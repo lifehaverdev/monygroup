@@ -13,7 +13,7 @@
 
         <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
         <script>
-        console.log('version 6')
+        console.log('version 8')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -41,7 +41,7 @@
                 getProps = async() => {
                     for(i=0;i<2;i++){
                         getListing(i);
-                        listingCount++;
+                        
                         try {
                             //count = await rejects.methods.count().call();
                             //holder = await rejects.methods.holderMints(accounts[0]).call();
@@ -55,7 +55,7 @@
         
                 }
                 getListing = async(id) => {
-                    console.log('we getting a listing');
+                    
                     var listing = {
                         saleOn: false,
                         erc: -1,
@@ -67,7 +67,7 @@
                     }
 
                     try {
-                        console.log('trying to get listing');
+                        
                         var currentListing = await market.methods.listingList(id).call();
                         console.log('erc',currentListing.erc);
                         listing = currentListing;
@@ -77,6 +77,7 @@
                     console.log('listingCount:',listingCount)
                     listings[listingCount] = listing;
                     console.log(listings[listingCount])
+                    listingCount++;
                 }
                 getProps();
                 
