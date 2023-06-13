@@ -9,6 +9,67 @@
             >
         <link rel="shortcut icon" type="image/png" width="32px" href="public/favicon-32x32.png"/>
         <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png"/>
+
+        <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js">
+        
+            const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
+            
+            console.log('givenProvider:',provider);
+            const web3 = new Web3(provider) // || 'http://localhost:8545');
+            console.log('web3 object',web3)
+
+            
+            var accounts = [];
+            //var friend; lets add this later for miladystation holders
+            var approveSell;
+            var approveBuy;
+            var connected = false;
+            var chainScanPre = 'https://etherscan.io/tx/'
+
+            const marketAddress = "0xAcd9b6C25704c4CdE7d8FBfcfF0eA41346B61E19";  //main
+
+            const marketABI = [{"inputs":[],"name":"CurrencyAllowanceError","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"SaleNotOn","type":"error"},{"inputs":[],"name":"TokenApprovalError","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"inputs":[],"name":"YouDontOwn","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"seller","type":"address"},{"indexed":false,"internalType":"address","name":"buyer","type":"address"},{"indexed":false,"internalType":"address","name":"collection","type":"address"},{"indexed":false,"internalType":"address","name":"currency","type":"address"},{"indexed":false,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"Purchase","type":"event"},{"inputs":[{"internalType":"address","name":"collection","type":"address"}],"name":"approveIt1155","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"collection","type":"address"}],"name":"approveIt721","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"listingId","type":"uint256"}],"name":"buy","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"erc","type":"uint256"},{"internalType":"address","name":"collection","type":"address"},{"internalType":"address","name":"currency","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"name":"createListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"listingId","type":"uint256"}],"name":"deleteListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"listingCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"listingList","outputs":[{"internalType":"bool","name":"saleOn","type":"bool"},{"internalType":"uint256","name":"erc","type":"uint256"},{"internalType":"address","name":"seller","type":"address"},{"internalType":"address","name":"collection","type":"address"},{"internalType":"address","name":"currency","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownershipHandoverValidFor","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"}];
+
+            const market = new web3.eth.Contract(marketABI,marketAddress);
+
+            //functions
+                getProps = async() => {
+                    for(i=0;i<2;i++){
+                        getListing(i);
+                        try {
+                            //count = await rejects.methods.count().call();
+                            //holder = await rejects.methods.holderMints(accounts[0]).call();
+                            // update page to show count
+                            //var prog = get('count');
+                            //prog.innerHTML = `${count}/123`
+                        } catch (err) {
+                            console.log('prop err:',err)
+                        }
+                    }
+        
+                }
+                getListing = async(id) => {
+                    console.log('we getting a listing');
+                    var listing = {
+                        saleOn: false,
+                        erc: -1,
+                        seller: 0x0000000000000000000000000000,
+                        collection: 0x0000000000000000000000000000,
+                        currency: 0x0000000000000000000000000000,
+                        tokenId: -1,
+                        price: -1
+                    }
+
+                    try {
+                        var listing = await market.methods.listingList(id).call();
+                        console.log(listing);
+                    } catch (err) {
+                        console.log('fail:::::',err)
+                    }
+                }
+                getProps();
+    </script>
+
         
     </head>
     <!-- dropdown -->
@@ -39,41 +100,7 @@
           });
         });
       </script>
-      <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
-    <script>
-
-            //console.log('givenProvider:',Web3.givenProvider);
-            
-            //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://sepolia.infura.io/ws/v3/3d54d62605b14e1c94fca9debcdee0fc');
-
-            const web3 = new Web3(Web3.givenProvider) // || 'http://localhost:8545');
-            //console.log('web3 object',web3)
-
-            //btw this is thet ipfs of the images
-            //bafybeiet54i3thflkrbh2kmxo7snjwsa7jnarve5ieil5d3htzd3zs2ypi
-            //this is the ipfs for the metadata.
-            //ipfs://bafybeifl5hcsccuqahwrrukjcjsi2qhlkhhtz5z5su5xur2e32bwbefepa had the .json on metadata
-            //ipfs://bafybeiac4pznic2itz5ia3qvvsm5xahtfryv3qqs3o5lk2ilubraldwxxe does not
-        
-
-            
-            var accounts = [];
-            var friend;
-            var approve;
-            var totalSup;
-            var targets = [];
-            var connected = false;
-            var chainScanPre = 'https://etherscan.io/tx/'
-
-            const marketAddress = "0xAcd9b6C25704c4CdE7d8FBfcfF0eA41346B61E19";  //main
-
-            const marketABI = [{"inputs":[],"name":"CurrencyAllowanceError","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"SaleNotOn","type":"error"},{"inputs":[],"name":"TokenApprovalError","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"inputs":[],"name":"YouDontOwn","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"seller","type":"address"},{"indexed":false,"internalType":"address","name":"buyer","type":"address"},{"indexed":false,"internalType":"address","name":"collection","type":"address"},{"indexed":false,"internalType":"address","name":"currency","type":"address"},{"indexed":false,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"Purchase","type":"event"},{"inputs":[{"internalType":"address","name":"collection","type":"address"}],"name":"approveIt1155","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"collection","type":"address"}],"name":"approveIt721","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"listingId","type":"uint256"}],"name":"buy","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"erc","type":"uint256"},{"internalType":"address","name":"collection","type":"address"},{"internalType":"address","name":"currency","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"name":"createListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"listingId","type":"uint256"}],"name":"deleteListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"listingCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"listingList","outputs":[{"internalType":"bool","name":"saleOn","type":"bool"},{"internalType":"uint256","name":"erc","type":"uint256"},{"internalType":"address","name":"seller","type":"address"},{"internalType":"address","name":"collection","type":"address"},{"internalType":"address","name":"currency","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownershipHandoverValidFor","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"}];
-
-            const market = new web3.eth.Contract(marketABI,marketAddress);
-
-            //got the proof to work
-    </script>
-
+    
     <body>
         
             <div class="toolbar">
@@ -158,39 +185,7 @@
         
     </body>
     <script>
-        getProps = async() => {
-            for(i=0;i<10;i++){
-                getListing(i);
-                try {
-                    //count = await rejects.methods.count().call();
-                    //holder = await rejects.methods.holderMints(accounts[0]).call();
-                    // update page to show count
-                    //var prog = get('count');
-                    //prog.innerHTML = `${count}/123`
-                } catch (err) {
-                    console.log('prop err:',err)
-                }
-            }
- 
-        }
-        getListing = async(id) => {
-            var listing = {
-                saleOn: false,
-                erc: -1,
-                seller: 0x0000000000000000000000000000,
-                collection: 0x0000000000000000000000000000,
-                currency: 0x0000000000000000000000000000,
-                tokenId: -1,
-                price: -1
-            }
-
-            try {
-                console.log(market.methods.listingList(id).call());
-            } catch (err) {
-                console.log('fail:::::',err)
-            }
-        }
-        getProps();
+        
     </script>
     <script href="index.js"/>
 </html>
