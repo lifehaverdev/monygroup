@@ -13,7 +13,7 @@
 
         <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
         <script>
-        console.log('version 4')
+        console.log('version 5')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -24,6 +24,8 @@
             
             var accounts = [];
             //var friend; lets add this later for miladystation holders
+            var listings = [];
+            var listingCount = 0;
             var approveSell;
             var approveBuy;
             var connected = false;
@@ -39,6 +41,7 @@
                 getProps = async() => {
                     for(i=0;i<2;i++){
                         getListing(i);
+                        listingCount++;
                         try {
                             //count = await rejects.methods.count().call();
                             //holder = await rejects.methods.holderMints(accounts[0]).call();
@@ -64,11 +67,15 @@
                     }
 
                     try {
-                        var listing = await market.methods.listingList(id).call();
-                        console.log(listing);
+                        console.log('trying to get listing');
+                        var currentListing = await market.methods.listingList(id).call();
+                        console.log('erc',listing.erc);
+                        listing = currentListing;
                     } catch (err) {
                         console.log('fail:::::',err)
                     }
+                    listings[listingCount] = listing;
+                    console.log(listings[listingCount])
                 }
                 getProps();
                 
