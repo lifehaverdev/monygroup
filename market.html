@@ -13,11 +13,12 @@
 
         <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
         <script>
-        
-            const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
-            
+        console.log('version 3')
+            //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
+            const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
+
             console.log('givenProvider:',provider);
-            const web3 = new Web3(provider) // || 'http://localhost:8545');
+            //const web3 = new Web3(provider) // || 'http://localhost:8545');
             console.log('web3 object',web3)
 
             
@@ -70,6 +71,7 @@
                     }
                 }
                 getProps();
+                
         </script>
 
         
