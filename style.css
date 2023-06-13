@@ -1,0 +1,184 @@
+body {
+    background-color: whitesmoke;
+    background-image: linear-gradient(to bottom, #87cefa, #e0f3ea);
+    margin: 0;
+    padding: 0;
+}
+.toolbar {
+    font-family: ProN W3,Hiragino Kaku Gothic ProN,メイリオ,Meiryo,sans-serif;
+}
+.topbar {
+    margin-top: -27px;
+    height: 35px;
+    background-color: black;
+    color: white;
+    text-align: right;
+    text-justify: center;
+    font-size:x-large;
+}
+.topbar p {
+    margin-right: 3%;
+}
+.menu {
+    display: inline-block;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+        /* fallback color */
+    background-color: #f2f2f2;
+
+    /* gradient background */
+    background-image: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+    border-bottom: 10px solid rgba(0, 0, 0, 0.1);
+}
+.menu ul li a {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
+.logo {
+    width: 170px;
+    height: 80px;
+    float: left;
+    padding:10px;
+}
+.options {
+    display: inline-block;
+}
+.options ul li{
+    display: inline-block;
+    margin: 20px;
+}
+.dropdown {
+    display:inline-block;
+}
+.dropitems {
+    display:none;
+    position: absolute;
+    z-index: 1;
+    padding: 20px;
+}
+.dropitems a {
+    padding: 10px;
+}
+.dropdown:hover {
+    background-color: azure;
+    cursor:pointer;
+}
+.dropdown:hover .dropitems {
+    display:block !important;
+}
+.dropitems a:hover {
+    background-color: gray;
+}
+.search {
+    float: right;
+    padding: 20px;
+}
+.search input {
+    height: 20px;
+}
+.content {
+    display:flex;
+    padding: 3%;
+}
+.banner {
+    display: block;
+    width: 40%;
+    text-align: center;
+    margin: 2%;
+    margin-top: 0%;
+    background: linear-gradient(to bottom, #fef9e7, #ffffff);
+    padding: 5px;
+}
+.banner h1 {
+    width: 100%;
+}
+a {
+    color:darkgoldenrod;
+}
+
+.marquee {
+    width: 60%;
+    --gap: 1rem;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: var(--gap);
+  }
+
+  .marquee ul li {
+    list-style: none;
+  }
+  
+
+  .marquee__content {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    gap: var(--gap);
+    min-width: 100%;
+    animation: scroll 25s linear infinite;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+}
+
+.footerwrap {
+    background-color: #093a8b;
+    height: 105%;
+    margin-bottom: -2.5%;
+    padding: 1%;
+    float: bottom;
+}
+.footer {
+    margin-left: 3%;
+    color: white;
+}
+.miladystationlogo {
+    float:left;
+    margin: 1%;
+}
+.footeroption ul{
+    list-style: none;
+}
+.footeroption ul li {
+    display: inline;
+    margin:2px;
+}
+.copyleft{
+    margin-left: 2.5%
+}
+
+@media screen and (max-width: 780px) {
+    body {
+      font-size: 22px;
+    }
+    h1 {
+      font-size: 32px;
+    }
+    p {
+      font-size: 22px;
+    }
+    a {
+        font-size: 22px;
+    }
+    li {
+        font-size: 22px;
+    }
+    div {
+        font-size: 22px;
+    }
+    .content{
+        flex-direction: column;
+    }
+    
+}  

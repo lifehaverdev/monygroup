@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="150"
+   height="50"
+   viewBox="0 0 39.687499 13.229167"
+   version="1.1"
+   id="svg437"
+   inkscape:export-filename="/Users/johnkelly/jfkwebdev/mony/public/logo.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   sodipodi:docname="bancofmony.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview439"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="1.5616767"
+     inkscape:cx="64.994246"
+     inkscape:cy="127.74731"
+     inkscape:window-width="1312"
+     inkscape:window-height="969"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs434">
+    <rect
+       x="85.164871"
+       y="16.008434"
+       width="83.884201"
+       height="55.069016"
+       id="rect2505" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#00ffff;stroke-width:0.11859"
+       id="rect463"
+       width="8.0822306"
+       height="8.0822306"
+       x="-4.7146344"
+       y="-14.278254"
+       transform="rotate(135)" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.28701814,0,0,0.27838764,-9.6192795,-4.912098)"
+       id="text2503"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:'System Font';-inkscape-font-specification:'System Font, @wght=626,YAXS=576';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'wght' 626, 'YAXS' 576;white-space:pre;shape-inside:url(#rect2505);fill:#000080;fill-opacity:1;stroke:none"
+       inkscape:export-filename="/Users/johnkelly/jfkwebdev/mony/public/logo.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         x="85.164062"
+         y="28.619721"
+         id="tspan38">mony
+</tspan><tspan
+         x="85.164062"
+         y="45.286347"
+         id="tspan40">group
+</tspan><tspan
+         x="85.164062"
+         y="61.952973"
+         id="tspan42">corporation</tspan></text>
+  </g>
+</svg>
