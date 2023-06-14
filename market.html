@@ -13,7 +13,7 @@
 
         <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
         <script>
-        console.log('version 11')
+        console.log('version 12')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -23,12 +23,13 @@
 
             
             var accounts = [];
-            //var friend; lets add this later for miladystation holders
+            //var friend; lets add this later for miladystation holders to buy and sell without a fee
             var listings = [];
             var listingCount = 0;
             var approveSell;
             var approveBuy;
             var connected = false;
+            var gotProps = false;
             var chainScanPre = 'https://etherscan.io/tx/'
 
             const marketAddress = "0xAcd9b6C25704c4CdE7d8FBfcfF0eA41346B61E19";  //main
@@ -52,7 +53,7 @@
                             console.log('prop err:',err)
                         }
                     }
-        
+                    gotProps = true;
                 }
                 getListing = async(id) => {
                     
@@ -202,7 +203,10 @@
             var listlist = document.getElementById('listings');
             console.log('tokenId check:',listings[0])
             listlist.innerHTML += `<li>${listings[0]}</li>`
-        }    
+        }   
+        while (!gotProps) {
+            console.log('tick');
+        }
         updateListings();
     </script>
     
