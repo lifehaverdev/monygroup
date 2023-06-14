@@ -31,6 +31,7 @@
               const data = await response.json();
               // Handle the response data
               console.log(data);
+              return data;
             } else {
               console.error('Fetch Error:', response.status, response.statusText);
             }
@@ -149,7 +150,7 @@
         
     </body>
     <script>
-        console.log('version 18')
+        console.log('version 19')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -176,9 +177,10 @@
 
             //functions
                 getProps = async() => {
+                    var meta;
                     for(i=0;i<2;i++){
-                        await getListing(i);
-                        updateListings(i);
+                        meta = await getListing(i);
+                        updateListings(meta.metadata.name,i, meta.metadata.image);
                         try {
                             //count = await rejects.methods.count().call();
                             //holder = await rejects.methods.holderMints(accounts[0]).call();
@@ -216,17 +218,18 @@
                     listings[listingCount] = listing;
                     
                     listingCount++;
-
+                    var meta;
                     try {
-                        fetchNFTData(listing.collection,listing.tokenId);
+                        meta = fetchNFTData(listing.collection,listing.tokenId);
                     } catch (err) {
                         console.log('getListing fetch metadata errr',err);
                     }
+                    return meta;
                 }
-                updateListings = async(id) => {
+                updateListings = async(name, id, image) => {
                     var listlist = document.getElementById('listings');
                     console.log('tokenId check:',listings[id].tokenId)
-                    listlist.innerHTML += `<li>${listings[id].tokenId}</li>`
+                    listlist.innerHTML += `<li>${name} <img href="${image}"</li>`
                 } 
                 getProps();
                 
