@@ -35,6 +35,6 @@ jobs:
         id: deployment
         #hopefully this has secrets available to market.html
         env: # as an environment variable
-          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }
+          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
           INFURA_API_KEY_SECRET: ${{ secrets.INFURA_API_KEY_SECRET }}
         uses: actions/deploy-pages@v2
