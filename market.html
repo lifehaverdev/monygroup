@@ -153,7 +153,7 @@
         
     </body>
     <script>
-        console.log('version 23')
+        console.log('version 24')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -232,7 +232,7 @@
                 updateListings = async(name, id, image) => {
                     var listlist = document.getElementById('listings');
                     console.log('tokenId check:',listings[id].tokenId)
-                    listlist.innerHTML += `<li>${name} <img href="mony.mypinata.cloud/ipfs${editCID(image)}?pinataGatewayToken=uyN3_jcO6fLxjvmAV82o6PezM48bw7BlDk3ij1hpSOG5FSVgODrv-eIz_1OEkvAw"/></li>`
+                    listlist.innerHTML += `<li>${name} <img src="mony.mypinata.cloud/ipfs${editCID(image)}?pinataGatewayToken=uyN3_jcO6fLxjvmAV82o6PezM48bw7BlDk3ij1hpSOG5FSVgODrv-eIz_1OEkvAw"/></li>`
                 } 
                 getProps();
                 
