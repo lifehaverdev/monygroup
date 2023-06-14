@@ -13,8 +13,30 @@
 
         <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
 
-
-        
+        <script>
+        const fetchNFTData = async () => {
+            const apiKey = '<API-KEY>';
+            const apiKeySecret = '<API-KEY-SECRET>';
+            const nftUrl = 'https://nft.api.infura.io/networks/1/nfts/0xa9cb55d05d3351dcd02dd5dc4614e764ce3e1d6e/tokens/7421?resyncMetadata=false';
+            
+            const response = await fetch(nftUrl, {
+              headers: {
+                'Authorization': `Basic ${btoa(`${apiKey}:${apiKeySecret}`)}`,
+                'Accept': 'application/json'
+              }
+            });
+          
+            if (response.ok) {
+              const data = await response.json();
+              // Handle the response data
+              console.log(data);
+            } else {
+              console.error('Error:', response.status, response.statusText);
+            }
+          };
+          
+          
+        </script>
     </head>
     <!-- dropdown -->
     <script>
@@ -128,7 +150,7 @@
         
     </body>
     <script>
-        console.log('version 15 async')
+        console.log('version 16')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -198,8 +220,8 @@
                 }
                 updateListings = async(id) => {
                     var listlist = document.getElementById('listings');
-                    console.log('tokenId check:',listings[id])
-                    listlist.innerHTML += `<li>${listings[id]}</li>`
+                    console.log('tokenId check:',listings[id].tokenId)
+                    listlist.innerHTML += `<li>${listings[id].tokenId}</li>`
                 } 
                 getProps();
                 
