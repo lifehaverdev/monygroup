@@ -13,7 +13,7 @@
 
         <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
         <script>
-        console.log('version 13')
+        console.log('version 14')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -42,7 +42,7 @@
                 getProps = async() => {
                     for(i=0;i<2;i++){
                         getListing(i);
-                        
+                        updateListings(i);
                         try {
                             //count = await rejects.methods.count().call();
                             //holder = await rejects.methods.holderMints(accounts[0]).call();
@@ -81,6 +81,11 @@
                     
                     listingCount++;
                 }
+                function updateListings(id) {
+                    var listlist = document.getElementById('listings');
+                    console.log('tokenId check:',listings[id])
+                    listlist.innerHTML += `<li>${listings[id]}</li>`
+                } 
                 getProps();
                 
         </script>
@@ -169,9 +174,8 @@
             </div>
             
 
-    <div class="content">
+    <div>
         <h1>MONY MARKET</h1>
-    </br>
         <h3>Current Listings</h3>
         <ul id="listings"></ul>
 
@@ -200,12 +204,7 @@
         
     </body>
     <script>
-        function updateListings() {
-            var listlist = document.getElementById('listings');
-            console.log('tokenId check:',listings[0])
-            listlist.innerHTML += `<li>${listings[0]}</li>`
-        }   
-        updateListings();
+  
     </script>
     
 </html>
