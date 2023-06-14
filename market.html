@@ -128,7 +128,7 @@
         
     </body>
     <script>
-        console.log('version 15')
+        console.log('version 15 async')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -196,7 +196,7 @@
                     
                     listingCount++;
                 }
-                function updateListings(id) {
+                updateListings = async(id) => {
                     var listlist = document.getElementById('listings');
                     console.log('tokenId check:',listings[id])
                     listlist.innerHTML += `<li>${listings[id]}</li>`
