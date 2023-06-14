@@ -14,10 +14,10 @@
         <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
 
         <script>
-        const fetchNFTData = async () => {
-            const apiKey = '<API-KEY>';
-            const apiKeySecret = '<API-KEY-SECRET>';
-            const nftUrl = 'https://nft.api.infura.io/networks/1/nfts/0xa9cb55d05d3351dcd02dd5dc4614e764ce3e1d6e/tokens/7421?resyncMetadata=false';
+        const fetchNFTData = async (collection, id) => {
+            const apiKey = process.environment.INFURA_API_KEY;
+            const apiKeySecret = process.environment.INFURA_API_KEY_SECRET;
+            const nftUrl = `https://nft.api.infura.io/networks/1/nfts/${collection}/tokens/${id}?resyncMetadata=false`;
             
             const response = await fetch(nftUrl, {
               headers: {
@@ -31,11 +31,9 @@
               // Handle the response data
               console.log(data);
             } else {
-              console.error('Error:', response.status, response.statusText);
+              console.error('Fetch Error:', response.status, response.statusText);
             }
           };
-          
-          
         </script>
     </head>
     <!-- dropdown -->
@@ -150,7 +148,7 @@
         
     </body>
     <script>
-        console.log('version 16')
+        console.log('version 17')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -211,12 +209,18 @@
                         
                         listing = currentListing;
                     } catch (err) {
-                        console.log('fail:::::',err)
+                        console.log('listinglist call fail:::::',err)
                     }
                     
                     listings[listingCount] = listing;
                     
                     listingCount++;
+
+                    try {
+                        fetchNFTData(listing.collection,listing.tokenId);
+                    } catch (err) {
+                        console.log('getListing fetch metadata errr',err);
+                    }
                 }
                 updateListings = async(id) => {
                     var listlist = document.getElementById('listings');
