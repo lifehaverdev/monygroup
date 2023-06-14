@@ -232,7 +232,7 @@
                 updateListings = async(name, id, image) => {
                     var listlist = document.getElementById('listings');
                     console.log('tokenId check:',listings[id].tokenId)
-                    listlist.innerHTML += `<li>${name} <img href="mony.mypinata.cloud/ipfs/${editCID(image)}"/></li>`
+                    listlist.innerHTML += `<li>${name} <img href="mony.mypinata.cloud/ipfs${editCID(image)}"/></li>`
                 } 
                 getProps();
                 
