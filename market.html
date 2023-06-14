@@ -15,8 +15,9 @@
 
         <script>
         const fetchNFTData = async (collection, id) => {
-            const apiKey = process.environment.INFURA_API_KEY;
-            const apiKeySecret = process.environment.INFURA_API_KEY_SECRET;
+            //if u steal this fuk u
+            const apiKey = "51af642c93d846f7821865a7e3ab05d1";
+            const apiKeySecret = "806aff78b8b94437a04ee0b13d5d0612";
             const nftUrl = `https://nft.api.infura.io/networks/1/nfts/${collection}/tokens/${id}?resyncMetadata=false`;
             
             const response = await fetch(nftUrl, {
@@ -148,7 +149,7 @@
         
     </body>
     <script>
-        console.log('version 17')
+        console.log('version 18')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 

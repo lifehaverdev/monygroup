@@ -15,7 +15,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "deploy"
@@ -40,7 +40,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         #hopefully this has secrets available to market.html
-        env: # as an environment variable
+        env: # ugh this doesnt even work
           INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
           INFURA_API_KEY_SECRET: ${{ secrets.INFURA_API_KEY_SECRET }}
         uses: actions/deploy-pages@v2
