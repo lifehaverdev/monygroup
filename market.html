@@ -71,20 +71,20 @@
             });
             });
         //Popup
-        function closePop() {
-            var pop = document.getElementById('pop');
-            pop.innerHTML = '';
-            pop.style.display = 'none';
-        }
-        showPop = () => {
-            var pop = document.getElementById('pop');
-            pop.innerHTML += '<div class="x" onclick="closePop()">x</div>'
-            pop.style.display = 'block';
-        }
-        popPop = (innerHTML) => {
-            var pop = document.getElementById('pop');
-            pop.innerHTML += innerHTML;
-        }
+            function closePop() {
+                var pop = document.getElementById('pop');
+                pop.innerHTML = '';
+                pop.style.display = 'none';
+            }
+            showPop = () => {
+                var pop = document.getElementById('pop');
+                pop.innerHTML += '<div class="x" onclick="closePop()">x</div>'
+                pop.style.display = 'block';
+            }
+            popPop = (innerHTML) => {
+                var pop = document.getElementById('pop');
+                pop.innerHTML += innerHTML;
+            }
     </script>
     
     <body>
@@ -172,7 +172,7 @@
 
     </body>
     <script>
-        console.log('version 42')
+        console.log('version 44')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -255,7 +255,7 @@
                 updateListing = async(meta, listing, id) => {
                     var listlist = document.getElementById('listings');
                     var src = `https://mony.mypinata.cloud/ipfs${editCID(meta.image)}?pinataGatewayToken=uyN3_jcO6fLxjvmAV82o6PezM48bw7BlDk3ij1hpSOG5FSVgODrv-eIz_1OEkvAw`
-                    var currency = getCoinInfo(listing.currency);
+                    var currency = await getCoinInfo(listing.currency);
                     if (listing.saleOn) {
                         listlist.innerHTML += 
                         `
