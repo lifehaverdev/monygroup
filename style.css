@@ -259,6 +259,7 @@ a {
     min-height: 25%;
     margin:10px;
     z-index: 4;
+    overflow-y: visible;
 }
 
 #connect {
