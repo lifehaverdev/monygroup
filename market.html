@@ -326,7 +326,7 @@
                 //User logic
                 //gets accounts and checks chain id then sends to checkWallet()
                 connectWallet = async() => {
-                    var web3 = new Web3(new Web3.givenProvider);
+                    var web3 = new Web3(Web3.givenProvider);
                     try {
                         accounts = await web3.eth.requestAccounts().then()
                         if(accounts[0]){
