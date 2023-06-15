@@ -172,7 +172,7 @@
 
     </body>
     <script>
-        console.log('version 35')
+        console.log('version 36')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -379,7 +379,7 @@
                 buyFlow = async(id) => {
                     target = id;
                     var pop = document.getElementById('pop');
-                    if(pop.style.display == 'none'){
+                    if(pop.style.display == ''){
                         showPop();
                     }
                     var innerHTML = "";
