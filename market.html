@@ -172,7 +172,7 @@
 
     </body>
     <script>
-        console.log('version 34')
+        console.log('version 35')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -310,6 +310,7 @@
                     var allowance;
                     try {
                         allowance = coin.methods.allowance(accounts[0],marketAddress).call();
+                        console.log('allowance within checkAllowance',allowance);
                     } catch (err) {
                         console.log('uhoh checkAllownace error:',err)
                     }
@@ -378,7 +379,7 @@
                 buyFlow = async(id) => {
                     target = id;
                     var pop = document.getElementById('pop');
-                    if(pop.style.display != 'none'){
+                    if(pop.style.display == 'none'){
                         showPop();
                     }
                     var innerHTML = "";
