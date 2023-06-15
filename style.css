@@ -1,8 +1,15 @@
+@font-face {
+    src: url(public/fonts/Gloock/Gloock-Regular.ttf);
+    font-family: gloock; 
+}
 body {
     background-color: whitesmoke;
     background-image: linear-gradient(to bottom, #87cefa, #e0f3ea);
     margin: 0;
     padding: 0;
+}
+.center {
+    text-align: center;
 }
 .toolbar {
     font-family: ProN W3,Hiragino Kaku Gothic ProN,メイリオ,Meiryo,sans-serif;
@@ -182,3 +189,81 @@ a {
     }
     
 }  
+
+#market {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5%;
+}
+
+#listings {
+    width: 100%;
+    display: flex;
+}
+
+.listing-item{
+    padding: 3%;
+}
+
+.listing-item button {
+    transition: filter 0.3s ease;
+    display: none;
+    position:absolute;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.listing-item img {
+    transition: filter 0.3s ease;
+    width: 300px;
+}
+
+.listing-item:hover img {
+    filter: brightness(1.2); /* Apply darkness effect */
+}
+
+.listing-item:hover button {
+    display: block;
+}
+
+.dark {
+    filter: brightness(0.3);
+}
+
+.x {
+    font-size: 30px;
+    color: white;
+}
+
+#pop {
+    display: none;
+    align-items: center;
+    background-color: black;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    width: 75%;
+    height: 25%;
+    margin:10px;
+    z-index: 4;
+    overflow: scroll;
+}
+
+#connect {
+    display: block;
+    width: 200px;
+    height: 60px;
+    background-color: white;
+    color: skyblue;
+    text-align: center;
+    font-family: gloock;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+}
