@@ -172,7 +172,7 @@
 
     </body>
     <script>
-        console.log('version 29')
+        console.log('version 30')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -267,7 +267,7 @@
                             <img class="listing-image" src="${src}"/>
                             <h3 class="center">${meta.name}</h3>
                             <h3 class="center">
-                            <button onclick="buyFlow(id)">BUY</button>
+                            <button onclick="buyFlow(${id})">BUY</button>
                         </div>
                         `
                     } else {
@@ -357,6 +357,7 @@
                     } catch(err){
                         console.log(err);
                     }
+                    console.log('friends',friend);
                 }
                 //user clicks buy button, needs to check approval for currency and price
                 buyFlow = async(id) => {
@@ -368,7 +369,6 @@
                         <button id="connect" onclick="connectWallet()">Connect Wallet</button>
                         `
                     }
-                    console.log(listings[id]);
                     if(connected && listings[id].seller == accounts[0]){
                         innerHTML = `
                         <h3>This is your listing. Whatsup</h3>
