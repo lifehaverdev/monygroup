@@ -172,7 +172,7 @@
 
     </body>
     <script>
-        console.log('version 27')
+        console.log('version 28')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -326,7 +326,7 @@
                 //User logic
                 //gets accounts and checks chain id then sends to checkWallet()
                 connectWallet = async() => {
-                    var web3 = new Web3(new Web3.currentProvider);
+                    var web3 = new Web3(new Web3.givenProvider);
                     try {
                         accounts = await web3.eth.requestAccounts().then()
                         if(accounts[0]){
