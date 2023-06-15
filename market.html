@@ -172,7 +172,7 @@
 
     </body>
     <script>
-        console.log('version 41')
+        console.log('version 42')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -255,19 +255,14 @@
                 updateListing = async(meta, listing, id) => {
                     var listlist = document.getElementById('listings');
                     var src = `https://mony.mypinata.cloud/ipfs${editCID(meta.image)}?pinataGatewayToken=uyN3_jcO6fLxjvmAV82o6PezM48bw7BlDk3ij1hpSOG5FSVgODrv-eIz_1OEkvAw`
-
-                    //listing flow: 
-                    //are you connected? (cause if not, the flow will ask for connection first) connection function must figure out the below:
-                    //are you a holder? (cause youll pay a fee if not)
-                    //are you the seller? (cause then you'll have cancel or edit logic possible and no buy button)                    
-                    //are you as a buyer allowance with the contract? (cause otherwise you need to be sent that way)
+                    var currency = getCoinInfo(listing.currency);
                     if (listing.saleOn) {
                         listlist.innerHTML += 
                         `
                         <div class="listing-item">
                             <img class="listing-image" src="${src}"/>
                             <h3 class="center">${meta.name}</h3>
-                            <h3 class="center">
+                            <h3 class="center">${listing.price/1e18} ${currency}</h3>
                             <button onclick="buyFlow(${id})">BUY</button>
                         </div>
                         `
@@ -308,6 +303,7 @@
                     var coin = await makeCoin(currency);
                     console.log('coin:',coin)
                     var allowance;
+                    console.log('within checkAllowance trynna see accounts 0',accounts[0]);
                     try {
                         allowance = await coin.methods.allowance(accounts[0],marketAddress).call();
                         console.log('allowance within checkAllowance',allowance);
@@ -315,6 +311,16 @@
                         console.log('uhoh checkAllownace error:',err)
                     }
                     return allowance;
+                }
+                getCoinInfo = async(currency) => {
+                    var coin = await makeCoin(currency);
+                    var name;
+                    try {
+                        name = await coin.methods.name().call();
+                    } catch (err) {
+                        console.log(err);
+                    }
+                    return name;
                 }
                 //erc721 logic
                 makeNFT721 = async(collection) => {
@@ -356,6 +362,7 @@
                         var connect = document.getElementById('connect');
                         connect.innerHTML = 'Connected';
                         connect.disabled = true;
+                        connect.style.display = 'none';
                         //checkWallet should see miladystation holder
                         checkWallet();
                     }
@@ -379,7 +386,7 @@
                 buyFlow = async(id) => {
                     target = id;
                     var pop = document.getElementById('pop');
-                    if(pop.style.display == ''){
+                    if(pop.style.display == '' || pop.style.display == 'none'){
                         showPop();
                     }
                     var innerHTML = "";
