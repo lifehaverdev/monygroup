@@ -172,7 +172,7 @@
 
     </body>
     <script>
-        console.log('version 30')
+        console.log('version 31')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -189,6 +189,7 @@
             var listings = [];
             var listingCount = 0;
             var listingTotal = 2;
+            var target;
             
             var gotProps = false;
             var chainScanPre = 'https://etherscan.io/tx/'
@@ -340,12 +341,15 @@
                         if (networkId !== 1) {
                             alert('change your network to main ethereum')
                         }
+                        var connect = document.getElementById('connect');
+                        connect.innerHTML = 'Connected';
+                        connect.disabled = true;
                         //checkWallet should see miladystation holder
                         checkWallet();
                     }
                     var pop = document.getElementById('pop');
                     if(pop.style.display != 'none'){
-                        buyFlow();
+                        buyFlow(target);
                     }
                 }
                 //checks miladystation holder just for website stuff, merkle in market contract is line of defense
@@ -361,6 +365,7 @@
                 }
                 //user clicks buy button, needs to check approval for currency and price
                 buyFlow = async(id) => {
+                    target = id;
                     showPop();
                     var innerHTML = "";
                     if(!connected) {
