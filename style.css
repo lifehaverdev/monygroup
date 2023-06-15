@@ -8,6 +8,9 @@ body {
     margin: 0;
     padding: 0;
 }
+button {
+    font-family: gloock;
+}
 .center {
     text-align: center;
 }
@@ -236,6 +239,10 @@ a {
 .x {
     font-size: 30px;
     color: white;
+}
+
+.x:hover {
+    cursor: pointer;
 }
 
 #pop {
