@@ -1,12 +1,8 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>MONYMARKET</title>
-        <link 
-            rel="stylesheet"
-            href="style.css"
-            >
+        <link rel="stylesheet" href="style.css" />
         <link rel="shortcut icon" type="image/png" width="32px" href="public/favicon-32x32.png"/>
         <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png"/>
         <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
@@ -15,31 +11,31 @@
 
         <!-- metadata fetch -->
         <script>
-        const fetchNFTData = async (collection, id) => {
-            //if u steal this fuk u
-            const apiKey = "51af642c93d846f7821865a7e3ab05d1";
-            const apiKeySecret = "806aff78b8b94437a04ee0b13d5d0612";
-            const nftUrl = `https://nft.api.infura.io/networks/1/nfts/${collection}/tokens/${id}?resyncMetadata=false`;
+            const fetchNFTData = async (collection, id) => {
+                //if u steal this fuk u
+                const apiKey = "51af642c93d846f7821865a7e3ab05d1";
+                const apiKeySecret = "806aff78b8b94437a04ee0b13d5d0612";
+                const nftUrl = `https://nft.api.infura.io/networks/1/nfts/${collection}/tokens/${id}?resyncMetadata=false`;
+                
+                const response = await fetch(nftUrl, {
+                headers: {
+                    'Authorization': `Basic ${btoa(`${apiKey}:${apiKeySecret}`)}`,
+                    'Accept': 'application/json'
+                }
+                });
             
-            const response = await fetch(nftUrl, {
-              headers: {
-                'Authorization': `Basic ${btoa(`${apiKey}:${apiKeySecret}`)}`,
-                'Accept': 'application/json'
-              }
-            });
-          
-            if (response.ok) {
-              const data = await response.json();
-              // Handle the response data
-              //console.log(data);
-              return data;
-            } else {
-              console.error('Fetch Error:', response.status, response.statusText);
+                if (response.ok) {
+                const data = await response.json();
+                // Handle the response data
+                //console.log(data);
+                return data;
+                } else {
+                console.error('Fetch Error:', response.status, response.statusText);
+                }
+            };
+            function editCID (ipfs) {
+                return ipfs.slice(6)
             }
-          };
-          function editCID (ipfs) {
-            return ipfs.slice(6)
-          }
         </script>
         <!-- frontend stuff -->
         <script>
@@ -171,7 +167,7 @@
         </div>
         <!-- web3 -->
         <script>
-            console.log('version 48')
+            console.log('version 49')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -291,7 +287,7 @@
                     setAllowance = async(currency, price) => {
                         var coin = await makeCoin(currency);
                         try {
-                            coin.methods.approve(marketAddress,price).send({
+                            await coin.methods.approve(marketAddress,price).send({
                                 from: accounts[0]
                             });
                         } catch (err) {
