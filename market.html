@@ -172,7 +172,7 @@
 
     </body>
     <script>
-        console.log('version 39')
+        console.log('version 40')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -305,7 +305,7 @@
                     buyFlow(target);
                 }
                 checkAllowance = async(currency) => {
-                    var coin = makeCoin(currency);
+                    var coin = await makeCoin(currency);
                     console.log('coin:',coin)
                     var allowance;
                     try {
