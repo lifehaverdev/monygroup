@@ -256,10 +256,9 @@ a {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     width: 75%;
-    height: 25%;
+    min-height: 25%;
     margin:10px;
     z-index: 4;
-    overflow: scroll;
 }
 
 #connect {

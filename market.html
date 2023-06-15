@@ -172,7 +172,7 @@
 
     </body>
     <script>
-        console.log('version 37')
+        console.log('version 38')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -384,31 +384,32 @@
                     }
                     var innerHTML = "";
                     if(!connected) {
+                        //connect button
                         innerHTML = `
                         <h3>Please Connect your Wallet</h3>
                         <button id="connect" onclick="connectWallet()">Connect Wallet</button>
                         `
-                    }
-                    //seller menu
-                    if(connected && listings[id].seller == accounts[0]){
-                        innerHTML = `
-                        <h3>This is your listing. Whatsup</h3>
-                        <button onclick="cancelListing()">Cancel Listing</button>
-                        <button onclick="editPrice()">Edit Price</button>
-                        `
-                    }
-                    //buyer flow
-                    if(connected && listings[id].seller != accounts[0]){
-                        //check allowance
-                        if(checkAllowance(listings[id].currency) == listings[id].price){
+                    } else {
+                        //seller menu
+                        if(listings[id].seller == accounts[0]) {
+                            innerHTML = `
+                                <h3>This is your listing. Whatsup</h3>
+                                <button onclick="cancelListing()">Cancel Listing</button>
+                                <button onclick="editPrice()">Edit Price</button>
+                                `
+                        //buyer flow
+                        } else {
+                            //check allowance
+                            if(checkAllowance(listings[id].currency) == listings[id].price){
                             innerHTML = `
                                 <button onclick="buy(${target})">BUY</button>
                                 `
-                        } else {
-                            innerHTML = `
-                                <h3>Must Approve Currency for Purchase</h3>
-                                <button onclick="setAllowance("${listings[id].currency}",${listings[id].price})">Approve Coin</button>
-                                `
+                            } else {
+                                innerHTML = `
+                                    <h3>Must Approve Currency for Purchase</h3>
+                                    <button onclick="setAllowance("${listings[id].currency}",${listings[id].price})">Approve Coin</button>
+                                    `
+                            }
                         }
                     }
                     
