@@ -11,7 +11,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png"/>
         <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 
-        <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
+        <script src="https://unpkg.com/web3@1.10.0/dist/web3.min.js"></script>
 
         <!-- metadata fetch -->
         <script>
@@ -172,7 +172,7 @@
 
     </body>
     <script>
-        console.log('version 44')
+        console.log('version 45')
             //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
             var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
 
@@ -255,14 +255,15 @@
                 updateListing = async(meta, listing, id) => {
                     var listlist = document.getElementById('listings');
                     var src = `https://mony.mypinata.cloud/ipfs${editCID(meta.image)}?pinataGatewayToken=uyN3_jcO6fLxjvmAV82o6PezM48bw7BlDk3ij1hpSOG5FSVgODrv-eIz_1OEkvAw`
-                    var currency = await getCoinInfo(listing.currency);
+                    var currencyName = await getCoinName(listing.currency);
+                    var decimals = await getCoinDec(listing.currency);
                     if (listing.saleOn) {
                         listlist.innerHTML += 
                         `
                         <div class="listing-item">
                             <img class="listing-image" src="${src}"/>
                             <h3 class="center">${meta.name}</h3>
-                            <h3 class="center">${listing.price/1e18} ${currency}</h3>
+                            <h3 class="center">${listing.price/decimals} ${currencyName}</h3>
                             <button onclick="buyFlow(${id})">BUY</button>
                         </div>
                         `
@@ -312,7 +313,7 @@
                     }
                     return allowance;
                 }
-                getCoinInfo = async(currency) => {
+                getCoinName = async(currency) => {
                     var coin = await makeCoin(currency);
                     var name;
                     try {
@@ -321,6 +322,16 @@
                         console.log(err);
                     }
                     return name;
+                }
+                getCoinDec = async(currency) => {
+                    var coin = await makeCoin(currency);
+                    var dec;
+                    try {
+                        dec = await coin.methods.decimals().call();
+                    } catch (err) {
+                        console.log(err);
+                    }
+                    return 1**dec;
                 }
                 //erc721 logic
                 makeNFT721 = async(collection) => {
