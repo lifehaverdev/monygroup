@@ -41,51 +41,52 @@
             return ipfs.slice(6)
           }
         </script>
-    </head>
-    <!-- frontend stuff -->
-    <script>
-        //Dropdown
-            // Select all dropdown parent elements
-            var dropdownParents = document.querySelectorAll('.dropdown');
-        
-            // Add click event listener to each dropdown parent
-            dropdownParents.forEach(function (parent) {
-            parent.addEventListener('click', function () {
-                // Toggle the "active" class on the clicked dropdown parent
-                this.classList.toggle('active');
-        
-                // Toggle the visibility of the dropdown content
-                var dropdownContent = this.querySelector('.dropitems');
-                dropdownContent.classList.toggle('show');
-            });
-            });
-        
-            // Close the dropdown when clicking outside of it
-            window.addEventListener('click', function (event) {
-            dropdownParents.forEach(function (parent) {
-                if (!parent.contains(event.target)) {
-                parent.classList.remove('active');
-                var dropdownContent = parent.querySelector('.dropitems');
-                dropdownContent.classList.remove('show');
+        <!-- frontend stuff -->
+        <script>
+            //Dropdown
+                // Select all dropdown parent elements
+                var dropdownParents = document.querySelectorAll('.dropdown');
+            
+                // Add click event listener to each dropdown parent
+                dropdownParents.forEach(function (parent) {
+                parent.addEventListener('click', function () {
+                    // Toggle the "active" class on the clicked dropdown parent
+                    this.classList.toggle('active');
+            
+                    // Toggle the visibility of the dropdown content
+                    var dropdownContent = this.querySelector('.dropitems');
+                    dropdownContent.classList.toggle('show');
+                });
+                });
+            
+                // Close the dropdown when clicking outside of it
+                window.addEventListener('click', function (event) {
+                dropdownParents.forEach(function (parent) {
+                    if (!parent.contains(event.target)) {
+                    parent.classList.remove('active');
+                    var dropdownContent = parent.querySelector('.dropitems');
+                    dropdownContent.classList.remove('show');
+                    }
+                });
+                });
+            //Popup
+                function closePop() {
+                    var pop = document.getElementById('pop');
+                    pop.innerHTML = '';
+                    pop.style.display = 'none';
                 }
-            });
-            });
-        //Popup
-            function closePop() {
-                var pop = document.getElementById('pop');
-                pop.innerHTML = '';
-                pop.style.display = 'none';
-            }
-            showPop = () => {
-                var pop = document.getElementById('pop');
-                pop.innerHTML += '<div class="x" onclick="closePop()">x</div>'
-                pop.style.display = 'block';
-            }
-            popPop = (innerHTML) => {
-                var pop = document.getElementById('pop');
-                pop.innerHTML += innerHTML;
-            }
-    </script>
+                showPop = () => {
+                    var pop = document.getElementById('pop');
+                    pop.innerHTML += '<div class="x" onclick="closePop()">x</div>'
+                    pop.style.display = 'block';
+                }
+                popPop = (innerHTML) => {
+                    var pop = document.getElementById('pop');
+                    pop.innerHTML += innerHTML;
+                }
+        </script>
+    </head>
+
     
     <body>
         
@@ -145,8 +146,7 @@
             <div id="listings"></div>
         </div>
 
-        <div id="pop">
-        </div>
+        <div id="pop"></div>
 
         <div class="footerwrap">
             <div class="footer">
@@ -169,267 +169,268 @@
                 </div>
             </div>
         </div>
-
-    </body>
-    <script>
-        console.log('version 46')
-            //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
-            var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
-
-            //console.log('givenProvider:',provider);
-            
-            //console.log('web3 object',web3)
-
-            var connected = false;
-            var accounts = [];
-            var friend = false;
-            var approveSell;
-            var approveBuy;
-
-            var listings = [];
-            var listingCount = 0;
-            var listingTotal = 2;
-            var target;
-            
-            var gotProps = false;
-            var chainScanPre = 'https://etherscan.io/tx/'
-
-            const marketAddress = "0xAcd9b6C25704c4CdE7d8FBfcfF0eA41346B61E19";  //main
-            const marketABI = [{"inputs":[],"name":"CurrencyAllowanceError","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"SaleNotOn","type":"error"},{"inputs":[],"name":"TokenApprovalError","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"inputs":[],"name":"YouDontOwn","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"seller","type":"address"},{"indexed":false,"internalType":"address","name":"buyer","type":"address"},{"indexed":false,"internalType":"address","name":"collection","type":"address"},{"indexed":false,"internalType":"address","name":"currency","type":"address"},{"indexed":false,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"Purchase","type":"event"},{"inputs":[{"internalType":"address","name":"collection","type":"address"}],"name":"approveIt1155","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"collection","type":"address"}],"name":"approveIt721","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"listingId","type":"uint256"}],"name":"buy","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"erc","type":"uint256"},{"internalType":"address","name":"collection","type":"address"},{"internalType":"address","name":"currency","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"name":"createListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"listingId","type":"uint256"}],"name":"deleteListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"listingCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"listingList","outputs":[{"internalType":"bool","name":"saleOn","type":"bool"},{"internalType":"uint256","name":"erc","type":"uint256"},{"internalType":"address","name":"seller","type":"address"},{"internalType":"address","name":"collection","type":"address"},{"internalType":"address","name":"currency","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownershipHandoverValidFor","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"}];
-            const market = new web3.eth.Contract(marketABI,marketAddress);
-
-            const msAddress = "0xB24BaB1732D34cAD0A7C7035C3539aEC553bF3a0";
-            const msABI = [{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
-            const ms = new web3.eth.Contract(msABI,msAddress);
-
-            //functions
-                //Contract logic
-                getProps = async() => {
-                    var meta;
-                    for(i=0;i<listingTotal;i++){
-                        meta = await getListing(i);
-                        updateListing(meta.metadata, listings[i], i);
-                        try {
-                            //count = await rejects.methods.count().call();
-                            //holder = await rejects.methods.holderMints(accounts[0]).call();
-                            // update page to show count
-                            //var prog = get('count');
-                            //prog.innerHTML = `${count}/123`
-                        } catch (err) {
-                            console.log('prop err:',err)
-                        }
-                    }
-                    
-                    gotProps = true;
-                }
-                getListing = async(id) => {
-                    //js listing object to make a website copy of the contract situation
-                    var listing = {
-                        saleOn: false,
-                        erc: -1,
-                        seller: 0x0000000000000000000000000000,
-                        collection: 0x0000000000000000000000000000,
-                        currency: 0x0000000000000000000000000000,
-                        tokenId: -1,
-                        price: -1
-                    }
-
-                    try {
-                        var currentListing = await market.methods.listingList(id).call();
-                        listing = currentListing;
-                    } catch (err) {
-                        console.log('listinglist call fail:::::',err)
-                    }
-                    //this saves the copy of the listing to the website listing array
-                    listings[listingCount] = listing;
-                    listingCount++;
-                    var meta;
-                    try {
-                        meta = fetchNFTData(listing.collection,listing.tokenId);
-                    } catch (err) {
-                        console.log('getListing fetch metadata errr',err);
-                    }
-                    //this returns the metadata
-                    return meta;
-                }
-                updateListing = async(meta, listing, id) => {
-                    var listlist = document.getElementById('listings');
-                    var src = `https://mony.mypinata.cloud/ipfs${editCID(meta.image)}?pinataGatewayToken=uyN3_jcO6fLxjvmAV82o6PezM48bw7BlDk3ij1hpSOG5FSVgODrv-eIz_1OEkvAw`
-                    var currencyName = await getCoinName(listing.currency);
-                    var decimals = await getCoinDec(listing.currency);
-                    if (listing.saleOn) {
-                        listlist.innerHTML += 
-                        `
-                        <div class="listing-item">
-                            <img class="listing-image" src="${src}"/>
-                            <h3 class="center">${meta.name}</h3>
-                            <h3 class="center">${listing.price/decimals} ${currencyName}</h3>
-                            <button onclick="buyFlow(${id})">BUY</button>
-                        </div>
-                        `
-                    } else {
-                        listlist.innerHTML += 
-                        `
-                        <div class="listing-item">
-                            <img class="listing-image dark" src="${src}"/>
-                            <h3 class="center">SOLD OUT</h3>
-                        </div>
-                        `
-                    }
-                    
-                }
+        <!-- web3 -->
+        <script>
+            console.log('version 48')
+                //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
+                var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
+    
+                //console.log('givenProvider:',provider);
                 
-                getProps();
-
-                //erc20 logic
-                makeCoin = async(currency) => {
-                    var coinAddress = currency;
-                    //this is miladypeso abi tbh
-                    var coinABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegator","type":"address"},{"indexed":true,"internalType":"address","name":"fromDelegate","type":"address"},{"indexed":true,"internalType":"address","name":"toDelegate","type":"address"}],"name":"DelegateChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegate","type":"address"},{"indexed":false,"internalType":"uint256","name":"previousBalance","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"newBalance","type":"uint256"}],"name":"DelegateVotesChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"account","type":"address"}],"name":"Paused","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"id","type":"uint256"}],"name":"Snapshot","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"account","type":"address"}],"name":"Unpaused","type":"event"},{"inputs":[],"name":"DOMAIN_SEPARATOR","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"snapshotId","type":"uint256"}],"name":"balanceOfAt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burnFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint32","name":"pos","type":"uint32"}],"name":"checkpoints","outputs":[{"components":[{"internalType":"uint32","name":"fromBlock","type":"uint32"},{"internalType":"uint224","name":"votes","type":"uint224"}],"internalType":"struct ERC20Votes.Checkpoint","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"delegatee","type":"address"}],"name":"delegate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"delegatee","type":"address"},{"internalType":"uint256","name":"nonce","type":"uint256"},{"internalType":"uint256","name":"expiry","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"delegateBySig","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"delegates","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"blockNumber","type":"uint256"}],"name":"getPastTotalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"blockNumber","type":"uint256"}],"name":"getPastVotes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"getVotes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"nonces","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"numCheckpoints","outputs":[{"internalType":"uint32","name":"","type":"uint32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pause","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"permit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"snapshot","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"snapshotId","type":"uint256"}],"name":"totalSupplyAt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"unpause","outputs":[],"stateMutability":"nonpayable","type":"function"}];
-                    var coin = await new web3.eth.Contract(coinABI,coinAddress);
-                    return coin;
-                }
-                setAllowance = async(currency, price) => {
-                    var coin = await makeCoin(currency);
-                    try {
-                        coin.methods.approve(marketAddress,price).send({
-                            from: accounts[0]
-                        });
-                    } catch (err) {
-                        console.log('uhoh setAllowance error:',err)
-                    }
-                    buyFlow(target);
-                }
-                checkAllowance = async(currency) => {
-                    var coin = await makeCoin(currency);
-                    var allowance;
-                    try {
-                        allowance = await coin.methods.allowance(accounts[0],marketAddress).call();
-                    } catch (err) {
-                        console.log('uhoh checkAllownace error:',err)
-                    }
-                    return allowance;
-                }
-                getCoinName = async(currency) => {
-                    var coin = await makeCoin(currency);
-                    var name;
-                    try {
-                        name = await coin.methods.name().call();
-                    } catch (err) {
-                        console.log(err);
-                    }
-                    return name;
-                }
-                getCoinDec = async(currency) => {
-                    var coin = await makeCoin(currency);
-                    var dec;
-                    try {
-                        dec = await coin.methods.decimals().call();
-                    } catch (err) {
-                        console.log(err);
-                    }
-                    return 1**dec;
-                }
-                //erc721 logic
-                makeNFT721 = async(collection) => {
-                    var nftAddress = collection;
-                    //this is 
-                    var nft721ABI; //
-                    var nft = new web3.eth.Contract(nftABI,nftAddress);
-                    return nft;
-                }
-                approve721 = async(collection) => {
-
-                }
-
-                //erc1155 logic
-                makeNFT1155 = async(collection) => {
-
-                }
-                approve721 = async(collection) => {
-
-                }
-
-                //User logic
-                //gets accounts and checks chain id then sends to checkWallet()
-                connectWallet = async() => {
-                    var web3 = new Web3(Web3.givenProvider);
-                    try {
-                        accounts = await web3.eth.requestAccounts().then()
-                        if(accounts[0]){
-                            connected = true;
-                        }
-                    } catch(err) {
-                        errorTell(err.message);
-                    }
-                    if(connected){
-                        var networkId = await web3.eth.net.getId();
-                        if (networkId !== 1) {
-                            alert('change your network to main ethereum')
-                        }
-                        var connect = document.getElementById('connect');
-                        connect.innerHTML = 'Connected';
-                        connect.disabled = true;
-                        connect.style.display = 'none';
-                        //checkWallet should see miladystation holder
-                        checkWallet();
-                    }
-                    var pop = document.getElementById('pop');
-                    if(pop.style.display != 'none'){
-                        buyFlow(target);
-                    }
-                }
-                //checks miladystation holder just for website stuff, merkle in market contract is line of defense
-                checkWallet = async() => {
-                    console.log('whats in your wallet');
-                    try {
-                        friend = await ms.methods
-                        .balanceOf(accounts[0]).call();
-                    } catch(err){
-                        console.log(err);
-                    }
-                    console.log('friends',friend);
-                }
-                //user clicks buy button, needs to check approval for currency and price
-                buyFlow = async(id) => {
-                    target = id;
-                    var pop = document.getElementById('pop');
-                    if(pop.style.display == '' || pop.style.display == 'none'){
-                        showPop();
-                    }
-                    var innerHTML = "";
-                    if(!connected) {
-                        //connect button
-                        innerHTML = `
-                        <h3>Please Connect your Wallet</h3>
-                        <button id="connect" onclick="connectWallet()">Connect Wallet</button>
-                        `;
-                    } else {
-                        //seller menu
-                        if(listings[id].seller == accounts[0]) {
-                            innerHTML = `
-                                <h3>This is your listing. Whatsup</h3>
-                                <button onclick="cancelListing()">Cancel Listing</button>
-                                <button onclick="editPrice()">Edit Price</button>
-                                `;
-                        //buyer flow
-                        } else {
-                            //check allowance
-                            if(checkAllowance(listings[id].currency) == listings[id].price){
-                            innerHTML = `
-                                <button onclick="buy(${target})">BUY</button>
-                                `;
-                            } else {
-                                innerHTML = `
-                                    <h3>Must Approve Currency for Purchase</h3>
-                                    <button onclick="setAllowance("${listings[id].currency}",${listings[id].price})">Approve Coin</button>
-                                    `;
+                //console.log('web3 object',web3)
+    
+                var connected = false;
+                var accounts = [];
+                var friend = false;
+                var approveSell;
+                var approveBuy;
+    
+                var listings = [];
+                var listingCount = 0;
+                var listingTotal = 2;
+                var target;
+                
+                var gotProps = false;
+                var chainScanPre = 'https://etherscan.io/tx/'
+    
+                const marketAddress = "0xAcd9b6C25704c4CdE7d8FBfcfF0eA41346B61E19";  //main
+                const marketABI = [{"inputs":[],"name":"CurrencyAllowanceError","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"SaleNotOn","type":"error"},{"inputs":[],"name":"TokenApprovalError","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"inputs":[],"name":"YouDontOwn","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"seller","type":"address"},{"indexed":false,"internalType":"address","name":"buyer","type":"address"},{"indexed":false,"internalType":"address","name":"collection","type":"address"},{"indexed":false,"internalType":"address","name":"currency","type":"address"},{"indexed":false,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"Purchase","type":"event"},{"inputs":[{"internalType":"address","name":"collection","type":"address"}],"name":"approveIt1155","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"collection","type":"address"}],"name":"approveIt721","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"listingId","type":"uint256"}],"name":"buy","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"erc","type":"uint256"},{"internalType":"address","name":"collection","type":"address"},{"internalType":"address","name":"currency","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"name":"createListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"listingId","type":"uint256"}],"name":"deleteListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"listingCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"listingList","outputs":[{"internalType":"bool","name":"saleOn","type":"bool"},{"internalType":"uint256","name":"erc","type":"uint256"},{"internalType":"address","name":"seller","type":"address"},{"internalType":"address","name":"collection","type":"address"},{"internalType":"address","name":"currency","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownershipHandoverValidFor","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"}];
+                const market = new web3.eth.Contract(marketABI,marketAddress);
+    
+                const msAddress = "0xB24BaB1732D34cAD0A7C7035C3539aEC553bF3a0";
+                const msABI = [{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
+                const ms = new web3.eth.Contract(msABI,msAddress);
+    
+                //functions
+                    //Contract logic
+                    getProps = async() => {
+                        var meta;
+                        for(i=0;i<listingTotal;i++){
+                            meta = await getListing(i);
+                            updateListing(meta.metadata, listings[i], i);
+                            try {
+                                //count = await rejects.methods.count().call();
+                                //holder = await rejects.methods.holderMints(accounts[0]).call();
+                                // update page to show count
+                                //var prog = get('count');
+                                //prog.innerHTML = `${count}/123`
+                            } catch (err) {
+                                console.log('prop err:',err)
                             }
                         }
+                        
+                        gotProps = true;
                     }
-                    popPop(innerHTML);
-                }
-                
+                    getListing = async(id) => {
+                        //js listing object to make a website copy of the contract situation
+                        var listing = {
+                            saleOn: false,
+                            erc: -1,
+                            seller: 0x0000000000000000000000000000,
+                            collection: 0x0000000000000000000000000000,
+                            currency: 0x0000000000000000000000000000,
+                            tokenId: -1,
+                            price: -1
+                        }
+    
+                        try {
+                            var currentListing = await market.methods.listingList(id).call();
+                            listing = currentListing;
+                        } catch (err) {
+                            console.log('listinglist call fail:::::',err)
+                        }
+                        //this saves the copy of the listing to the website listing array
+                        listings[listingCount] = listing;
+                        listingCount++;
+                        var meta;
+                        try {
+                            meta = fetchNFTData(listing.collection,listing.tokenId);
+                        } catch (err) {
+                            console.log('getListing fetch metadata errr',err);
+                        }
+                        //this returns the metadata
+                        return meta;
+                    }
+                    updateListing = async(meta, listing, id) => {
+                        var listlist = document.getElementById('listings');
+                        var src = `https://mony.mypinata.cloud/ipfs${editCID(meta.image)}?pinataGatewayToken=uyN3_jcO6fLxjvmAV82o6PezM48bw7BlDk3ij1hpSOG5FSVgODrv-eIz_1OEkvAw`
+                        var currencySym = await getCoinSym(listing.currency);
+                        var decimals = await getCoinDec(listing.currency);
+                        if (listing.saleOn) {
+                            listlist.innerHTML += 
+                            `
+                            <div class="listing-item">
+                                <img class="listing-image" src="${src}"/>
+                                <h3 class="center">${meta.name}</h3>
+                                <h3 class="center">${listing.price/decimals} ${currencySym}</h3>
+                                <button onclick="buyFlow(${id})">BUY</button>
+                            </div>
+                            `
+                        } else {
+                            listlist.innerHTML += 
+                            `
+                            <div class="listing-item">
+                                <img class="listing-image dark" src="${src}"/>
+                                <h3 class="center">SOLD OUT</h3>
+                            </div>
+                            `
+                        }
+                        
+                    }
+                    
+                    getProps();
+    
+                    //erc20 logic
+                    makeCoin = async(currency) => {
+                        var coinAddress = currency;
+                        //this is miladypeso abi tbh
+                        var coinABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegator","type":"address"},{"indexed":true,"internalType":"address","name":"fromDelegate","type":"address"},{"indexed":true,"internalType":"address","name":"toDelegate","type":"address"}],"name":"DelegateChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegate","type":"address"},{"indexed":false,"internalType":"uint256","name":"previousBalance","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"newBalance","type":"uint256"}],"name":"DelegateVotesChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"account","type":"address"}],"name":"Paused","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"id","type":"uint256"}],"name":"Snapshot","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"account","type":"address"}],"name":"Unpaused","type":"event"},{"inputs":[],"name":"DOMAIN_SEPARATOR","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"snapshotId","type":"uint256"}],"name":"balanceOfAt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burnFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint32","name":"pos","type":"uint32"}],"name":"checkpoints","outputs":[{"components":[{"internalType":"uint32","name":"fromBlock","type":"uint32"},{"internalType":"uint224","name":"votes","type":"uint224"}],"internalType":"struct ERC20Votes.Checkpoint","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"delegatee","type":"address"}],"name":"delegate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"delegatee","type":"address"},{"internalType":"uint256","name":"nonce","type":"uint256"},{"internalType":"uint256","name":"expiry","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"delegateBySig","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"delegates","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"blockNumber","type":"uint256"}],"name":"getPastTotalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"blockNumber","type":"uint256"}],"name":"getPastVotes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"getVotes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"nonces","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"numCheckpoints","outputs":[{"internalType":"uint32","name":"","type":"uint32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pause","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"permit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"snapshot","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"snapshotId","type":"uint256"}],"name":"totalSupplyAt","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"unpause","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+                        var coin = await new web3.eth.Contract(coinABI,coinAddress);
+                        return coin;
+                    }
+                    setAllowance = async(currency, price) => {
+                        var coin = await makeCoin(currency);
+                        try {
+                            coin.methods.approve(marketAddress,price).send({
+                                from: accounts[0]
+                            });
+                        } catch (err) {
+                            console.log('uhoh setAllowance error:',err)
+                        }
+                        buyFlow(target);
+                    }
+                    checkAllowance = async(currency) => {
+                        var coin = await makeCoin(currency);
+                        var allowance;
+                        try {
+                            allowance = await coin.methods.allowance(accounts[0],marketAddress).call();
+                        } catch (err) {
+                            console.log('uhoh checkAllownace error:',err)
+                        }
+                        return allowance;
+                    }
+                    getCoinSym = async(currency) => {
+                        var coin = await makeCoin(currency);
+                        var symbol;
+                        try {
+                            symbol = await coin.methods.symbol().call();
+                        } catch (err) {
+                            console.log(err);
+                        }
+                        return symbol;
+                    }
+                    getCoinDec = async(currency) => {
+                        var coin = await makeCoin(currency);
+                        var dec;
+                        try {
+                            dec = await coin.methods.decimals().call();
+                        } catch (err) {
+                            console.log(err);
+                        }
+                        return 1**dec;
+                    }
+                    //erc721 logic
+                    makeNFT721 = async(collection) => {
+                        var nftAddress = collection;
+                        //this is 
+                        var nft721ABI; //
+                        var nft = new web3.eth.Contract(nftABI,nftAddress);
+                        return nft;
+                    }
+                    approve721 = async(collection) => {
+    
+                    }
+    
+                    //erc1155 logic
+                    makeNFT1155 = async(collection) => {
+    
+                    }
+                    approve721 = async(collection) => {
+    
+                    }
+    
+                    //User logic
+                    //gets accounts and checks chain id then sends to checkWallet()
+                    connectWallet = async() => {
+                        var web3 = new Web3(Web3.givenProvider);
+                        try {
+                            accounts = await web3.eth.requestAccounts().then()
+                            if(accounts[0]){
+                                connected = true;
+                            }
+                        } catch(err) {
+                            errorTell(err.message);
+                        }
+                        if(connected){
+                            var networkId = await web3.eth.net.getId();
+                            if (networkId !== 1) {
+                                alert('change your network to main ethereum')
+                            }
+                            var connect = document.getElementById('connect');
+                            connect.innerHTML = 'Connected';
+                            connect.disabled = true;
+                            connect.style.display = 'none';
+                            //checkWallet should see miladystation holder
+                            checkWallet();
+                        }
+                        var pop = document.getElementById('pop');
+                        if(pop.style.display != 'none'){
+                            buyFlow(target);
+                        }
+                    }
+                    //checks miladystation holder just for website stuff, merkle in market contract is line of defense
+                    checkWallet = async() => {
+                        console.log('whats in your wallet');
+                        try {
+                            friend = await ms.methods
+                            .balanceOf(accounts[0]).call();
+                        } catch(err){
+                            console.log(err);
+                        }
+                        console.log('friends',friend);
+                    }
+                    //user clicks buy button, needs to check approval for currency and price
+                    buyFlow = async(id) => {
+                        target = id;
+                        var pop = document.getElementById('pop');
+                        if(pop.style.display == '' || pop.style.display == 'none'){
+                            showPop();
+                        }
+                        var innerHTML = "";
+                        if(!connected) {
+                            //connect button
+                            innerHTML = `
+                            <h3>Please Connect your Wallet</h3>
+                            <button id="connect" onclick="connectWallet()">Connect Wallet</button>
+                            `;
+                        } else {
+                            //seller menu
+                            if(listings[id].seller == accounts[0]) {
+                                innerHTML = `
+                                    <h3>This is your listing. Whatsup</h3>
+                                    <button onclick="cancelListing()">Cancel Listing</button>
+                                    <button onclick="editPrice()">Edit Price</button>
+                                    `;
+                            //buyer flow
+                            } else {
+                                //check allowance
+                                if(checkAllowance(listings[id].currency) == listings[id].price){
+                                innerHTML = `
+                                    <button onclick="buy(${target})">BUY</button>
+                                    `;
+                                } else {
+                                    innerHTML = `
+                                        <h3>Must Approve Currency for Purchase</h3>
+                                        <button onclick="setAllowance("${listings[id].currency}",${listings[id].price})">Approve Coin</button>
+                                        `;
+                                }
+                            }
+                        }
+                        popPop(innerHTML);
+                    }
+                    
         </script>
+    </body>
+
     
 </html>
