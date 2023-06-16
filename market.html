@@ -78,7 +78,7 @@
                 }
                 popPop = (innerHTML) => {
                     var pop = document.getElementById('pop');
-                    pop.innerHTML += innerHTML;
+                    pop.innerHTML = '<div class="x" onclick="closePop()">x</div>'+innerHTML;
                 }
         </script>
     </head>
@@ -167,7 +167,7 @@
         </div>
         <!-- web3 -->
         <script>
-            console.log('version 52')
+            console.log('version 53')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -387,8 +387,10 @@
                     }
                     //user clicks buy button, needs to check approval for currency and price
                     buyFlow = async(id) => {
+                        console.log('top of buyFlow:::','target:',target,'pop:',pop,'connected',connected,'listings',listings,'accounts',accounts,'checkAllowance',checkAllowance,'popPop',popPop);
                         target = id;
                         var pop = document.getElementById('pop');
+                        console.log('pop.style.display before flow',pop.style.display);
                         if(pop.style.display == '' || pop.style.display == 'none'){
                             showPop();
                         }
@@ -399,14 +401,17 @@
                             <h3>Please Connect your Wallet</h3>
                             <button id="connect" onclick="connectWallet()">Connect Wallet</button>
                             `;
+                            console.log('connected innerhtml');
                         } else {
                             //seller menu
                             if(listings[id].seller == accounts[0]) {
+                                console.log('emergency')
                                 innerHTML = `
                                     <h3>This is your listing. Whatsup</h3>
                                     <button onclick="cancelListing()">Cancel Listing</button>
                                     <button onclick="editPrice()">Edit Price</button>
                                     `;
+                                console.log('EMERGENCY','seller menu innerhtml');
                             //buyer flow
                             } else {
                                 //check allowance
@@ -414,15 +419,18 @@
                                 innerHTML = `
                                     <button onclick="buy(${target})">BUY</button>
                                     `;
+                                    console.log('checkallowance == price innerhtml');
                                 } else {
                                     innerHTML = `
                                         <h3>Must Approve Currency for Purchase</h3>
-                                        <button onclick="setAllowance("${listings[id].currency}","${listings[id].price}")" >Approve Coin</button>
+                                        <button onclick="setAllowance('${listings[id].currency}','${listings[id].price}')">Approve Coin</button>
                                         `;
+                                    console.log('allowance != price');
                                 }
                             }
                         }
                         popPop(innerHTML);
+                        console.log('we have exited the buyFlow function');
                     }
                     
         </script>
