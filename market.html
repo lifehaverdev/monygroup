@@ -167,7 +167,7 @@
         </div>
         <!-- web3 -->
         <script>
-            console.log('version 54')
+            console.log('version 55')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -191,11 +191,11 @@
     
                 const marketAddress = "0xAcd9b6C25704c4CdE7d8FBfcfF0eA41346B61E19";  //main
                 const marketABI = [{"inputs":[],"name":"CurrencyAllowanceError","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"SaleNotOn","type":"error"},{"inputs":[],"name":"TokenApprovalError","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"inputs":[],"name":"YouDontOwn","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"seller","type":"address"},{"indexed":false,"internalType":"address","name":"buyer","type":"address"},{"indexed":false,"internalType":"address","name":"collection","type":"address"},{"indexed":false,"internalType":"address","name":"currency","type":"address"},{"indexed":false,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"Purchase","type":"event"},{"inputs":[{"internalType":"address","name":"collection","type":"address"}],"name":"approveIt1155","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"collection","type":"address"}],"name":"approveIt721","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"listingId","type":"uint256"}],"name":"buy","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"erc","type":"uint256"},{"internalType":"address","name":"collection","type":"address"},{"internalType":"address","name":"currency","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"name":"createListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"listingId","type":"uint256"}],"name":"deleteListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"listingCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"listingList","outputs":[{"internalType":"bool","name":"saleOn","type":"bool"},{"internalType":"uint256","name":"erc","type":"uint256"},{"internalType":"address","name":"seller","type":"address"},{"internalType":"address","name":"collection","type":"address"},{"internalType":"address","name":"currency","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownershipHandoverValidFor","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"}];
-                const market = new web3.eth.Contract(marketABI,marketAddress);
+                var market = new web3.eth.Contract(marketABI,marketAddress);
     
                 const msAddress = "0xB24BaB1732D34cAD0A7C7035C3539aEC553bF3a0";
                 const msABI = [{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
-                const ms = new web3.eth.Contract(msABI,msAddress);
+                var ms = new web3.eth.Contract(msABI,msAddress);
     
                 //functions
                     //Contract logic
@@ -349,7 +349,11 @@
                     //User logic
                     //gets accounts and checks chain id then sends to checkWallet()
                     connectWallet = async() => {
+                        console.log('web3 before',web3);
                         var web3 = new Web3(Web3.givenProvider);
+                        console.log('we checking web3 after',web3)
+                        market = new web3.eth.Contract(marketABI,marketAddress);
+                        ms = new web3.eth.Contract(msABI,msAddress);
                         try {
                             accounts = await web3.eth.requestAccounts().then()
                             if(accounts[0]){
