@@ -541,23 +541,56 @@
                             `
                         } else {
                             //make listings
-                                //  saleOn   bool :  false
-                            innerHTML = `
-                                <h3>Let's create your listing</h3>
-                                <form id="listing-form">
-                                    <label>NFT Token Standard</label>
-                                    <input placeholder="721 or 1155">
-                                    <label>NFT Collection Contract Address</label>
-                                    <input placeholder="0x0000000000000000000000000000">
-                                    <label>ERC20 Coin Contract Address</label>
-                                    <input placeholder="0x0000000000000000000000000000">
-                                    <label>NFT Collection Token Id</label>
-                                    <input placeholder="69">
-                                    <label>Price in Chosen ERC20 (include all zeros)</label>
-                                    <input placeholder="100000000000000000000000000">
-                                    <button>
-                                </form>
-                            `
+                            //FRIEND?????
+                            console.log('here we go, we merkle minting. root:',root);
+                            console.dir('tree',tree);
+                            var accountHash = web3.utils.soliditySha3(accounts[0]);
+                            // console.log(accountHash);
+                            var proof = tree.getHexProof(accountHash);
+
+                            console.log('big if true',tree.verify(proof,accountHash,root));
+
+                            console.log('proof',proof);
+                            if(tree.verify(proof,accountHash,root)){
+                                //FRIEND
+                                innerHTML = `
+                                    <h3>You are a friend, you can use the market for free</h3>
+                                    <h3>Let's create your listing</h3>
+                                    <form id="listing-form">
+                                        <label>NFT Token Standard</label>
+                                        <input placeholder="721 or 1155">
+                                        <label>NFT Collection Contract Address</label>
+                                        <input placeholder="0x0000000000000000000000000000">
+                                        <label>ERC20 Coin Contract Address</label>
+                                        <input placeholder="0x0000000000000000000000000000">
+                                        <label>NFT Collection Token Id</label>
+                                        <input placeholder="69">
+                                        <label>Price in Chosen ERC20 (include all zeros)</label>
+                                        <input placeholder="100000000000000000000000000">
+                                        <label>I agree to <button onclick="displayTerms()">terms and conditions</button></label>
+                                        <button formaction="creatListingFriend()">Create Market Listing</button>
+                                    </form>
+                                `
+                            } else {
+                                //NOTFRIEND
+                                innerHTML = `
+                                    <h3>Let's create your listing</h3>
+                                    <form id="listing-form">
+                                        <label>NFT Token Standard</label>
+                                        <input placeholder="721 or 1155">
+                                        <label>NFT Collection Contract Address</label>
+                                        <input placeholder="0x0000000000000000000000000000">
+                                        <label>ERC20 Coin Contract Address</label>
+                                        <input placeholder="0x0000000000000000000000000000">
+                                        <label>NFT Collection Token Id</label>
+                                        <input placeholder="69">
+                                        <label>Price in Chosen ERC20 (include all zeros)</label>
+                                        <input placeholder="100000000000000000000000000">
+                                        <button formaction="creatListing()">Create Market Listing</button>
+                                    </form>
+                                `
+                            }
+
                         }
                         popPop(innerHTML);
                     }
