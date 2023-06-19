@@ -5,8 +5,12 @@
 body {
     background-color: whitesmoke;
     background-image: linear-gradient(to bottom, #87cefa, #e0f3ea);
+    /* background-image: url(public/milkbar1.png); */
+    background-size: cover;
+    background-position: center;
     margin: 0;
     padding: 0;
+    color: #093a8b
 }
 button {
     font-family: gloock;
@@ -41,6 +45,7 @@ button {
     background-image: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
     border-bottom: 10px solid rgba(0, 0, 0, 0.1);
+    color: darkblue;
 }
 .menu ul li a {
     color: inherit;
@@ -92,6 +97,7 @@ button {
 .content {
     display:flex;
     padding: 3%;
+    color: #093a8b
 }
 .banner {
     display: block;
@@ -107,6 +113,46 @@ button {
 }
 a {
     color:darkgoldenrod;
+}
+
+.landing {
+    height: 350px;
+    width: 75vw;
+    background-color: #093a8b;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 5%;
+    display: flex;
+    border-radius: 15px;
+}
+
+.landing h2{
+    text-align: center;
+}
+
+.landing ul li {
+    margin: 2%;
+}
+
+.landing img {
+    height: 350px;
+    width: 700px;
+}
+
+#collectibles {
+    background-color: darkslateblue;
+    padding: 5px;
+    border-radius: 15px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.marquee-container {
+    width: 95vw;
 }
 
 .marquee {
@@ -200,6 +246,14 @@ a {
     padding: 5%;
 }
 
+#title {
+    background-color: black;
+    background-blend-mode: screen;
+    opacity: .9;
+    width: auto;
+    padding: 2%;
+}
+
 #listings {
     width: 100%;
     display: flex;
@@ -207,24 +261,26 @@ a {
 
 .listing-item{
     padding: 3%;
+    transition: filter 0.3s ease;
+    height: 30%;
 }
 
 .listing-item button {
     transition: filter 0.3s ease;
     display: none;
-    position:absolute;
+    position:relative;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: auto;
-    margin-top: auto;
+    width: 200px;
+    height: 40px;
 }
 
 .listing-item img {
-    transition: filter 0.3s ease;
+    
     width: 300px;
 }
 
-.listing-item:hover img {
+.listing-item:hover {
     filter: brightness(1.2); /* Apply darkness effect */
 }
 
