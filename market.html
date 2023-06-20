@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 90')
+            console.log('version 91')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -336,8 +336,7 @@
                         if(
                             (erc != "721" && erc != "1155") ||
                             collection.length != 42 ||
-                            currency.length != 42 ||
-                            price < 10
+                            currency.length != 42
                         ){
                             return false;
                         } else {
@@ -473,7 +472,7 @@
                                     //friend, approvalSet, format good, create listing
                                     try {
                                         await market.methods
-                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,price*dec)
+                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,web3.utils.toBN(price*dec))
                                                     .send({
                                                     from: accounts[0]
                                                 });
@@ -507,7 +506,7 @@
                                 }
                             }
                         } else {
-                        alert('check your inputs, something is up');
+                        alert('check your inputs, something is up with the addresses or the erc');
                         }
                     }
                     
