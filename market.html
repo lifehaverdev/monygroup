@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 80')
+            console.log('version 81')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -460,7 +460,7 @@
                                     pass = await checkApproval1155(collection);
                                     break;
                             }
-                            
+                            console.log('what is pass',pass);
                             if(pass==true){
                                 if(tree.verify(proof,accountHash,root)){
                                     //friend, approvalSet, format good, create listing
