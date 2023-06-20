@@ -331,3 +331,7 @@ a {
     margin-right: auto;
     margin-left: auto;
 }
+
+#listing-form {
+    display: block;
+}
