@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 78')
+            console.log('version 79')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -600,7 +600,7 @@
                         return nft;
                     }
                     checkApproval721 = async(collection) => {
-                        var nft = makeNFT721(collection);
+                        var nft = await makeNFT721(collection);
                         let approved = false;
                         try {
                             approved = await nft.methods.isApprovedForAll(accounts[0],marketAddress)
@@ -617,7 +617,7 @@
                         return nft;
                     }
                     checkApproval1155 = async(collection) => {
-                        var nft = makeNFT1155(collection);
+                        var nft = await makeNFT1155(collection);
                         let approved = false;
                         try {
                             approved = await nft.methods.isApprovedForAll(accounts[0],marketAddress)
