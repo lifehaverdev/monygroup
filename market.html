@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 85')
+            console.log('version 86')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -446,8 +446,14 @@
                         let currency = get("currency-input").value;
                         let tokenId = get("tokenId-input").value;
                         let price = get("price-input").value;
-                        let termCheck = get("terms-input").value;
-
+                        
+                        console.log('we are taking a panel. what are the types of these things, what is getting put into the contract')
+                        console.log('proof',proof,'proof type',typeof proof);
+                        console.log('erc',erc,'erc type',typeof erc);
+                        console.log('collection',collection,'collection type',typeof collection);
+                        console.log('currency',currency,'currency type',typeof currency);
+                        console.log('tokenId',tokenId,'tokenId type',typeof tokenId);
+                        console.log('price',price,'price type',typeof price);
                         switch(erc){
                                 case "721":
                                     nft = await makeNFT721(collection);
