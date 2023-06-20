@@ -320,6 +320,24 @@ a {
     overflow-y: visible;
 }
 
+#pop2 {
+    display: none;
+    color: black;
+    align-items: center;
+    background-color: ivory;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    width: 80%;
+    min-height: 40%;
+    margin:10px;
+    z-index: 4;
+    overflow-y: visible;
+}
+
 #connect {
     display: block;
     width: 200px;

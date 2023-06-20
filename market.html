@@ -67,19 +67,41 @@
                 });
                 });
             //Popup
-                function closePop() {
-                    var pop = document.getElementById('pop');
+                function closePop(which) {
+                    var pop;
+                    switch(which){
+                        case 1:
+                            pop = document.getElementById('pop');
+                        case 2:
+                            pop = document.getElementById('pop2');
+                    }
                     pop.innerHTML = '';
                     pop.style.display = 'none';
                 }
-                showPop = () => {
-                    var pop = document.getElementById('pop');
-                    pop.innerHTML += '<div class="x" onclick="closePop()">x</div>'
+                showPop = (which) => {
+                    var pop;
+                    switch(which){
+                        case 1:
+                            pop = document.getElementById('pop');
+                            pop.innerHTML += '<div class="x" onclick="closePop(1)">x</div>'
+                        case 2:
+                            pop = document.getElementById('pop2');
+                            pop.innerHTML += '<div class="x" onclick="closePop(2)">x</div>'
+                    }
+                    
                     pop.style.display = 'block';
                 }
-                popPop = (innerHTML) => {
-                    var pop = document.getElementById('pop');
-                    pop.innerHTML = '<div class="x" onclick="closePop()">x</div>'+innerHTML;
+                popPop = (innerHTML,which) => {
+                    var pop;
+                    switch(which){
+                        case 1:
+                            pop = document.getElementById('pop');
+                            pop.innerHTML = '<div class="x" onclick="closePop(1)">x</div>'+innerHTML;
+                        case 2:
+                            pop = document.getElementById('pop2');
+                            pop.innerHTML = '<div class="x" onclick="closePop(2)">x</div>'+innerHTML;
+                    }
+                    
                 }
             //Get
                 function get(id) {
@@ -153,6 +175,7 @@
         </div>
 
         <div id="pop"></div>
+        <div id="pop2"></div>
 
         <div class="footerwrap">
             <div class="footer">
@@ -178,7 +201,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 59')
+            console.log('version 60')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -531,7 +554,7 @@
                         target = id;
                         var pop = document.getElementById('pop');
                         if(pop.style.display == '' || pop.style.display == 'none'){
-                            showPop();
+                            showPop(1);
                         }
                         var innerHTML = "";
                         if(!connected) {
@@ -574,12 +597,12 @@
                                 }
                             }
                         }
-                        popPop(innerHTML);
+                        popPop(innerHTML,1);
                     }
                     wizardFlow = async() => {
                         var pop = document.getElementById('pop');
                         if(pop.style.display == '' || pop.style.display == 'none'){
-                            showPop();
+                            showPop(1);
                         }
                         var innerHTML = "";
                         if (!connected) {
@@ -625,7 +648,7 @@
                                             <input id="price-input" placeholder="100000000000000000000000000">
                                         </div>
                                         <div>
-                                            <label>I agree to <a onclick="showTerms">terms and conditions</a></label>
+                                            <label>I agree to <a onclick="showTerms()">terms and conditions</a></label>
                                             <input id="terms-input" type="checkbox">
                                         </div>
                                         `
@@ -648,7 +671,25 @@
                             }
 
                         }
-                        popPop(innerHTML);
+                        popPop(innerHTML,1);
+                    }
+                    showTerms = () => {
+                        var pop = get("pop2");
+                        if(pop.style.display == '' || pop.style.display == 'none'){
+                            showPop(2);
+                        }
+                        var innerHTML = "";
+                        innerHTML = `
+                            <h2>Terms and Conditions</h2>
+                            <p>Double check that the url is monygroup.net/market</p>
+                            <p>Double check in the wallet that the contract interaction is with ${marketAddress}</p>
+                            <p>Consider this a private beta. Maybe use a separate wallet to interact</p>
+                            <p>IT SHOULD WORK but lmk</p>
+                            <p>Also by interacting with this contract you agree that Remilia rules and penguins/apes/punks/seals/etc drool</p>
+                            <p>Also you affirm that miladystation is an interesting complimentary collection and NOT A GRIFT</p>
+                            <p>thank you</p>
+                        `
+                        popPop(innerHTML,2);
                     }
         </script>
         <!-- merkle -->
