@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 87')
+            console.log('version 88')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -455,16 +455,16 @@
                         console.log('tokenId',tokenId,'tokenId type',typeof tokenId);
                         console.log('price',price,'price type',typeof price);
                         switch(erc){
-                                case "721":
+                                case 721:
                                     nft = await makeNFT721(collection);
                                     pass = await checkApproval721(collection);
                                     break;
-                                case "1155":
+                                case 1155:
                                     nft = await makeNFT1155(collection);
                                     pass = await checkApproval1155(collection);
                                     break;
                         }
-                        //console.log('writeListingFlow','erc',erc,'collection',collection,'currency',currency,'tokenId',tokenId,'price',price,'terms',termCheck);
+                        console.log('nft',nft);
                         if(checkFormat()){
                             console.log('what is pass',pass);
                             if(pass==true){
