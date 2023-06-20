@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 75')
+            console.log('version 76')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -426,7 +426,7 @@
                         //flow
                         //is connected? connect wallet
                         //is accounts[0] on the merkle
-                        
+                        var nft;
                         //is collection approved
                         //erc????
                         event.preventDefault();
@@ -449,7 +449,7 @@
                         //console.log('writeListingFlow','erc',erc,'collection',collection,'currency',currency,'tokenId',tokenId,'price',price,'terms',termCheck);
                         if(checkFormat()){
                             var pass = false;
-                            var nft;
+                            
                             console.log('inside checkformat what is erc',erc)
                             switch(erc){
                                 case 721:
@@ -746,18 +746,6 @@
                                 <button id="connect" onclick="connectWallet(2)">Connect Wallet</button>
                             `
                         } else {
-                            //make listings
-                            //FRIEND?????
-                            //approved nft??????
-                            console.log('here we go, we merkle minting. root:',root);
-                            console.dir('tree',tree);
-                            var accountHash = web3.utils.soliditySha3(accounts[0]);
-                            // console.log(accountHash);
-                            var proof = tree.getHexProof(accountHash);
-
-                            console.log('big if true',tree.verify(proof,accountHash,root));
-
-                            console.log('proof',proof);
                             
                             innerHTML = `
                                     <h3>You are a friend, you can use the market for free</h3>
