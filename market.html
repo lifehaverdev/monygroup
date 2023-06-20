@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 86')
+            console.log('version 87')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -441,11 +441,11 @@
 
                         //console.log('proof',proof);
 
-                        let erc = get("erc-input").value;
+                        let erc = parseInt(get("erc-input").value);
                         let collection = get("collection-input").value;
                         let currency = get("currency-input").value;
-                        let tokenId = get("tokenId-input").value;
-                        let price = get("price-input").value;
+                        let tokenId = parseInt(get("tokenId-input").value);
+                        let price = parseInt(get("price-input").value);
                         
                         console.log('we are taking a panel. what are the types of these things, what is getting put into the contract')
                         console.log('proof',proof,'proof type',typeof proof);
