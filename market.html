@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 65')
+            console.log('version 66')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -499,12 +499,17 @@
                                 }
                             } else {
                                 alert('you need to approve the collection to create the listing');
+                                sendToCollection(collection);
                             }
                         } else {
                         alert('check your inputs, something is up');
                         }
                     }
                     
+                    sendToCollection = (collection) => {
+                        window.open(`https://etherscan.io/address/${collection}#writeContract`)
+                    }
+
                     cancelListing = async(id) => {
                         try {
                             await market.methods.cancelListing(id).send({
@@ -787,8 +792,6 @@
                                         </div>
                                     </form>
                                         `;
-                            
-
                         }
                         popPop(innerHTML,1);
                     }
@@ -801,7 +804,8 @@
                         innerHTML = `
                             <h2>Terms and Conditions</h2>
                             <p>Double check that the url is monygroup.net/market</p>
-                            <p>Double check in the wallet that the contract interaction is with ${marketAddress}</p>
+                            <p>Double check that the NFT approval is for what you are trying to sell</p>
+                            <p>Double check in the wallet that the create listing interaction is with ${marketAddress}</p>
                             <p>Consider this a private beta. Maybe use a separate wallet to interact</p>
                             <p>You need to setApprovalAll the contract address. The wizard automatically prompts that transaction first after checking to see if your wallet already has it approved.</p>
                             <p>Your buyer will also need to set their allowance to spend the erc20 with the contract.</p>
