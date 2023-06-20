@@ -337,14 +337,14 @@
                             erc != "721" || erc != "1155" ||
                             collection.length != 42 ||
                             currency.length != 42 ||
-                            price < 1000000000000 ||
-                            termCheck
+                            price < 1000000000000
                         ){
                             return false;
                         } else {
                             return true;
                         }
                     }
+                    //no use having friend and unfriend functions, hust a deciision in one
                     writeListing = async() => {
                         let erc = get("erc-input").value;
                         let collection = get("collection-input").value;
