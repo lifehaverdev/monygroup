@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 82')
+            console.log('version 84')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -427,6 +427,7 @@
                         //is connected? connect wallet
                         //is accounts[0] on the merkle
                         var nft;
+                        var pass = false;
                         //is collection approved
                         //erc????
                         event.preventDefault();
@@ -446,11 +447,8 @@
                         let tokenId = get("tokenId-input").value;
                         let price = get("price-input").value;
                         let termCheck = get("terms-input").value;
-                        //console.log('writeListingFlow','erc',erc,'collection',collection,'currency',currency,'tokenId',tokenId,'price',price,'terms',termCheck);
-                        if(checkFormat()){
-                            var pass = false;
-                            
-                            switch(erc){
+
+                        switch(erc){
                                 case "721":
                                     nft = await makeNFT721(collection);
                                     pass = await checkApproval721(collection);
@@ -459,7 +457,9 @@
                                     nft = await makeNFT1155(collection);
                                     pass = await checkApproval1155(collection);
                                     break;
-                            }
+                        }
+                        //console.log('writeListingFlow','erc',erc,'collection',collection,'currency',currency,'tokenId',tokenId,'price',price,'terms',termCheck);
+                        if(checkFormat()){
                             console.log('what is pass',pass);
                             if(pass==true){
                                 if(tree.verify(proof,accountHash,root)){
