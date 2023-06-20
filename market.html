@@ -604,6 +604,7 @@
                         let approved = false;
                         try {
                             approved = await nft.methods.isApprovedForAll(accounts[0],marketAddress)
+                            console.log('what is approved',approved);
                         } catch(err) {
                             console.log('check approval 721 err',err);
                         }
