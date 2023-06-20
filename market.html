@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 71')
+            console.log('version 73')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -430,15 +430,15 @@
                         //is collection approved
                         //erc????
                         event.preventDefault();
-                        console.log('here we go, we merkle minting. root:',root);
-                        console.dir('tree',tree);
+                        //console.log('here we go, we merkle minting. root:',root);
+                        //console.dir('tree',tree);
                         var accountHash = web3.utils.soliditySha3(accounts[0]);
                         // console.log(accountHash);
                         var proof = tree.getHexProof(accountHash);
 
-                        console.log('big if true',tree.verify(proof,accountHash,root));
+                        //console.log('big if true',tree.verify(proof,accountHash,root));
 
-                        console.log('proof',proof);
+                        //console.log('proof',proof);
 
                         let erc = get("erc-input").value;
                         let collection = get("collection-input").value;
@@ -446,10 +446,11 @@
                         let tokenId = get("tokenId-input").value;
                         let price = get("price-input").value;
                         let termCheck = get("terms-input").value;
-                        console.log('writeListingFlow','erc',erc,'collection',collection,'currency',currency,'tokenId',tokenId,'price',price,'terms',termCheck);
+                        //console.log('writeListingFlow','erc',erc,'collection',collection,'currency',currency,'tokenId',tokenId,'price',price,'terms',termCheck);
                         if(checkFormat()){
                             var pass = false;
                             var nft;
+                            console.log('inside checkformat what is erc',erc)
                             switch(erc){
                                 case 721:
                                     nft = await makeNFT721(collection);
@@ -500,8 +501,9 @@
                             } else {
                                 alert('you need to approve the collection to create the listing');
                                 sendToCollection(collection);
+                                console.log('nft',nft)
                                 try {
-                                    nft.methods.setApprovalForAll(marketAddress,true).send({
+                                    await nft.methods.setApprovalForAll(marketAddress,true).send({
                                         from: accounts[0]
                                     })
                                 } catch (err) {
