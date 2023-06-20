@@ -332,12 +332,13 @@
                         let currency = get("currency-input").value;
                         let tokenId = get("tokenId-input").value;
                         let price = get("price-input").value;
-                        let termCheck = get("term-input").value;
+                        let termCheck = get("terms-input").value;
                         if(
                             erc != "721" || erc != "1155" ||
                             collection.length != 42 ||
                             currency.length != 42 ||
-                            price < 1000000000000
+                            price < 1000000000000 ||
+                            termCheck
                         ){
                             return false;
                         } else {
