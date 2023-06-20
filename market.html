@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 69')
+            console.log('version 70')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -498,7 +498,7 @@
                                         console.log(err)
                                 }
                             } else {
-                                alert('you need to approve the collection to create the listing',`copy the market contract address: ${marketAddress} as the operator on the setApprovalForAll function set to true`);
+                                alert('you need to approve the collection to create the listing');
                                 sendToCollection(collection);
                             }
                         } else {
@@ -507,8 +507,9 @@
                     }
                     
                     sendToCollection = (collection) => {
-                        var newTab = window.open();
-                        newTab.location.href = `https://etherscan.io/address/${collection}#writeContract`;
+                        get('pop');
+                        pop.innerHTML += 
+                            `<a id="send-to" href="https://etherscan.io/address/${collection}#writeContract" target="_blank">Go To Collection</a>`
                     }
 
                     cancelListing = async(id) => {
