@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 73')
+            console.log('version 75')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -454,50 +454,39 @@
                             switch(erc){
                                 case 721:
                                     nft = await makeNFT721(collection);
-                                    //format is cool, erc721, and youre approved. go for it
-                                    if(checkApproval721(collection)){
-                                        //format is cool, erc721 need to approve
-                                        pass = true;
-                                    } else {
-                                        try {
-                                            await nft.methods.setApprovalForAll(marketAddress,true).send({
-                                                from: accounts[0]
-                                            })
-                                        } catch (err) {
-                                            console.log('writelisting erc721 approve nft error');
-                                        }
-                                        if(checkApproval721(collection)){
-                                            pass = true;
-                                        }
-                                    }
+                                    console.log('what is nft here inside the erc switch statement',nft);
                                     break;
                                 case 1155:
                                     nft = await makeNFT1155(collection);
-                                    if(checkApproval1155(collection)){
-                                        pass = true;
-                                        nft = await makeCoin(collection);
-                                    } else {
-                                        try {
-                                            await nft.methods.setApprovalForAll(marketAddress,true).send({
-                                                from: accounts[0]
-                                            })
-                                        } catch (err) {
-                                            console.log('writelisting erc721 approve nft error');
-                                        }
-                                    }
                                     break;
                             }
+                            console.log('what is nft here before the pass if statement',nft);
                             if(pass){
-                                try {
-                                    await market.methods
-                                                .writeListingFriend(proof,erc,collection,currency,tokenId,price)
-                                                .send({
-                                                from: accounts[0],
-                                                value: 1000000000000000
-                                            });
-                                } catch (err) {
-                                        console.log(err)
+                                if(tree.verify(proof,accountHash,root)){
+                                    //friend, approvalSet, format good, create listing
+                                    try {
+                                        await market.methods
+                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,price)
+                                                    .send({
+                                                    from: accounts[0]
+                                                });
+                                    } catch (err) {
+                                            console.log(err)
+                                    }
+                                } else {
+                                    //nonfriend, approvalSet, format good, create listing
+                                    try {
+                                        await market.methods
+                                                    .writeListing(erc,collection,currency,tokenId,price)
+                                                    .send({
+                                                    from: accounts[0],
+                                                    value: 1000000000000000
+                                                });
+                                    } catch (err) {
+                                            console.log(err)
+                                    }
                                 }
+                                
                             } else {
                                 alert('you need to approve the collection to create the listing');
                                 sendToCollection(collection);
