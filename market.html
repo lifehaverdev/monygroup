@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 76')
+            console.log('version 77')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -452,11 +452,11 @@
                             
                             console.log('inside checkformat what is erc',erc)
                             switch(erc){
-                                case 721:
+                                case "721":
                                     nft = await makeNFT721(collection);
                                     console.log('what is nft here inside the erc switch statement',nft);
                                     break;
-                                case 1155:
+                                case "1155":
                                     nft = await makeNFT1155(collection);
                                     break;
                             }
