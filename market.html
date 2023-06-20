@@ -143,7 +143,7 @@
             
         <div id="market">
             <div class="collectibles">
-                <h1>MONY MARKET MILK BAR</h1>
+                <h1>MONY MARKET</h1>
                 <h3>Current Listings</h3>
             </div>
             <div class="market-tool">
@@ -296,6 +296,24 @@
                     getProps();
                     
                     //Market Logic
+                    checkFormat = () => {
+                        let erc = get("erc-input").value;
+                        let collection = get("collection-input").value;
+                        let currency = get("currency-input").value;
+                        let tokenId = get("tokenId-input").value;
+                        let price = get("price-input").value;
+                        let termCheck = get("term-input").value;
+                        if(
+                            erc != "721" || erc != "1155" ||
+                            collection.length != 42 ||
+                            currency.length != 42 ||
+                            price < 1000000000000
+                        ){
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
                     writeListing = async() => {
                         let erc = get("erc-input").value;
                         let collection = get("collection-input").value;
@@ -304,6 +322,7 @@
                         let price = get("price-input").value;
                         let termCheck = get("term-input").value;
                         console.log('writeListingFlow','erc',erc,'collection',collection,'currency',currency,'tokenId',tokenId,'price',price,'terms',termCheck);
+
                         try {
                             await market.methods
                                     .writeListingFriend(proof,erc,collection,currency,tokenId,price)
@@ -315,7 +334,7 @@
                             console.log(err)
                         }
                     }
-                    writeListingFriend = async(erc,collection,currency,tokenId,price) => {
+                    writeListingFriend = async() => {
                         console.log('here we go, we merkle minting. root:',root);
                         console.dir('tree',tree);
                         var accountHash = web3.utils.soliditySha3(accounts[0]);
@@ -326,15 +345,28 @@
 
                         console.log('proof',proof);
 
-                        try {
-                            await market.methods
-                                    .writeListingFriend(proof,erc,collection,currency,tokenId,price)
-                                    .send({
-                                    from: accounts[0]
-                                });
-                        } catch (err) {
-                            console.log(err)
+                        let erc = get("erc-input").value;
+                        let collection = get("collection-input").value;
+                        let currency = get("currency-input").value;
+                        let tokenId = get("tokenId-input").value;
+                        let price = get("price-input").value;
+                        let termCheck = get("term-input").value;
+                        console.log('writeListingFlow','erc',erc,'collection',collection,'currency',currency,'tokenId',tokenId,'price',price,'terms',termCheck);
+                        if(checkFormat()){
+                            try {
+                                await market.methods
+                                        .writeListingFriend(proof,erc,collection,currency,tokenId,price)
+                                        .send({
+                                        from: accounts[0],
+                                        value: 1000000000000000
+                                    });
+                            } catch (err) {
+                                console.log(err)
+                            }
+                        } else {
+                            alert('check your inputs, something is up');
                         }
+                        
                     }
                     cancelListing = async(id) => {
                         try {
@@ -567,10 +599,8 @@
                             console.log('big if true',tree.verify(proof,accountHash,root));
 
                             console.log('proof',proof);
-                            // need cheeky approval right in the form submission flow
-                            if(tree.verify(proof,accountHash,root)){
-                                //FRIEND
-                                innerHTML = `
+                            
+                            innerHTML = `
                                     <h3>You are a friend, you can use the market for free</h3>
                                     <h3>Let's create your listing</h3>
                                     <form id="listing-form">
@@ -598,6 +628,10 @@
                                             <label>I agree to <a onclick="showTerms">terms and conditions</a></label>
                                             <input id="terms-input" type="checkbox">
                                         </div>
+                                        `
+                            if(tree.verify(proof,accountHash,root)){
+                                //FRIEND
+                                innerHTML += `
                                         <div>
                                             <button id="listing-form-button" formaction="writeListingFriend()">Create Market Listing</button>
                                         </div>
@@ -605,31 +639,10 @@
                                 `
                             } else {
                                 //NOTFRIEND
-                                innerHTML = `
-                                    <h3>Let's create your listing</h3>
-                                    <form id="listing-form">
+                                innerHTML += `
                                         <div>
-                                            <label>NFT Token Standard</label>
-                                            <input placeholder="721 or 1155">
+                                            <button id="listing-form-button" formaction="writeListing()">Create Market Listing</button>
                                         </div>
-                                        <div>
-                                        <label>NFT Collection Contract Address</label>
-                                        <input placeholder="0x0000000000000000000000000000">
-                                    </div>
-                                        <div>
-                                        <label>ERC20 Coin Contract Address</label>
-                                        <input placeholder="0x0000000000000000000000000000">
-                                    </div>
-                                        <div>
-                                        <label>NFT Collection Token Id</label>
-                                        <input placeholder="69">
-                                    </div>
-                                        <div>
-                                        <label>Price in Chosen ERC20 (include all zeros)</label>
-                                        <input placeholder="100000000000000000000000000">
-                                    </div>
-                                        <div>
-                                        <button formaction="writeListing()">Create Market Listing</button>
                                     </form>
                                 `
                             }
