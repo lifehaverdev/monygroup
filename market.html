@@ -450,14 +450,14 @@
                         if(checkFormat()){
                             var pass = false;
                             
-                            console.log('inside checkformat what is erc',erc)
                             switch(erc){
                                 case "721":
                                     nft = await makeNFT721(collection);
-                                    console.log('what is nft here inside the erc switch statement',nft);
+                                    pass = checkApproval721(collection);
                                     break;
                                 case "1155":
                                     nft = await makeNFT1155(collection);
+                                    pass = checkApproval1155(collection);
                                     break;
                             }
                             console.log('what is nft here before the pass if statement',nft);
@@ -507,7 +507,7 @@
                     sendToCollection = (collection) => {
                         get('pop');
                         pop.innerHTML += 
-                            `<a id="send-to" href="https://etherscan.io/address/${collection}#writeContract" target="_blank">Go To Collection</a>`
+                            `<a id="send-to" href="https://etherscan.io/address/${collection}#writeContract" target="_blank">Double Check Your Chosen Collection</a>`
                     }
 
                     cancelListing = async(id) => {
