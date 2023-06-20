@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 81')
+            console.log('version 82')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -750,7 +750,7 @@
                             innerHTML = `
                                     <h3>Hiiiiiii ${accounts[0]}</h3>
                                     <h3>Let's create your listing</h3>
-                                    <form id="listing-form" onsubmit="return createListing()">
+                                    
                                         <div>
                                             <label>NFT Token Standard</label>
                                             <input id="erc-input" placeholder="721 or 1155">
@@ -776,9 +776,9 @@
                                             <input id="terms-input" type="checkbox">
                                         </div>
                                         <div>
-                                            <button id="listing-form-button" type="submit">Create Market Listing</button>
+                                            <button id="listing-form-button" onclick="createListing()">Create Market Listing</button>
                                         </div>
-                                    </form>
+                                    
                                         `;
                         }
                         popPop(innerHTML,1);
