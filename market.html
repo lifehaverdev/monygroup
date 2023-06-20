@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 79')
+            console.log('version 80')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -460,8 +460,8 @@
                                     pass = await checkApproval1155(collection);
                                     break;
                             }
-                            console.log('what is nft here before the pass if statement',nft);
-                            if(pass){
+                            
+                            if(pass==true){
                                 if(tree.verify(proof,accountHash,root)){
                                     //friend, approvalSet, format good, create listing
                                     try {
@@ -670,18 +670,18 @@
                     //checks miladystation holder just for website stuff, merkle in market contract is line of defense
                     checkWallet = async() => {
                         //merkle check
-                        console.log('whats in your wallet');
+                        //console.log('whats in your wallet');
                         //FRIEND?????
-                        console.log('here we go, we merkle minting. root:',root);
-                        console.dir('tree',tree);
+                        //console.log('here we go, we merkle minting. root:',root);
+                        //console.dir('tree',tree);
                         var accountHash = web3.utils.soliditySha3(accounts[0]);
                         // console.log(accountHash);
                         var proof = tree.getHexProof(accountHash);
 
                         console.log('big if true',tree.verify(proof,accountHash,root));
                         friend = tree.verify(proof,accountHash,root);
-                        console.log('proof',proof);
-                        console.log('friends',friend);
+                        //console.log('proof',proof);
+                        //console.log('friends',friend);
                     }
                     //user clicks buy button, needs to check approval for currency and price
                     //big, working with the item
