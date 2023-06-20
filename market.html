@@ -72,8 +72,13 @@
                     switch(which){
                         case 1:
                             pop = document.getElementById('pop');
+                            break;
                         case 2:
                             pop = document.getElementById('pop2');
+                            break;
+                        default:
+                            pop = document.getElementById('pop');
+                            break;
                     }
                     pop.innerHTML = '';
                     pop.style.display = 'none';
@@ -84,9 +89,11 @@
                         case 1:
                             pop = document.getElementById('pop');
                             pop.innerHTML += '<div class="x" onclick="closePop(1)">x</div>'
+                            break;
                         case 2:
                             pop = document.getElementById('pop2');
                             pop.innerHTML += '<div class="x" onclick="closePop(2)">x</div>'
+                            break;
                     }
                     pop.style.display = 'block';
                 }
@@ -96,11 +103,12 @@
                         case 1:
                             pop = document.getElementById('pop');
                             pop.innerHTML = '<div class="x" onclick="closePop(1)">x</div>'+innerHTML;
+                            break;
                         case 2:
                             pop = document.getElementById('pop2');
                             pop.innerHTML = '<div class="x" onclick="closePop(2)">x</div>'+innerHTML;
-                    }
-                    
+                            break;
+                    } 
                 }
             //Get
                 function get(id) {
