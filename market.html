@@ -367,7 +367,7 @@
                         let currency = get("currency-input").value;
                         let tokenId = parseInt(get("tokenId-input").value);
                         let price = parseInt(get("price-input").value);
-                        let dec = getCoinDec(currency);
+                        let dec = await getCoinDec(currency);
                         
                         console.log('we are taking a panel. what are the types of these things, what is getting put into the contract')
                         console.log('proof',proof,'proof type',typeof proof);
