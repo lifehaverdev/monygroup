@@ -127,6 +127,7 @@ a {
     padding: 5%;
     display: flex;
     border-radius: 15px;
+    color: white;
 }
 
 .landing h2{
@@ -149,6 +150,7 @@ a {
     position: relative;
     margin-left: auto;
     margin-right: auto;
+    color: white;
 }
 
 .marquee-container {
