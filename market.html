@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 94')
+            console.log('version 95')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -241,13 +241,6 @@
     
                 //functions
                     //Site+Contract logic
-                    // getListingTotal = async() => {
-                    //     let x = 0;
-                    //     while(x = 0) {
-                    //         meta = await get
-
-                    //     }
-                    // }
                     getProps = async() => {
                         var meta;
                         for(i=0;i<listingTotal;i++){
@@ -366,7 +359,8 @@
                         let collection = get("collection-input").value;
                         let currency = get("currency-input").value;
                         let tokenId = parseInt(get("tokenId-input").value);
-                        let price = parseInt(get("price-input").value);
+                        // let price = parseInt(get("price-input").value);
+                        let price = get("price-input").value;
                         let dec = await getCoinDec(currency);
                         
                         console.log('we are taking a panel. what are the types of these things, what is getting put into the contract')
@@ -376,9 +370,9 @@
                         console.log('currency',currency,'currency type',typeof currency);
                         console.log('tokenId',tokenId,'tokenId type',typeof tokenId);
                         console.log('price',price,'price type',typeof price);
-                        console.log('dec',dec,'dec type',typeof dec);
-                        console.log('multi price',price*dec,'multi price type',typeof price*dec)
-                        console.log('final price',web3.utils.BN(price*dec),'final price type',typeof web3.utils.BN(price*dec));
+                        //console.log('dec',dec,'dec type',typeof dec);
+                        //console.log('multi price',price*dec,'multi price type',typeof price*dec)
+                        console.log('final price',web3.utils.BN(price),'final price type',typeof web3.utils.BN(price));
                         switch(erc){
                                 case 721:
                                     nft = await makeNFT721(collection);
@@ -397,7 +391,7 @@
                                     //friend, approvalSet, format good, create listing
                                     try {
                                         await market.methods
-                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,web3.utils.toBN(price*dec))
+                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,web3.utils.BN(price))
                                                     .send({
                                                     from: accounts[0]
                                                 });
