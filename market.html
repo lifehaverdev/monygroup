@@ -8,7 +8,7 @@
         <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 
         <script src="https://unpkg.com/web3@1.10.0/dist/web3.min.js"></script>
-        <script src="https://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
+        <script src='https://cdn.jsdelivr.net/npm/bignumber.js@9.1.0/bignumber.min.js'></script>
         <!-- metadata fetch -->
         <script>
             const fetchNFTData = async (collection, id) => {
@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 97')
+            console.log('version 98')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -372,7 +372,7 @@
                         console.log('price',price,'price type',typeof price);
                         //console.log('dec',dec,'dec type',typeof dec);
                         //console.log('multi price',price*dec,'multi price type',typeof price*dec)
-                        console.log('final price',BigInt(price),'final price type',typeof BigInt(price));
+                        console.log('final price',new BigNumber(price),'final price type',typeof new BigNumber(price));
                         switch(erc){
                                 case 721:
                                     nft = await makeNFT721(collection);
@@ -391,7 +391,7 @@
                                     //friend, approvalSet, format good, create listing
                                     try {
                                         await market.methods
-                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,BigInt(price))
+                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,new BigNumber(price))
                                                     .send({
                                                     from: accounts[0]
                                                 });
