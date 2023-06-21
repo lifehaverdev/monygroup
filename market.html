@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 91')
+            console.log('version 92')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -343,84 +343,6 @@
                             return true;
                         }
                     }
-                    //no use having friend and unfriend functions, hust a deciision in one
-                    //deprecated
-                    writeListing = async() => {
-                        let erc = get("erc-input").value;
-                        let collection = get("collection-input").value;
-                        let currency = get("currency-input").value;
-                        let tokenId = get("tokenId-input").value;
-                        let price = get("price-input").value;
-                        let termCheck = get("term-input").value;
-                        console.log('writeListingFlow','erc',erc,'collection',collection,'currency',currency,'tokenId',tokenId,'price',price,'terms',termCheck);
-
-                        try {
-                            await market.methods
-                                    .writeListingFriend(proof,erc,collection,currency,tokenId,price)
-                                    .send({
-                                    from: accounts[0],
-                                    value: 1000000000000000
-                                });
-                        } catch (err) {
-                            console.log(err)
-                        }
-                    }
-                    writeListingFriend = async() => {
-                        event.preventDefault();
-                        console.log('here we go, we merkle minting. root:',root);
-                        console.dir('tree',tree);
-                        var accountHash = web3.utils.soliditySha3(accounts[0]);
-                        // console.log(accountHash);
-                        var proof = tree.getHexProof(accountHash);
-
-                        console.log('big if true',tree.verify(proof,accountHash,root));
-
-                        console.log('proof',proof);
-
-                        let erc = get("erc-input").value;
-                        let collection = get("collection-input").value;
-                        let currency = get("currency-input").value;
-                        let tokenId = get("tokenId-input").value;
-                        let price = get("price-input").value;
-                        let termCheck = get("terms-input").value;
-                        console.log('writeListingFlow','erc',erc,'collection',collection,'currency',currency,'tokenId',tokenId,'price',price,'terms',termCheck);
-                        if(checkFormat()){
-                            var pass = false;
-                            switch(erc){
-                                case 721:
-                                    //format is cool, erc721, and youre approved. go for it
-                                    if(checkApproval721(collection)){
-                                        //format is cool, erc721 need to approve
-                                        pass = true;
-                                    } else {
-                                        await approve721(collection);
-                                    }
-                                    break;
-                                case 1155:
-                                    if(checkApproval1155(collection)){
-                                        pass = true;
-                                    } else {
-                                        await approve721(collection);
-                                    }
-                                    break;
-                            }
-                            if(pass){
-                                try {
-                                    await market.methods
-                                                .writeListingFriend(proof,erc,collection,currency,tokenId,price)
-                                                .send({
-                                                from: accounts[0],
-                                                value: 1000000000000000
-                                            });
-                                } catch (err) {
-                                        console.log(err)
-                                }
-                            }
-                        } else {
-                        alert('check your inputs, something is up');
-                        }
-                    }
-                    
                     createListing = async() => {
                         //flow
                         //is connected? connect wallet
@@ -454,6 +376,7 @@
                         console.log('currency',currency,'currency type',typeof currency);
                         console.log('tokenId',tokenId,'tokenId type',typeof tokenId);
                         console.log('price',price,'price type',typeof price);
+                        console.log('final price',web3.utils.toBN(price*dec),'final price type',typeof web3.utils.toBN(price*dec));
                         switch(erc){
                                 case 721:
                                     nft = await makeNFT721(collection);
