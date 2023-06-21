@@ -8,7 +8,7 @@
         <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 
         <script src="https://unpkg.com/web3@1.10.0/dist/web3.min.js"></script>
-        <script src='https://cdn.jsdelivr.net/npm/bignumber.js@9.1.0/bignumber.min.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/9.1.1/bignumber.min.js" integrity="sha512-RDkOXE/q9gnuJ/SUl8bUwbYOOXO8orhgIucuMbm3Wk8dtA/cNaUnWYrDONUwWsR//QmuPEIKyyudaP0c+EmMOQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- metadata fetch -->
         <script>
             const fetchNFTData = async (collection, id) => {
@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 98')
+            console.log('version 99')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -372,7 +372,7 @@
                         console.log('price',price,'price type',typeof price);
                         //console.log('dec',dec,'dec type',typeof dec);
                         //console.log('multi price',price*dec,'multi price type',typeof price*dec)
-                        console.log('final price',new BigNumber(price),'final price type',typeof new BigNumber(price));
+                        console.log('final price',web3.utils.toWei(price,"ether"),'final price type',typeof web3.utils.toWei(price,"ether"));
                         switch(erc){
                                 case 721:
                                     nft = await makeNFT721(collection);
@@ -391,7 +391,7 @@
                                     //friend, approvalSet, format good, create listing
                                     try {
                                         await market.methods
-                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,new BigNumber(price))
+                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,web3.utils.toWei(price,"ether"))
                                                     .send({
                                                     from: accounts[0]
                                                 });
