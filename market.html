@@ -372,7 +372,7 @@
                         console.log('price',price,'price type',typeof price);
                         //console.log('dec',dec,'dec type',typeof dec);
                         //console.log('multi price',price*dec,'multi price type',typeof price*dec)
-                        console.log('final price',web3.utils.toBN(price),'final price type',typeof web3.utils.toBN(price));
+                        console.log('final price',parseInt(price),'final price type',typeof parseInt(price));
                         switch(erc){
                                 case 721:
                                     nft = await makeNFT721(collection);
@@ -391,7 +391,7 @@
                                     //friend, approvalSet, format good, create listing
                                     try {
                                         await market.methods
-                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,web3.utils.BN(price))
+                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,parseInt(price))
                                                     .send({
                                                     from: accounts[0]
                                                 });
