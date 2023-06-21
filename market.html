@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 92')
+            console.log('version 93')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -376,6 +376,7 @@
                         console.log('currency',currency,'currency type',typeof currency);
                         console.log('tokenId',tokenId,'tokenId type',typeof tokenId);
                         console.log('price',price,'price type',typeof price);
+                        console.log('dec',dec,'dec type',typeof dec);
                         console.log('final price',web3.utils.toBN(price*dec),'final price type',typeof web3.utils.toBN(price*dec));
                         switch(erc){
                                 case 721:
@@ -517,7 +518,7 @@
                         } catch (err) {
                             console.log(err);
                         }
-                        return 1**dec;
+                        return 10**dec;
                     }
                     
                     //erc721 logic
@@ -750,7 +751,7 @@
             
             const root = tree.getHexRoot();
 
-            console.log('root: ',root);
+            //console.log('root: ',root);
 
             function sharry(first,second) {
                 return web3.utils.soliditySha3(web3.utils.encodePacked(first,second));
