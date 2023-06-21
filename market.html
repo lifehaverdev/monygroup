@@ -208,7 +208,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 99')
+            console.log('version 100')
                 //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -372,7 +372,7 @@
                         console.log('price',price,'price type',typeof price);
                         //console.log('dec',dec,'dec type',typeof dec);
                         //console.log('multi price',price*dec,'multi price type',typeof price*dec)
-                        console.log('final price',web3.utils.toWei(price,"ether"),'final price type',typeof web3.utils.toWei(price,"ether"));
+                        console.log('final price',price,'final price type',typeof price);
                         switch(erc){
                                 case 721:
                                     nft = await makeNFT721(collection);
@@ -391,7 +391,7 @@
                                     //friend, approvalSet, format good, create listing
                                     try {
                                         await market.methods
-                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,web3.utils.toWei(price,"ether"))
+                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,price)
                                                     .send({
                                                     from: accounts[0]
                                                 });
@@ -402,7 +402,7 @@
                                     //nonfriend, approvalSet, format good, create listing
                                     try {
                                         await market.methods
-                                                    .writeListing(erc,collection,currency,tokenId,price*dec)
+                                                    .writeListing(erc,collection,currency,tokenId,price)
                                                     .send({
                                                     from: accounts[0],
                                                     value: 1000000000000000
