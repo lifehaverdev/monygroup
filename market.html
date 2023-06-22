@@ -76,6 +76,9 @@
                         case 2:
                             pop = document.getElementById('pop2');
                             break;
+                        case 3:
+                            pop = document.getElementById('pop3');
+                            break;
                         default:
                             pop = document.getElementById('pop');
                             break;
@@ -94,6 +97,10 @@
                             pop = document.getElementById('pop2');
                             pop.innerHTML += '<div class="x" onclick="closePop(2)">x</div>'
                             break;
+                        case 3:
+                            pop = document.getElementById('pop3');
+                            pop.innerHTML += '<div class="x" onclick="closePop(3)">x</div>'
+                            break;
                     }
                     pop.style.display = 'block';
                 }
@@ -108,11 +115,30 @@
                             pop = document.getElementById('pop2');
                             pop.innerHTML = '<div class="x" onclick="closePop(2)">x</div>'+innerHTML;
                             break;
+                        case 3:
+                            pop = document.getElementById('pop3');
+                            pop.innerHTML = '<div class="x" onclick="closePop(3)">x</div>'+innerHTML;
                     } 
                 }
             //Get
                 function get(id) {
                    return document.getElementById(id);
+                }
+            //TX Receipt
+            function gibReceipt(tx,desc) {
+
+                    var txPop = get('pop3');
+                    var innerHTML = 
+                        `
+                        <img src="public/cross.gif"/>
+                        <div id="receipt">
+                            <h3 class="center">Congratulations! You have just ${desc}</h3>
+                            <p class="center">You can see your transaction here:</p>
+                            <a class="center white-link" target="_blank" href="https://etherscan.io/tx/${tx}">${tx}</a>
+                        </div>
+                        `;
+                    popPop(innerHTML,3);
+                    showPop(3);
                 }
         </script>
     </head>
@@ -183,6 +209,7 @@
 
         <div id="pop"></div>
         <div id="pop2"></div>
+        <div id="pop3"></div>
 
         <div class="footerwrap">
             <div class="footer">
@@ -208,25 +235,18 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 100')
-                //const provider = new Web3.givenProvider || new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1');
-                var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
-    
-                //console.log('givenProvider:',provider);
+            console.log('version 101')
                 
-                //console.log('web3 object',web3)
+                var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
                 var connected = false;
                 var accounts = [];
-                var friend = false;
-                var approveSell;
-                var approveBuy;
     
                 var listings = [];
                 var listingCount = 0;
                 var listingTotal = 2;
                 var target;
-                var open = false;
+                //var open = false;
                 
                 var gotProps = false;
                 var chainScanPre = 'https://etherscan.io/tx/'
@@ -319,6 +339,87 @@
                     getProps();
                     
                     //Market Logic
+
+                    createListing = async() => {
+                        event.preventDefault();
+                        var nft;
+                        var pass = false;
+                        var accountHash = web3.utils.soliditySha3(accounts[0]);
+                        var proof = tree.getHexProof(accountHash);
+
+                        let erc = parseInt(get("erc-input").value);
+                        let collection = get("collection-input").value;
+                        let currency = get("currency-input").value;
+                        let tokenId = parseInt(get("tokenId-input").value);
+                        // let price = parseInt(get("price-input").value);
+                        let price = get("price-input").value;
+                        let dec = await getCoinDec(currency);
+
+                        switch(erc){
+                                case 721:
+                                    nft = await makeNFT721(collection);
+                                    pass = await checkApproval721(collection);
+                                    break;
+                                case 1155:
+                                    nft = await makeNFT1155(collection);
+                                    pass = await checkApproval1155(collection);
+                                    break;
+                        }
+                        
+                        if(checkFormat()){
+                            
+                            if(pass==true){
+                                if(tree.verify(proof,accountHash,root)){
+                                    //friend, approvalSet, format good, create listing
+                                    try {
+                                        await market.methods
+                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,price)
+                                                    .send({
+                                                    from: accounts[0]
+                                                })
+                                                .on('transactionHash',function(hash){
+                                                    gibReceipt(hash,'Created a Listing on the Mony Market');
+                                                });
+                                    } catch (err) {
+                                            console.log(err)
+                                    }
+                                } else {
+                                    //nonfriend, approvalSet, format good, create listing
+                                    try {
+                                        await market.methods
+                                                    .writeListing(erc,collection,currency,tokenId,price)
+                                                    .send({
+                                                    from: accounts[0],
+                                                    value: 1000000000000000
+                                                })
+                                                .on('transactionHash',function(hash){
+                                                    gibReceipt(hash,'Created a Listing on the Mony Market');
+                                                });
+                                    } catch (err) {
+                                            console.log(err)
+                                    }
+                                }
+                                
+                            } else {
+                                alert('you need to approve the collection to create the listing');
+                                sendToCollection(collection);
+                                
+                                try {
+                                    await nft.methods.setApprovalForAll(marketAddress,true).send({
+                                        from: accounts[0]
+                                    })
+                                    .on('transactionHash',function(hash){
+                                                    gibReceipt(hash,'Approved your NFT for listing on the mony marketplace');
+                                    });
+                                } catch (err) {
+                                    console.log('set Approval inside write contract',err)
+                                }
+                            }
+                        } else {
+                        alert('check your inputs, something is up with the addresses or the erc');
+                        }
+                    }      
+                    
                     checkFormat = () => {
                         let erc = get("erc-input").value;
                         let collection = get("collection-input").value;
@@ -336,121 +437,33 @@
                             return true;
                         }
                     }
-                    createListing = async() => {
-                        //flow
-                        //is connected? connect wallet
-                        //is accounts[0] on the merkle
-                        var nft;
-                        var pass = false;
-                        //is collection approved
-                        //erc????
-                        event.preventDefault();
-                        //console.log('here we go, we merkle minting. root:',root);
-                        //console.dir('tree',tree);
-                        var accountHash = web3.utils.soliditySha3(accounts[0]);
-                        // console.log(accountHash);
-                        var proof = tree.getHexProof(accountHash);
-
-                        //console.log('big if true',tree.verify(proof,accountHash,root));
-
-                        //console.log('proof',proof);
-
-                        let erc = parseInt(get("erc-input").value);
-                        let collection = get("collection-input").value;
-                        let currency = get("currency-input").value;
-                        let tokenId = parseInt(get("tokenId-input").value);
-                        // let price = parseInt(get("price-input").value);
-                        let price = get("price-input").value;
-                        let dec = await getCoinDec(currency);
-                        
-                        console.log('we are taking a panel. what are the types of these things, what is getting put into the contract')
-                        console.log('proof',proof,'proof type',typeof proof);
-                        console.log('erc',erc,'erc type',typeof erc);
-                        console.log('collection',collection,'collection type',typeof collection);
-                        console.log('currency',currency,'currency type',typeof currency);
-                        console.log('tokenId',tokenId,'tokenId type',typeof tokenId);
-                        console.log('price',price,'price type',typeof price);
-                        //console.log('dec',dec,'dec type',typeof dec);
-                        //console.log('multi price',price*dec,'multi price type',typeof price*dec)
-                        console.log('final price',price,'final price type',typeof price);
-                        switch(erc){
-                                case 721:
-                                    nft = await makeNFT721(collection);
-                                    pass = await checkApproval721(collection);
-                                    break;
-                                case 1155:
-                                    nft = await makeNFT1155(collection);
-                                    pass = await checkApproval1155(collection);
-                                    break;
-                        }
-                        console.log('nft',nft);
-                        if(checkFormat()){
-                            console.log('what is pass',pass);
-                            if(pass==true){
-                                if(tree.verify(proof,accountHash,root)){
-                                    //friend, approvalSet, format good, create listing
-                                    try {
-                                        await market.methods
-                                                    .writeListingFriend(proof,erc,collection,currency,tokenId,price)
-                                                    .send({
-                                                    from: accounts[0]
-                                                });
-                                    } catch (err) {
-                                            console.log(err)
-                                    }
-                                } else {
-                                    //nonfriend, approvalSet, format good, create listing
-                                    try {
-                                        await market.methods
-                                                    .writeListing(erc,collection,currency,tokenId,price)
-                                                    .send({
-                                                    from: accounts[0],
-                                                    value: 1000000000000000
-                                                });
-                                    } catch (err) {
-                                            console.log(err)
-                                    }
-                                }
-                                
-                            } else {
-                                alert('you need to approve the collection to create the listing');
-                                sendToCollection(collection);
-                                console.log('nft',nft)
-                                try {
-                                    await nft.methods.setApprovalForAll(marketAddress,true).send({
-                                        from: accounts[0]
-                                    })
-                                } catch (err) {
-                                    console.log('set Approval inside write contract',err)
-                                }
-                            }
-                        } else {
-                        alert('check your inputs, something is up with the addresses or the erc');
-                        }
-                    }
-                    
                     sendToCollection = (collection) => {
                         get('pop');
                         pop.innerHTML += 
                             `<a id="send-to" href="https://etherscan.io/address/${collection}#writeContract" target="_blank">Double Check Your Chosen Collection</a>`
                     }
-
                     cancelListing = async(id) => {
                         try {
                             await market.methods.cancelListing(id).send({
                                 from: accounts[0]
+                            })
+                            .on('transactionHash',function(hash){
+                                gibReceipt(hash,'Cancelled Your Listing');
                             });
                         } catch (err) {
                             console.log(err);
                         }
                     }
                     editListing = async(id) => {
-                        var newPrice = document.getElementById('new-price-input');
+                        var newPrice = document.getElementById('new-price-input').value;
                         
                         try {
-                            await market.methods.editListing(newPrice.value,id).send({
+                            await market.methods.editPrice(newPrice.value,id).send({
                                 from: accounts[0]
                             })
+                            .on('transactionHash',function(hash){
+                                gibReceipt(hash,'Edited Your Listing');
+                            });
                         } catch (err) {
                             console.log(err);
                         }
@@ -461,11 +474,39 @@
                                 from: accounts[0],
                                 value: 77700000000000000
                             })
+                            .on('transactionHash',function(hash){
+                                gibReceipt(hash,'Requested a Market Stall. DM the Dev to set it up');
+                            });
                         } catch (err) {
                             console.log(err);
                         }
                     }
                     
+                    buyFriend = async(id) => {
+                        try {
+                            await market.methods.purchaseFriend(proof,id).send({
+                                from: accounts[0]
+                            })
+                            .on('transactionHash',function(hash){
+                                gibReceipt(hash,'Purchased an NFT using ERC20, as a friend');
+                            });
+                        } catch (err) {
+                            console.log(err);
+                        }
+                    }
+                    buy = async(id) => {
+                        try {
+                            await market.methods.purchase(id).send({
+                                from: accounts[0],
+                                value: 1000000000000000
+                            })
+                            .on('transactionHash',function(hash){
+                                gibReceipt(hash,'Purchased an NFT using ERC20');
+                            });
+                        } catch (err) {
+                            console.log(err);
+                        }
+                    }
                     //erc20 logic
                     makeCoin = async(currency) => {
                         var coinAddress = currency;
@@ -479,6 +520,9 @@
                         try {
                             await coin.methods.approve(marketAddress,price).send({
                                 from: accounts[0]
+                            })
+                            .on('transactionHash',function(hash){
+                                gibReceipt(hash,'Approved your coin allowance for purchase');
                             });
                         } catch (err) {
                             console.log('uhoh setAllowance error:',err)
@@ -596,18 +640,16 @@
                     //checks miladystation holder just for website stuff, merkle in market contract is line of defense
                     checkWallet = async() => {
                         //merkle check
-                        //console.log('whats in your wallet');
+                        
                         //FRIEND?????
-                        //console.log('here we go, we merkle minting. root:',root);
-                        //console.dir('tree',tree);
+                        
                         var accountHash = web3.utils.soliditySha3(accounts[0]);
-                        // console.log(accountHash);
+                        
                         var proof = tree.getHexProof(accountHash);
 
                         console.log('big if true',tree.verify(proof,accountHash,root));
                         friend = tree.verify(proof,accountHash,root);
-                        //console.log('proof',proof);
-                        //console.log('friends',friend);
+                        
                     }
                     //user clicks buy button, needs to check approval for currency and price
                     //big, working with the item
@@ -627,19 +669,18 @@
                         } else {
                             //seller menu
                             if(listings[id].seller == accounts[0]) {
-                                console.log('emergency')
+                                
                                 innerHTML = `
                                     <h3>This is your listing. Whatsup</h3>
                                     <button onclick="cancelListing(${target})">Cancel Listing</button>
                                     <input id="new-price-input">
                                     <button onclick="editListing(${target})">Edit Price</button>
                                     `;
-                                console.log('EMERGENCY','seller menu innerhtml');
                             //buyer flow
                             } else {
                                 //check allowance
-                                if(checkAllowance(listings[id].currency) == listings[id].price){
-                                    if(friend > 0){
+                                if(checkAllowance(listings[id].currency) >= listings[id].price){
+                                    if(tree.verify(proof,accountHash,root)){
                                         innerHTML = `
                                             <button onclick="buyFriend(${target})">BUY</button>
                                             `;
@@ -648,7 +689,6 @@
                                             <button onclick="buy(${target})">BUY</button>
                                             `;
                                     }
-                                
                                 } else {
                                     innerHTML = `
                                         <h3>Must Approve Currency for Purchase</h3>
@@ -746,7 +786,7 @@
             
             const root = tree.getHexRoot();
 
-            console.log('root: ',root);
+            
 
             function sharry(first,second) {
                 return web3.utils.soliditySha3(web3.utils.encodePacked(first,second));
