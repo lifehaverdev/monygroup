@@ -235,7 +235,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 101')
+            console.log('version 103')
                 
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -244,7 +244,7 @@
     
                 var listings = [];
                 var listingCount = 0;
-                var listingTotal = 2;
+                var listingTotal = 10;
                 var target;
                 //var open = false;
                 
@@ -265,8 +265,10 @@
                         var meta;
                         for(i=0;i<listingTotal;i++){
                             meta = await getListing(i);
-                            if(meta){
+                            if(meta != -1){
                                 showListing(meta.metadata, listings[i], i);
+                            } else {
+                                break;
                             }
                             
                         }
@@ -278,6 +280,7 @@
                         
                         gotProps = true;
                     }
+
                     getListing = async(id) => {
                         //js listing object to make a website copy of the contract situation
                         var listing = {
@@ -308,6 +311,8 @@
                             }
                             //this returns the metadata
                             return meta;
+                        } else {
+                            return -1;
                         }
                     }
                     showListing = async(meta, listing, id) => {
@@ -315,6 +320,7 @@
                         var src = `https://mony.mypinata.cloud/ipfs${editCID(meta.image)}?pinataGatewayToken=uyN3_jcO6fLxjvmAV82o6PezM48bw7BlDk3ij1hpSOG5FSVgODrv-eIz_1OEkvAw`
                         var currencySym = await getCoinSym(listing.currency);
                         var decimals = await getCoinDec(listing.currency);
+
                         if (listing.saleOn) {
                             listlist.innerHTML += 
                             `
