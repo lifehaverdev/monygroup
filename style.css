@@ -343,7 +343,7 @@ a {
 
 #pop3 {
     display: none;
-    color: white;
+    color: darkgoldenrod;
     align-items: center;
     background-image: url(public/clouds.gif);
     padding: 20px;
@@ -359,6 +359,14 @@ a {
     overflow-y: visible;
 }
 
+
+#receipt {
+    font-size: xx-large;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+}
+
 #connect {
     display: block;
     width: 200px;
@@ -370,6 +378,7 @@ a {
     position: relative;
     margin-right: auto;
     margin-left: auto;
+    overflow: auto;
 }
 
 #listing-form {

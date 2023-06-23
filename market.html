@@ -99,7 +99,7 @@
                             break;
                         case 3:
                             pop = document.getElementById('pop3');
-                            pop.innerHTML += '<div class="x" onclick="closePop(3)">x</div>'
+                            // pop.innerHTML += '<div class="x" onclick="closePop(3)">x</div>'
                             break;
                     }
                     pop.style.display = 'block';
@@ -127,10 +127,9 @@
             //TX Receipt
             function gibReceipt(tx,desc) {
 
-                    var txPop = get('pop3');
                     var innerHTML = 
                         `
-                        <img src="public/cross.gif"/>
+                        <img id="cashier" src="public/milkbar1.png"/>
                         <div id="receipt">
                             <h3 class="center">Congratulations! You have just ${desc}</h3>
                             <p class="center">You can see your transaction here:</p>
