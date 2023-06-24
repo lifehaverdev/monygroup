@@ -660,6 +660,7 @@
                     //big, working with the item
                     itemFlow = async(id) => {
                         target = id;
+                        var proof = tree.getHexProof(accountHash);
                         var pop = document.getElementById('pop');
                         if(pop.style.display == '' || pop.style.display == 'none'){
                             showPop(1);
