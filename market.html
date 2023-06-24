@@ -240,6 +240,7 @@
     
                 var connected = false;
                 var accounts = [];
+                var proof;
     
                 var listings = [];
                 var listingCount = 0;
@@ -660,7 +661,10 @@
                     //big, working with the item
                     itemFlow = async(id) => {
                         target = id;
+
+                        var accountHash = web3.utils.soliditySha3(accounts[0]);
                         var proof = tree.getHexProof(accountHash);
+                        
                         var pop = document.getElementById('pop');
                         if(pop.style.display == '' || pop.style.display == 'none'){
                             showPop(1);
