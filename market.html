@@ -663,9 +663,6 @@
                     itemFlow = async(id) => {
                         target = id;
 
-                        var accountHash = web3.utils.soliditySha3(accounts[0]);
-                        var proof = tree.getHexProof(accountHash);
-
                         var pop = document.getElementById('pop');
                         if(pop.style.display == '' || pop.style.display == 'none'){
                             showPop(1);
@@ -678,6 +675,8 @@
                             <button id="connect" onclick="connectWallet(1)">Connect Wallet</button>
                             `;
                         } else {
+                            var accountHash = web3.utils.soliditySha3(accounts[0]);
+                            var proof = tree.getHexProof(accountHash);
                             //seller menu
                             if(listings[id].seller == accounts[0]) {
                                 
