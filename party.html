@@ -196,10 +196,10 @@
             </div>
         </div>
             
-        <div id="market">
+        <div id="raffle">
             <div class="collectibles">
                 <h1>Milady Maker Party HQ</h1>
-                <button id="connect" onclick="connectWallet()">Connect Wallet</button>
+                <button id="connect" onclick="partyFlow()">Let's Party B^]</button>
             </div>
         </div>
 
@@ -231,7 +231,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 1')
+            console.log('version 2')
                 
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
     
@@ -252,11 +252,11 @@
     
                 const partyRaffleAddress = "0xfB6798e50b0618C5013a26eb61fb51cbdB13c615";  //sepolia 2
                 const partyRaffleABI = [{"inputs":[{"internalType":"uint64","name":"subscriptionId","type":"uint64"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"have","type":"address"},{"internalType":"address","name":"want","type":"address"}],"name":"OnlyCoordinatorCanFulfill","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"OwnershipTransferRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"inputs":[],"name":"_miladyXAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_mmpAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_pixeladyXAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_remilioXAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"acceptOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"winner","type":"address"}],"name":"blackCheck","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"checkCoin","outputs":[{"internalType":"uint256[3]","name":"","type":"uint256[3]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint32","name":"numWin","type":"uint32"}],"name":"drawPrize","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_requestId","type":"uint256"}],"name":"getRequestStatus","outputs":[{"internalType":"bool","name":"fulfilled","type":"bool"},{"internalType":"uint256[]","name":"randomWords","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"lastRequestId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"miladyWinnerCount","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pixeladyWinnerCount","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"range","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"requestId","type":"uint256"},{"internalType":"uint256[]","name":"randomWords","type":"uint256[]"}],"name":"rawFulfillRandomWords","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"remilioWinnerCount","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"requestIds","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"s_requests","outputs":[{"internalType":"bool","name":"fulfilled","type":"bool"},{"internalType":"bool","name":"exists","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"tokenId","type":"uint256[]"},{"internalType":"uint8[]","name":"which","type":"uint8[]"}],"name":"sendIt","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint32","name":"newGas","type":"uint32"}],"name":"setGasLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawCoins","outputs":[],"stateMutability":"nonpayable","type":"function"}];
-                var raffle = new web3.eth.Contract(marketABI,marketAddress);
+                var raffle = new web3.eth.Contract(raffleABI,raffleAddress);
 
                 // mainnet
                 const mmpAddress = "0xB24BaB1732D34cAD0A7C7035C3539aEC553bF3a0";
-                const mmpABI = [{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
+                const mmpABI = [{"inputs":[{"internalType":"uint64","name":"subscriptionId","type":"uint64"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"have","type":"address"},{"internalType":"address","name":"want","type":"address"}],"name":"OnlyCoordinatorCanFulfill","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"OwnershipTransferRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"playa","type":"address"},{"indexed":false,"internalType":"uint256","name":"requestId","type":"uint256"},{"indexed":false,"internalType":"uint256[]","name":"randomWords","type":"uint256[]"}],"name":"RequestFulfilled","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"requestId","type":"uint256"},{"indexed":false,"internalType":"uint32","name":"numWords","type":"uint32"}],"name":"RequestSent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256[]","name":"rando","type":"uint256[]"}],"name":"loaded","type":"event"},{"inputs":[],"name":"_miladyXAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_mmpAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_pixeladyXAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_remilioXAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"acceptOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"winner","type":"address"}],"name":"blackCheck","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"checkCoin","outputs":[{"internalType":"uint256[3]","name":"","type":"uint256[3]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint32","name":"numWin","type":"uint32"}],"name":"drawPrize","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_requestId","type":"uint256"}],"name":"getRequestStatus","outputs":[{"internalType":"bool","name":"fulfilled","type":"bool"},{"internalType":"uint256[]","name":"randomWords","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"lastRequestId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"miladyWinnerCount","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pixeladyWinnerCount","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"randomness","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"range","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"requestId","type":"uint256"},{"internalType":"uint256[]","name":"randomWords","type":"uint256[]"}],"name":"rawFulfillRandomWords","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"remilioWinnerCount","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"requestIds","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"s_requests","outputs":[{"internalType":"bool","name":"fulfilled","type":"bool"},{"internalType":"bool","name":"exists","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"tokenId","type":"uint256[]"},{"internalType":"uint8[]","name":"which","type":"uint8[]"}],"name":"sendIt","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint32","name":"newGas","type":"uint32"}],"name":"setGasLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawCoins","outputs":[],"stateMutability":"nonpayable","type":"function"}];
                 // var ms = new web3.eth.Contract(msABI,msAddress);
     
                 //functions
@@ -284,7 +284,7 @@
                     //gets accounts and checks chain id then sends to checkWallet()
                     connectWallet = async() => {
                         web3 = new Web3(Web3.givenProvider);
-                        raffle = new web3.eth.Contract(marketABI,marketAddress);
+                        raffle = new web3.eth.Contract(raffleABI,raffleAddress);
                         //mmp = new web3.eth.Contract(msABI,msAddress);
                         try {
                             accounts = await web3.eth.requestAccounts().then()
@@ -306,6 +306,15 @@
                             //checkWallet should see miladystation holder
                             checkWallet();
                         }
+                        var pop = document.getElementById('pop');
+                        if(pop.style.display != 'none' || pop.style.display != ''){
+                            switch(flowSwitch){
+                                //no flow
+                                case 0: 
+                                    partyFlow();
+                                    break;
+                            } 
+                        }
                     }
                     //checks miladystation holder just for website stuff, merkle in market contract is line of defense
                     checkWallet = async() => {
@@ -314,9 +323,9 @@
                         if(accounts[0] == admin){
                             friend = true;
                         }
-                        if(friend) {
-                            partyFlow();
-                        }
+                        // if(friend) {
+                        //     partyFlow();
+                        // }
                         
                     }
                     //user clicks buy button, needs to check approval for currency and price
@@ -430,9 +439,9 @@
                         var innerHTML = "";
                         innerHTML = `
                             <h2>Terms and Conditions</h2>
-                            <p>Double check that the url is monygroup.net/market</p>
+                            <p>Double check that the url is monygroup.net/raffle</p>
                             <p>Double check that the NFT approval is for what you are trying to sell</p>
-                            <p>Double check in the wallet that the create listing interaction is with ${marketAddress}</p>
+                            <p>Double check in the wallet that the create listing interaction is with ${raffleAddress}</p>
                             <p>Consider this a private beta. Maybe use a separate wallet to interact</p>
                             <p>You need to setApprovalAll the contract address. The wizard automatically prompts that transaction first after checking to see if your wallet already has it approved.</p>
                             <p>Your buyer will also need to set their allowance to spend the erc20 with the contract.</p>
@@ -446,6 +455,54 @@
 
                     partyFlow = async() => {
                         console.log('lets party');
+                        var pop = document.getElementById('pop');
+                        if(pop.style.display == '' || pop.style.display == 'none'){
+                            showPop(1);
+                        }
+                        var innerHTML = "";
+                        if (!connected) {
+                            innerHTML = `
+                                <h3>Please Connect your Wallet</h3>
+                                <button id="connect" onclick="connectWallet(0)">Connect Wallet</button>
+                            `
+                        } else {
+                            
+                            innerHTML = `
+                                    <h3>Hiiiiiii ${accounts[0]}</h3>
+                                    <h3>Let's create your listing</h3>
+                                    
+                                        <div>
+                                            <label>NFT Token Standard</label>
+                                            <input id="erc-input" placeholder="721 or 1155">
+                                        </div>
+                                        <div>
+                                            <label>NFT Collection Contract Address</label>
+                                            <input id="collection-input" placeholder="0x0000000000000000000000000000">
+                                        </div>
+                                        <div>
+                                            <label>ERC20 Currency Contract Address</label>
+                                            <input id="currency-input" placeholder="0x0000000000000000000000000000">
+                                        </div>
+                                        <div>
+                                            <label>NFT Collection Token Id</label>
+                                            <input id="tokenId-input" placeholder="69">
+                                        </div>
+                                        <div>
+                                            <label>Price in Chosen ERC20 (include all decimals)</label>
+                                            <input id="price-input" placeholder="100000000">
+                                        </div>
+                                        <div>
+                                            <label>I agree to <a onclick="showTerms()">terms and conditions</a></label>
+                                            <input id="terms-input" type="checkbox">
+                                        </div>
+                                        <div>
+                                            <button id="listing-form-button" onclick="createListing()">Create Market Listing</button>
+                                        </div>
+                                    
+                                        `;
+                        }
+                        popPop(innerHTML,1);
+                    
                     }
         </script>
 
