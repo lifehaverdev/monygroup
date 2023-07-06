@@ -238,7 +238,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 7')
+            console.log('version 8')
                 
                     
                 //var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
@@ -282,6 +282,9 @@
                             console.log('block',block);
                             
                             time = await web3.eth.getBlock(block.blockNumber);
+                            console.log('getBlock',time);
+                            time = time.creationTimeStamp
+                            console.log('creation time stamp',time);
                             winnerMCount = await raffle.methods.miladyWinnerCount().call();
                             winnerRCount = await raffle.methods.remilioWinnerCount().call();
                             winnerPCount = await raffle.methods.pixeladyWinnerCount().call();
