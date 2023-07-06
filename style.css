@@ -266,6 +266,15 @@ a {
     flex-wrap: wrap;
 }
 
+#raffle {
+    width: 100%;
+    display: flex;
+    overflow-y: auto;
+    flex-wrap: wrap;
+    height: 500px;
+    padding: 30px;
+}
+
 .listing-item{
     padding: 3%;
     transition: filter 0.3s ease;
