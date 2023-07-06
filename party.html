@@ -238,7 +238,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 6')
+            console.log('version 7')
                 
                     
                 //var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
@@ -278,7 +278,10 @@
                         var meta;
                         
                         try{
-                            time = await web3.eth.getBlock(await web3.eth.getTransaction(creationHash).blockNumber);
+                            let block = await web3.eth.getTransaction(creationHash)
+                            console.log('block',block);
+                            
+                            time = await web3.eth.getBlock(block.blockNumber);
                             winnerMCount = await raffle.methods.miladyWinnerCount().call();
                             winnerRCount = await raffle.methods.remilioWinnerCount().call();
                             winnerPCount = await raffle.methods.pixeladyWinnerCount().call();
@@ -505,10 +508,13 @@
                                             </ul>
                                         </div>
                                         <div id="party">
-                                            <button onclick="draw()">Draw Names</button>
+                                            <button onclick="drawFlow()">Draw Names</button>
                                         </div>
                                         `;
                             }
+                        }
+                        drawFlow = async() => {
+
                         }
                         popPop(innerHTML,0);
                         popProps();
