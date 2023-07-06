@@ -206,24 +206,6 @@
                 <h1>Milady Maker Party HQ</h1>
                 <div id="dashboard">
                     <button id="connect" onclick="partyFlow()">Let's Party B^]</button>
-                    <div id="loading">
-                        <h3>Current Picks</h3>
-                        <div id="winner1">
-                            <h3 id="wallet1">0x00000....</h3>
-                            <p>Status:</p>
-                            <button onclick="addCount(1)">Add Count</button>
-                        </div>
-                        <div id="winner2">
-                            <h3 id="wallet2">0x00000....</h3>
-                            <p>Status:</p>
-                            <button onclick="addCount(2)">Add Count</button>
-                        </div>
-                        <div id="winner3">
-                            <h3 id="wallet3">0x00000....</h3>
-                            <p>Status:</p>
-                            <button onclick="addCount(3)">Add Count</button>
-                        </div>
-                    </div>
                     <div id="locked"></div>
                 </div>
             </div>
@@ -356,8 +338,6 @@
                         rWin.innerHTML = "This many Remilio won: "+winnerRCount;
                         pWin.innerHTML = "This many Pixelady won: "+winnerPCount;
                         
-                        
-
                         if(!loaded){
                             dashboard.innerHTML += `
                             <div id="loaded">
@@ -366,7 +346,13 @@
                             `
                         } else {
                             //we have randomness
-                            win1.innerHTML = await getHolder( await getId(1));
+                            console.log(randomness);
+
+                            let id = await getId(1);
+
+                            console.log(id);
+
+                            win1.innerHTML = await getHolder( id );
                             if(randomness.length > 2){
                                 win2.innerHTML = getHolder(getId(2));
                             } 
