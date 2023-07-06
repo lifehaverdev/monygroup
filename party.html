@@ -238,7 +238,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 9')
+            console.log('version 10')
                 
                     
                 //var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
@@ -305,17 +305,13 @@
 
                         const currentTimestamp = Math.floor(Date.now() / 1000);
                         const ageInSeconds = currentTimestamp - time;
-                        
+                        const ageInMinutes = ageInSeconds / 60;
                         const ageInHours = ageInMinutes / 60;
                         
                         time.innerHTML = ageInHours;
                         mWin.innerHTML = winnerMCount;
                         rWin.innerHTML = winnerRCount;
                         pWin.innerHTML = winnerPCount;
-
-
-                        
-
                     }
                     getProps();
                     
@@ -337,6 +333,7 @@
                         }
                         if(connected){
                             var networkId = await web3.eth.net.getId();
+                            console.log('neworkid',networkId)
                             if (networkId !== 111555111) {
                                 alert('change your network to sepolia ethereum')
                             }
@@ -526,12 +523,11 @@
                                         `;
                             }
                         }
-                        drawFlow = async() => {
-
-                        }
                         popPop(innerHTML,0);
                         popProps();
-                    
+                    }
+                    drawFlow = async() => {
+
                     }
         </script>
 
