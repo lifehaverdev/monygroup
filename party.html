@@ -292,7 +292,7 @@
                         gotProps = true;
                     }
                     popProps = () => {
-                        let time = get('time');
+                        let times = get('time');
                         let mWin = get('mWin');
                         let rWin = get('rWin');
                         let pWin = get('pWin');
@@ -306,7 +306,7 @@
                         let ageInHours = ageInMinutes / 60;
                         console.log(ageInHours);
                         
-                        time.innerHTML = "Partying for "+ageInHours+"Hours";
+                        times.innerHTML = "Partying for "+ageInHours+"Hours";
                         mWin.innerHTML = "This many milady won:"+winnerMCount;
                         rWin.innerHTML = "This many Remilio won:"+winnerRCount;
                         pWin.innerHTML = "This many Pixelady won:"+winnerPCount;
