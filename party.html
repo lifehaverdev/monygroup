@@ -279,7 +279,9 @@
                         
                         try{
                             let block = await web3.eth.getTransaction(creationHash)
-                            time = await web3.eth.getBlock(block.blockNumber).timestamp;
+                            time = await web3.eth.getBlock(block.blockNumber);
+                            time = time.timestamp;
+                            console.log('time in props',time)
                             winnerMCount = await raffle.methods.miladyWinnerCount().call();
                             winnerRCount = await raffle.methods.remilioWinnerCount().call();
                             winnerPCount = await raffle.methods.pixeladyWinnerCount().call();
