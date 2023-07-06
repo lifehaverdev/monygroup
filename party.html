@@ -238,7 +238,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 10')
+            console.log('version 11')
                 
                     
                 //var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
@@ -333,8 +333,8 @@
                         }
                         if(connected){
                             var networkId = await web3.eth.net.getId();
-                            console.log('neworkid',networkId)
-                            if (networkId !== 111555111) {
+                            
+                            if (networkId !== 11155111) {
                                 alert('change your network to sepolia ethereum')
                             }
                             var connect = document.getElementById('connect');
@@ -503,6 +503,7 @@
                                 <h3>Please Connect your Wallet</h3>
                                 <button id="connect" onclick="connectWallet(0)">Connect Wallet</button>
                             `
+                            popPop(innerHTML,1);
                         } else {
                             if(friend){
                                 innerHTML = `
@@ -522,9 +523,10 @@
                                         </div>
                                         `;
                             }
+                            popPop(innerHTML,0);
+                            popProps();
                         }
-                        popPop(innerHTML,0);
-                        popProps();
+
                     }
                     drawFlow = async() => {
 
