@@ -11,7 +11,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/9.1.1/bignumber.min.js" integrity="sha512-RDkOXE/q9gnuJ/SUl8bUwbYOOXO8orhgIucuMbm3Wk8dtA/cNaUnWYrDONUwWsR//QmuPEIKyyudaP0c+EmMOQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- metadata fetch -->
         <!-- <script>
-            const fetchNFTData = async (collection, id) => {
+            let fetchNFTData = async (collection, id) => {
                 //if u steal this fuk u
                 const apiKey = "51af642c93d846f7821865a7e3ab05d1";
                 const apiKeySecret = "806aff78b8b94437a04ee0b13d5d0612";
@@ -238,7 +238,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 11')
+            console.log('version 12')
                 
                     
                 //var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
@@ -279,18 +279,12 @@
                         
                         try{
                             let block = await web3.eth.getTransaction(creationHash)
-                            console.log('block',block);
-                            
-                            time = await web3.eth.getBlock(block.blockNumber);
-                            console.log('getBlock',time);
-                            time = time.timestamp
-                            console.log('creation time stamp',time);
+                            time = await web3.eth.getBlock(block.blockNumber).timestamp;
                             winnerMCount = await raffle.methods.miladyWinnerCount().call();
                             winnerRCount = await raffle.methods.remilioWinnerCount().call();
                             winnerPCount = await raffle.methods.pixeladyWinnerCount().call();
                             randomness[0] = await raffle.methods.randomness(0).call();
                             randomness[1] = await raffle.methods.randomness(1).call();
-
                         } catch (err) {
                             console.log('props getter err',err);
                         }
@@ -303,15 +297,19 @@
                         let rWin = get('rWin');
                         let pWin = get('pWin');
 
-                        const currentTimestamp = Math.floor(Date.now() / 1000);
-                        const ageInSeconds = currentTimestamp - time;
-                        const ageInMinutes = ageInSeconds / 60;
-                        const ageInHours = ageInMinutes / 60;
+                        let currentTimestamp = Math.floor(Date.now() / 1000);
+                        console.log(currentTimestamp);
+                        let ageInSeconds = currentTimestamp - time;
+                        console.log(currentTimestamp);
+                        let ageInMinutes = ageInSeconds / 60;
+                        console.log(ageInMinutes);
+                        let ageInHours = ageInMinutes / 60;
+                        console.log(ageInHours);
                         
-                        time.innerHTML = ageInHours;
-                        mWin.innerHTML = winnerMCount;
-                        rWin.innerHTML = winnerRCount;
-                        pWin.innerHTML = winnerPCount;
+                        time.innerHTML = "Partying for "+ageInHours+"Hours";
+                        mWin.innerHTML = "This many milady won:"+winnerMCount;
+                        rWin.innerHTML = "This many Remilio won:"+winnerRCount;
+                        pWin.innerHTML = "This many Pixelady won:"+winnerPCount;
                     }
                     getProps();
                     
