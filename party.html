@@ -647,7 +647,27 @@
                                                 <li id="pWin"></li>
                                             </ul>
                                         </div>
-                                        `;
+                                        
+                                        <div id="loading">
+                                        <h3>Current Picks</h3>
+                                        <div id="winner1">
+                                            <h3 id="wallet1">0x00000....</h3>
+                                            <p>Status:</p>
+                                            <button onclick="addCount(1)">Add Count</button>
+                                        </div>
+                                        <div id="winner2">
+                                            <h3 id="wallet2">0x00000....</h3>
+                                            <p>Status:</p>
+                                            <button onclick="addCount(2)">Add Count</button>
+                                        </div>
+                                        <div id="winner3">
+                                            <h3 id="wallet3">0x00000....</h3>
+                                            <p>Status:</p>
+                                            <button onclick="addCount(3)">Add Count</button>
+                                        </div>
+                                    </div>
+                                    `
+                                    ;
                             }
                             popPop(innerHTML,0);
                             popProps();
