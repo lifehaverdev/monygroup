@@ -209,17 +209,17 @@
                     <div id="loading">
                         <h3>Current Picks</h3>
                         <div id="winner1">
-                            <h3 class="wallet">0x00000....</h3>
+                            <h3 id="wallet1">0x00000....</h3>
                             <p>Status:</p>
                             <button onclick="addCount(1)">Add Count</button>
                         </div>
                         <div id="winner2">
-                            <h3 class="wallet">0x00000....</h3>
+                            <h3 id="wallet2">0x00000....</h3>
                             <p>Status:</p>
                             <button onclick="addCount(2)">Add Count</button>
                         </div>
                         <div id="winner3">
-                            <h3 class="wallet">0x00000....</h3>
+                            <h3 id="wallet3">0x00000....</h3>
                             <p>Status:</p>
                             <button onclick="addCount(3)">Add Count</button>
                         </div>
@@ -257,10 +257,10 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 13')
+            console.log('version 16')
                 
                     
-                //var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
+                var web33 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
                 //test
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://sepolia.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
             
@@ -292,7 +292,7 @@
                 // mainnet
                 const mmpAddress = "0xB24BaB1732D34cAD0A7C7035C3539aEC553bF3a0";
                 const mmpABI = [{"inputs":[{"internalType":"uint64","name":"subscriptionId","type":"uint64"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"have","type":"address"},{"internalType":"address","name":"want","type":"address"}],"name":"OnlyCoordinatorCanFulfill","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"OwnershipTransferRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"playa","type":"address"},{"indexed":false,"internalType":"uint256","name":"requestId","type":"uint256"},{"indexed":false,"internalType":"uint256[]","name":"randomWords","type":"uint256[]"}],"name":"RequestFulfilled","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"requestId","type":"uint256"},{"indexed":false,"internalType":"uint32","name":"numWords","type":"uint32"}],"name":"RequestSent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256[]","name":"rando","type":"uint256[]"}],"name":"loaded","type":"event"},{"inputs":[],"name":"_miladyXAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_mmpAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_pixeladyXAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_remilioXAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"acceptOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"winner","type":"address"}],"name":"blackCheck","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"checkCoin","outputs":[{"internalType":"uint256[3]","name":"","type":"uint256[3]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint32","name":"numWin","type":"uint32"}],"name":"drawPrize","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_requestId","type":"uint256"}],"name":"getRequestStatus","outputs":[{"internalType":"bool","name":"fulfilled","type":"bool"},{"internalType":"uint256[]","name":"randomWords","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"lastRequestId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"miladyWinnerCount","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pixeladyWinnerCount","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"randomness","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"range","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"requestId","type":"uint256"},{"internalType":"uint256[]","name":"randomWords","type":"uint256[]"}],"name":"rawFulfillRandomWords","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"remilioWinnerCount","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"requestIds","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"s_requests","outputs":[{"internalType":"bool","name":"fulfilled","type":"bool"},{"internalType":"bool","name":"exists","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"tokenId","type":"uint256[]"},{"internalType":"uint8[]","name":"which","type":"uint8[]"}],"name":"sendIt","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint32","name":"newGas","type":"uint32"}],"name":"setGasLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawCoins","outputs":[],"stateMutability":"nonpayable","type":"function"}];
-                // var ms = new web3.eth.Contract(msABI,msAddress);
+                var mmp = new web33.eth.Contract(msABI,msAddress);
     
                 //functions
                     //Site+Contract logic
@@ -328,14 +328,19 @@
                             loaded = true;
                         }
                         
+                        
                         gotProps = true;
                     }
                     popProps = () => {
+
                         let times = get('time');
                         let mWin = get('mWin');
                         let rWin = get('rWin');
                         let pWin = get('pWin');
                         let dash = get('dashboard');
+                        let win1 = get('wallet1');
+                        let win2 = get('wallet2');
+                        let win3 = get('wallet3');
                         console.log(time);
                         let currentTimestamp = Math.floor(Date.now() / 1000);
                         console.log(currentTimestamp);
@@ -351,21 +356,95 @@
                         rWin.innerHTML = "This many Remilio won: "+winnerRCount;
                         pWin.innerHTML = "This many Pixelady won: "+winnerPCount;
                         
+                        
 
-
-                        if(loaded){
+                        if(!loaded){
                             dashboard.innerHTML += `
                             <div id="loaded">
                                 <button onclick="drawFlow()">Draw</button>
                             </div>
                             `
+                        } else {
+                            //we have randomness
+                            win1.innerHTML = getHolder(getId(1));
+                            if(randomness.length > 2){
+                                win2.innerHTML = getHolder(getId(2));
+                            } 
+                            if(randomness.length > 4){
+                                win3.innerHTML = getHolder(getId(3));
+                            }
+                            
+                        }
+                        if(!locked){
+
                         }
 
                     }
                     getProps();
                     
                     //Raffle Logic
-
+                    getHolder = async (id) => {
+                        let addy;
+                        try {
+                            addy = await mmp.methods.ownerOf(id).call();
+                        } catch(err) {
+                            console.log('get holder error:::',err);
+                        }
+                    }
+                    getId = (which) => {
+                        let id;
+                        switch(which){
+                            case 1:
+                            id = randomness[0] + randomness[1];
+                            if(id>partyHat.length){
+                                id = id - partyHat.length;
+                            }
+                            return id;
+                            break;
+                            case 2:
+                            id = randomness[2] + randomness[3];
+                            if(id>partyHat.length){
+                                id = id - partyHat.length;
+                            }
+                            return id;
+                            break;
+                            case 3:
+                            id = randomness[4] + randomness[5];
+                            if(id>partyHat.length){
+                                id = id - partyHat.length;
+                            }
+                            return id;
+                            break;
+                        }
+                        
+                        
+                    }
+                    countId = (id,which) => {
+                        switch (which) {
+                            case 1:
+                                id = id + randomness[1]
+                                if(id > partyHat.length){
+                                    id = id - partyHat.length;
+                                }
+                                return id;
+                                break;
+                            case 2:
+                                id = id + randomness[3]
+                                if(id > partyHat.length){
+                                    id = id - partyHat.length;
+                                }
+                                return id;
+                                break;
+                            case 3:
+                                id = id + randomness[5]
+                                if(id > partyHat.length){
+                                    id = id - partyHat.length;
+                                }
+                                return id;
+                                break;
+                        }
+                        
+                    }
                     //User logic
                     //gets accounts and checks chain id then sends to checkWallet()
                     connectWallet = async(flowSwitch) => {
