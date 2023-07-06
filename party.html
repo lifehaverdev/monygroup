@@ -110,6 +110,7 @@
                         case 0:
                             pop = document.getElementById('dashboard');
                             pop.innerHTML = innerHTML;
+                            break;
                         case 1:
                             pop = document.getElementById('pop');
                             pop.innerHTML = '<div class="x" onclick="closePop(1)">x</div>'+innerHTML;
@@ -121,6 +122,7 @@
                         case 3:
                             pop = document.getElementById('pop3');
                             pop.innerHTML = '<div class="x" onclick="closePop(3)">x</div>'+innerHTML;
+                            break;
                     } 
                 }
             //Get
@@ -236,7 +238,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 5')
+            console.log('version 6')
                 
                     
                 //var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
@@ -246,7 +248,10 @@
                 var connected = false;
                 var accounts = [];
                 const admin = '0x6A0a993cc824457734EC7Cac50744a34EcAf34D4';
-                
+                //test
+                const creationHash = '0xa699588b268be353911a65731e5769f93e58fe92dd17e17597edbda8e36ce41f';
+
+                var time;
                 var winnerMCount;
                 var winnerRCount;
                 var winnerPCount;
@@ -273,6 +278,7 @@
                         var meta;
                         
                         try{
+                            time = await web3.eth.getBlock(await web3.eth.getTransaction(creationHash).blockNumber);
                             winnerMCount = await raffle.methods.miladyWinnerCount().call();
                             winnerRCount = await raffle.methods.remilioWinnerCount().call();
                             winnerPCount = await raffle.methods.pixeladyWinnerCount().call();
@@ -284,7 +290,17 @@
                         
                         gotProps = true;
                     }
-
+                    popProps = () => {
+                        let time = get('time');
+                        let mWin = get('mWin');
+                        let rWin = get('rWin');
+                        let pWin = get('pWin');
+                        
+                        time.innerHTML = time;
+                        mWin.innerHTML = miladyWinnerCount;
+                        rWin.innerHTML = remilioWinnerCount;
+                        pWin.innerHTML = pixeladyWinnerCount;
+                    }
                     getProps();
                     
                     //Raffle Logic
@@ -475,8 +491,8 @@
                                 <button id="connect" onclick="connectWallet(0)">Connect Wallet</button>
                             `
                         } else {
-                            
-                            innerHTML = `
+                            if(friend){
+                                innerHTML = `
                                     <h3>Dashboard</h3>
                                     <p>welcome back king, lets give out some party favors</p>
                                     <div>
@@ -492,8 +508,10 @@
                                             <button onclick="draw()">Draw Names</button>
                                         </div>
                                         `;
+                            }
                         }
                         popPop(innerHTML,0);
+                        popProps();
                     
                     }
         </script>
