@@ -107,6 +107,9 @@
                 popPop = (innerHTML,which) => {
                     var pop;
                     switch(which){
+                        case 0:
+                            pop = document.getElementById('dashboard');
+                            pop.innerHTML = innerHTML;
                         case 1:
                             pop = document.getElementById('pop');
                             pop.innerHTML = '<div class="x" onclick="closePop(1)">x</div>'+innerHTML;
@@ -233,7 +236,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 4')
+            console.log('version 5')
                 
                     
                 //var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
@@ -474,40 +477,23 @@
                         } else {
                             
                             innerHTML = `
-                                    <h3>Hiiiiiii ${accounts[0]}</h3>
-                                    <h3>Let's create your listing</h3>
-                                    
-                                        <div>
-                                            <label>NFT Token Standard</label>
-                                            <input id="erc-input" placeholder="721 or 1155">
+                                    <h3>Dashboard</h3>
+                                    <p>welcome back king, lets give out some party favors</p>
+                                    <div>
+                                        <div id="props">
+                                            <ul>
+                                                <li id="time"></li>
+                                                <li id="mWin"></li>
+                                                <li id="rWin"></li>
+                                                <li id="pWin"></li>
+                                            </ul>
                                         </div>
-                                        <div>
-                                            <label>NFT Collection Contract Address</label>
-                                            <input id="collection-input" placeholder="0x0000000000000000000000000000">
+                                        <div id="party">
+                                            <button onclick="draw()">Draw Names</button>
                                         </div>
-                                        <div>
-                                            <label>ERC20 Currency Contract Address</label>
-                                            <input id="currency-input" placeholder="0x0000000000000000000000000000">
-                                        </div>
-                                        <div>
-                                            <label>NFT Collection Token Id</label>
-                                            <input id="tokenId-input" placeholder="69">
-                                        </div>
-                                        <div>
-                                            <label>Price in Chosen ERC20 (include all decimals)</label>
-                                            <input id="price-input" placeholder="100000000">
-                                        </div>
-                                        <div>
-                                            <label>I agree to <a onclick="showTerms()">terms and conditions</a></label>
-                                            <input id="terms-input" type="checkbox">
-                                        </div>
-                                        <div>
-                                            <button id="listing-form-button" onclick="createListing()">Create Market Listing</button>
-                                        </div>
-                                    
                                         `;
                         }
-                        popPop(innerHTML,1);
+                        popPop(innerHTML,0);
                     
                     }
         </script>
