@@ -431,11 +431,12 @@
                         switch (which) {
                             case 1:
                                 id = id + randomness[1]*count1;
-                                if(id > partyHat.length){
+                                while(id > partyHat.length){
                                     id = id - partyHat.length;
                                 }
                                 let nextUp1 = await getHolder(partyHat[id]);
                                 console.log('nextup',nextUp1);
+                                console.log('partyHat[id]',partyHat[id])
                                 addy.innerHTML = nextUp1;
                                 count1++
                                 break;
