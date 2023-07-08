@@ -340,7 +340,7 @@
                         let currentTimestamp = Math.floor(Date.now() / 1000);
                         let ageInSeconds = currentTimestamp - time; 
                         let ageInMinutes = ageInSeconds / 60;
-                        let ageInHours = ageInMinutes / 60;
+                        let ageInHours = Math.floor(ageInMinutes / 60);
                         
                         times.innerHTML = "Partying for "+ageInHours+" Hours";
                         mWin.innerHTML = "This many milady won: "+winnerMCount;
@@ -421,8 +421,10 @@
                         
                         
                     }
-                    countId = (id,which) => {
+                    countId = (which) => {
+                        let id = getId(which);
                         switch (which) {
+                            
                             case 1:
                                 id = id + randomness[1]
                                 if(id > partyHat.length){
@@ -460,6 +462,8 @@
                             if(isX(win1)){
                                 let status = get('winner1').querySelector('p');
                                 status.innerHTML += "NFTX"
+                            } else {
+                                console.log('winner1 isnt nftx address')
                             }
                             break;
                             case 2:
@@ -679,17 +683,17 @@
                                         <div id="winner1">
                                             <h3 id="wallet1">0x00000....</h3>
                                             <p>Status:</p>
-                                            <button onclick="addCount(1)">Add Count</button>
+                                            <button onclick="countId(1)">Add Count</button>
                                         </div>
                                         <div id="winner2">
                                             <h3 id="wallet2">0x00000....</h3>
                                             <p>Status:</p>
-                                            <button onclick="addCount(2)">Add Count</button>
+                                            <button onclick="countId(2)">Add Count</button>
                                         </div>
                                         <div id="winner3">
                                             <h3 id="wallet3">0x00000....</h3>
                                             <p>Status:</p>
-                                            <button onclick="addCount(3)">Add Count</button>
+                                            <button onclick="countId(3)">Add Count</button>
                                         </div>
                                     </div>
                                     `
