@@ -368,13 +368,13 @@
                                 win2.innerHTML = getHolder(getId(2));
                             }else {
                                 let div = get('winner2');
-                                div.style.display = none;
+                                div.style.display = 'none';
                             }
                             if(randomness.length > 4){
                                 win3.innerHTML = getHolder(getId(3));
                             } else {
                                 let div = get('winner3');
-                                div.style.display = none;
+                                div.style.display = 'none';
                             }
                         
                             
@@ -441,7 +441,7 @@
                                 }
                                 
                                 let nextUp = await getHolder(id);
-                                console.log('nextup',nextup);
+                                console.log('nextup',nextUp);
                                 addy.innerHTML = nextUp;
                                 break;
                             case 2:
