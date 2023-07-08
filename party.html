@@ -386,7 +386,9 @@
                     getHolder = async (id) => {
                         let addy;
                         try {
+                            console.log('id inside get holder try: ',id);
                             addy = await mmp.methods.ownerOf(id).call();
+                            console.log(addy)
                             return addy;
                         } catch(err) {
                             console.log('get holder error:::',err);
@@ -423,7 +425,9 @@
                     }
                     countId = async (which) => {
                         let id = getId(which);
+                        console.log(id);
                         let addy = get(`wallet${which}`);
+                        console.log('wallet element',addy)
                         switch (which) {
                             case 1:
                                 id = id + randomness[1]
