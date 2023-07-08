@@ -279,9 +279,9 @@ a {
     list-style: none;
     padding: 10px;
     margin: 20px;
-    display: flex;
-    flex-wrap: wrap;
+    display: block;
     height: 400px;
+    overflow-y: scroll;
 }
 
 .listing-item{
