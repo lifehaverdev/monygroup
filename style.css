@@ -277,6 +277,11 @@ a {
 #dashboard {
     background-color: aliceblue;
     list-style: none;
+    padding: 10px;
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 400px;
 }
 
 .listing-item{
