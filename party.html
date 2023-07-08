@@ -240,7 +240,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 34')
+            console.log('version 35')
                 
                     
                 var web33 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
@@ -393,7 +393,7 @@
                     getHolder = async (id) => {
                         let addy;
                         try {
-                            console.log('id inside get holder try: ',id);
+                            console.log('id type inside get holder try: ',typeof(id));
                             addy = await mmp.methods.ownerOf(id).call();
                             console.log('addy inside getHolder',addy)
                         } catch(err) {
@@ -440,7 +440,7 @@
                                     id = id - partyHat.length;
                                 }
                                 
-                                let nextUp = await getHolder(id);
+                                let nextUp = await getHolder(partyHat[id]);
                                 console.log('nextup',nextUp);
                                 addy.innerHTML = nextUp;
                                 break;
@@ -469,10 +469,12 @@
                         }
                     }
                     doubleCheck = (which) => {
-                        console.log('doublecheck',win1)
+                        let wallet;
                         switch(which){
+                            
                             case 1:
-                            if(isX(win1)){
+                                wallet= get('wallet1');
+                            if(isX(wallet)){
                                 let status = get('winner1').querySelector('p');
                                 status.innerHTML += "NFTX"
                             } else {
@@ -480,7 +482,8 @@
                             }
                             break;
                             case 2:
-                            if(isX(win2)){
+                                wallet = get('wallet2')
+                            if(isX(wallet)){
                                 let status = get('winner2').querySelector('p');
                                 status.innerHTML += "NFTX"
                             }
