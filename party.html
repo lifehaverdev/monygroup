@@ -240,7 +240,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 19')
+            console.log('version 22')
                 
                     
                 var web33 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
@@ -292,14 +292,22 @@
                             winnerMCount = await raffle.methods.miladyWinnerCount().call();
                             winnerRCount = await raffle.methods.remilioWinnerCount().call();
                             winnerPCount = await raffle.methods.pixeladyWinnerCount().call();
-                            randomness[0] = await raffle.methods.randomness(0).call();
-                            randomness[1] = await raffle.methods.randomness(1).call();
-                            //randomness[2] = await raffle.methods.randomness(2).call();
-                            //randomness[3] = await raffle.methods.randomness(3).call();
-                            //randomness[4] = await raffle.methods.randomness(4).call();
-                            //randomness[5] = await raffle.methods.randomness(5).call();
+                            randomness[0] = parseFloat(await raffle.methods.randomness(0).call());
+                            randomness[1] = parseFloat(await raffle.methods.randomness(1).call());
                         } catch (err) {
                             console.log('props getter err',err);
+                        }
+                        try {
+                            randomness[2] = await raffle.methods.randomness(2).call();
+                            randomness[3] = await raffle.methods.randomness(3).call();
+                        } catch(err) {
+                            console.log('randomness 2nd winner err:',err)
+                        }
+                        try {
+                            randomness[4] = await raffle.methods.randomness(4).call();
+                            randomness[5] = await raffle.methods.randomness(5).call();
+                        } catch (err) {
+                            console.log('randomness 3rd winner err:', err);
                         }
 
                         let randcount = 0;
@@ -326,15 +334,12 @@
                         let win1 = get('wallet1');
                         let win2 = get('wallet2');
                         let win3 = get('wallet3');
-                        console.log(time);
+
+                        
                         let currentTimestamp = Math.floor(Date.now() / 1000);
-                        console.log(currentTimestamp);
-                        let ageInSeconds = currentTimestamp - time;
-                        console.log(ageInSeconds);
+                        let ageInSeconds = currentTimestamp - time; 
                         let ageInMinutes = ageInSeconds / 60;
-                        console.log(ageInMinutes);
                         let ageInHours = ageInMinutes / 60;
-                        console.log(ageInHours);
                         
                         times.innerHTML = "Partying for "+ageInHours+" Hours";
                         mWin.innerHTML = "This many milady won: "+winnerMCount;
@@ -353,7 +358,7 @@
 
                             let id = await getId(1);
 
-                            console.log(id);
+                            console.log('id',id);
 
                             win1.innerHTML = await getHolder( id );
                             if(randomness.length > 2){
@@ -384,7 +389,7 @@
                         let id;
                         switch(which){
                             case 1:
-                            id = randomness[0] + randomness[1];
+                            randomness[0] + randomness[1];
                             if(id>partyHat.length){
                                 id = id - partyHat.length;
                             }
