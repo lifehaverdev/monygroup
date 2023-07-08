@@ -264,7 +264,9 @@
                 var loaded = false;
                 var locked = false;
 
-                
+                var count1;
+                var count2;
+                var count3;
 
                 var gotProps = false;
                 var chainScanPre = 'https://etherscan.io/tx/'
@@ -425,15 +427,15 @@
                     }
                     countId = async (which) => {
                         let id = getId(which);
-                        console.log(id);
+                        console.log('id at top of countId',id);
                         let addy = get(`wallet${which}`);
-                        console.log('wallet element',addy)
                         switch (which) {
                             case 1:
                                 id = id + randomness[1]
                                 if(id > partyHat.length){
                                     id = id - partyHat.length;
                                 }
+                                console.log("id after count",id);
                                 addy.innerHTML = await getHolder(id);
                                 break;
                             case 2:

@@ -270,7 +270,7 @@ a {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    height: 500px;
+    min-height: 500px;
     padding: 30px;
 }
 
