@@ -250,6 +250,7 @@
                 var connected = false;
                 var accounts = [];
                 const admin = '0x6A0a993cc824457734EC7Cac50744a34EcAf34D4';
+                const nftxAdd = '0xdaD370b2eb3D67EC2ff271827b5A2216a0122e87';
                 //test
                 const creationHash = '0xa699588b268be353911a65731e5769f93e58fe92dd17e17597edbda8e36ce41f';
 
@@ -346,6 +347,8 @@
                         rWin.innerHTML = "This many Remilio won: "+winnerRCount;
                         pWin.innerHTML = "This many Pixelady won: "+winnerPCount;
                         
+
+                        //get wallets on deck from randomness
                         if(!loaded){
                             dashboard.innerHTML += `
                             <div id="loaded">
@@ -369,6 +372,9 @@
                             }
                             
                         }
+
+                        doubleCheck()
+
                         if(!locked){
 
                         }
@@ -447,6 +453,23 @@
                         } else {
                             return false;
                         }
+                    }
+                    doubleCheck = (which) => {
+                        switch(which){
+                            case 1:
+                            if(isX(win1)){
+                                let status = get('winner1').querySelector('p');
+                                status.innerHTML += "NFTX"
+                            }
+                            break;
+                            case 2:
+                            if(isX(win2)){
+                                let status = get('winner2').querySelector('p');
+                                status.innerHTML += "NFTX"
+                            }
+                            break;
+                        }
+
                     }
                     //User logic
                     //gets accounts and checks chain id then sends to checkWallet()
