@@ -438,6 +438,7 @@
                                 console.log('nextup',nextUp1);
                                 console.log('partyHat[id]',partyHat[id])
                                 addy.innerHTML = nextUp1;
+                                doubleCheck(1);
                                 count1++
                                 break;
                             case 2:
@@ -476,8 +477,9 @@
                             
                             case 1:
                                 wallet= get('wallet1');
-                            if(isX(wallet)){
+                            if(isX(wallet.innerHTML)){
                                 let status = get('winner1').querySelector('p');
+                                wallet.style.fontColor = 'red';
                                 status.innerHTML += "NFTX"
                             } else {
                                 console.log('winner1 isnt nftx address')
