@@ -275,6 +275,11 @@ a {
     padding: 30px;
 }
 
+#pride {
+    background-color: aliceblue;
+    list-style: none;
+}
+
 .listing-item{
     padding: 3%;
     transition: filter 0.3s ease;
