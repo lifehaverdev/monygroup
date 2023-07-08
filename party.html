@@ -359,8 +359,7 @@
                             `
                         } else {
                             //we have randomness
-                            console.log(randomness);
-
+                    
                             let id = await getId(1);
 
                             win1.innerHTML = await getHolder(id);
@@ -393,11 +392,8 @@
                     getHolder = async (id) => {
                         let addy;
                         try {
-                            console.log('id type inside get holder try: ',typeof(id));
                             addy = await mmp.methods.ownerOf(id).call();
-                            console.log('addy inside getHolder',addy)
                         } catch(err) {
-                            console.log('get holder error:::',err);
                         }
                         return addy;
                     }
@@ -431,32 +427,37 @@
                     }
                     countId = async (which) => {
                         let id = getId(which);
-                        console.log('id at top of countId',id);
                         let addy = get(`wallet${which}`);
                         switch (which) {
                             case 1:
-                                id = id + randomness[1]
+                                id = id + randomness[1]*count1;
                                 if(id > partyHat.length){
                                     id = id - partyHat.length;
                                 }
-                                
-                                let nextUp = await getHolder(partyHat[id]);
+                                let nextUp1 = await getHolder(partyHat[id]);
                                 console.log('nextup',nextUp);
-                                addy.innerHTML = nextUp;
+                                addy.innerHTML = nextUp1;
+                                count1++
                                 break;
                             case 2:
-                                id = id + randomness[3]
+                            id = id + randomness[3]*count2;
                                 if(id > partyHat.length){
                                     id = id - partyHat.length;
                                 }
-                                return id;
+                                let nextUp2 = await getHolder(partyHat[id]);
+                                console.log('nextup',nextUp2);
+                                addy.innerHTML = nextUp2;
+                                count2++
                                 break;
                             case 3:
-                                id = id + randomness[5]
+                            id = id + randomness[5]*count3;
                                 if(id > partyHat.length){
                                     id = id - partyHat.length;
                                 }
-                                return id;
+                                let nextUp3 = await getHolder(partyHat[id]);
+                                console.log('nextup',nextUp3);
+                                addy.innerHTML = nextUp3;
+                                count3++
                                 break;
                         }
                         
