@@ -479,9 +479,11 @@
                                 wallet= get('wallet1');
                             if(isX(wallet.innerHTML)){
                                 let status = get('winner1').querySelector('p');
-                                wallet.style.fontColor = 'red';
+                                wallet.style.color = 'red';
                                 status.innerHTML += "NFTX"
                             } else {
+                                let status = get('winner1').querySelector('p');
+                                status.innerHTML = "";
                                 console.log('winner1 isnt nftx address')
                             }
                             break;
