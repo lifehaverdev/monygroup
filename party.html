@@ -298,14 +298,14 @@
                             console.log('props getter err',err);
                         }
                         try {
-                            randomness[2] = await raffle.methods.randomness(2).call();
-                            randomness[3] = await raffle.methods.randomness(3).call();
+                            randomness[2] = parseFloat(await raffle.methods.randomness(2).call());
+                            randomness[3] = parseFloat(await raffle.methods.randomness(3).call());
                         } catch(err) {
                             console.log('randomness 2nd winner err:',err)
                         }
                         try {
-                            randomness[4] = await raffle.methods.randomness(4).call();
-                            randomness[5] = await raffle.methods.randomness(5).call();
+                            randomness[4] = parseFloat(await raffle.methods.randomness(4).call());
+                            randomness[5] = parseFloat(await raffle.methods.randomness(5).call());
                         } catch (err) {
                             console.log('randomness 3rd winner err:', err);
                         }
@@ -389,7 +389,7 @@
                         let id;
                         switch(which){
                             case 1:
-                            randomness[0] + randomness[1];
+                            id=randomness[0] + randomness[1];
                             if(id>partyHat.length){
                                 id = id - partyHat.length;
                             }
