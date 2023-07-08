@@ -269,13 +269,12 @@ a {
 #raffle {
     width: 100%;
     display: flex;
-    overflow-y: auto;
     flex-wrap: wrap;
     height: 500px;
     padding: 30px;
 }
 
-#pride {
+#dashboard {
     background-color: aliceblue;
     list-style: none;
 }
