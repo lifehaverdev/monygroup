@@ -295,10 +295,15 @@
                             winnerMCount = await raffle.methods.miladyWinnerCount().call();
                             winnerRCount = await raffle.methods.remilioWinnerCount().call();
                             winnerPCount = await raffle.methods.pixeladyWinnerCount().call();
-                            randomness[0] = parseFloat(await raffle.methods.randomness(0).call());
-                            randomness[1] = parseFloat(await raffle.methods.randomness(1).call());
                         } catch (err) {
                             console.log('props getter err',err);
+                        }
+                        try {
+                            randomness[0] = parseFloat(await raffle.methods.randomness(0).call());
+                            randomness[1] = parseFloat(await raffle.methods.randomness(1).call());
+                        } catch(err) {
+                            console.log('randomness 1st winner err:',err)
+                            randomness = [0,0,0,0,0,0];
                         }
                         try {
                             randomness[2] = parseFloat(await raffle.methods.randomness(2).call());
@@ -520,6 +525,7 @@
                             connect.disabled = true;
                             connect.style.display = 'none';
                             checkWallet();
+                            closePop(1);
                         }
                         var pop = document.getElementById('pop');
                         if(pop.style.display != 'none' || pop.style.display != ''){
@@ -533,7 +539,6 @@
                     }
                     //checks miladystation holder just for website stuff, merkle in market contract is line of defense
                     checkWallet = async() => {
-                        closePop(1);
                         //mmp host check
                         //testing as miladycola host
                         if(accounts[0] == admin){
@@ -667,10 +672,7 @@
 
                     partyFlow = async() => {
                         console.log('lets party');
-                        var pop = document.getElementById('pop');
-                        if(pop.style.display == '' || pop.style.display == 'none'){
-                            showPop(1);
-                        }
+
                         var innerHTML = "";
                         if (!connected) {
                             innerHTML = `
