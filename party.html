@@ -205,8 +205,8 @@
         <div id="raffle">
             <div class="collectibles">
                 <h1>Milady Maker Party HQ</h1>
+                <button id="connect" onclick="partyFlow()">Let's Party</button>
                 <div id="dashboard">
-                    <button id="connect" onclick="partyFlow()">Let's Party B^]</button>
                     <div id="locked"></div>
                 </div>
             </div>
@@ -671,6 +671,12 @@
 
                     partyFlow = async() => {
                         console.log('lets party');
+                        var pop = get('pop');
+                        if(pop.display == 'none' || pop.display == ''){
+                            showPop(1);
+                        } else if(pop.display == 'none' && connected){
+                            console.log('we do partyflow no show pop');
+                        }
 
                         var innerHTML = "";
                         if (!connected) {
