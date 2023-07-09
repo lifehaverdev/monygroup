@@ -501,7 +501,7 @@
                     }
                     //User logic
                     //gets accounts and checks chain id then sends to checkWallet()
-                    connectWallet = async(flowSwitch) => {
+                    connectWallet = async() => {
                         web3 = new Web3(Web3.givenProvider);
                         raffle = new web3.eth.Contract(partyRaffleABI,partyRaffleAddress);
                         //mmp = new web3.eth.Contract(msABI,msAddress);
@@ -525,15 +525,6 @@
                             connect.style.display = 'none';
                             checkWallet();
                             closePop(1);
-                        }
-                        var pop = document.getElementById('pop');
-                        if(pop.style.display != 'none' || pop.style.display != ''){
-                            switch(flowSwitch){
-                                //no flow
-                                case 0: 
-                                    partyFlow();
-                                    break;
-                            } 
                         }
                     }
                     //checks miladystation holder just for website stuff, merkle in market contract is line of defense
@@ -671,12 +662,7 @@
 
                     partyFlow = async() => {
                         console.log('lets party');
-                        var pop = get('pop');
-                        if(pop.display == 'none' || pop.display == ''){
-                            showPop(1);
-                        } else if(pop.display == 'none' && connected){
-                            console.log('we do partyflow no show pop');
-                        }
+                        connectWallet();
 
                         var innerHTML = "";
                         if (!connected) {
