@@ -726,7 +726,7 @@
                     drawFlow = async() => {
                         let names = parseFloat(get('names').value);
                         try {
-                            await raffle.methods.drawPrize(nWin).send({
+                            await raffle.methods.drawPrize(names).send({
                                 from: accounts[0]
                             })
                         } catch (err) {
