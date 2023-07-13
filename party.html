@@ -569,11 +569,11 @@
                         let mmpAll;
                         
                     }
-                    lockIn = () => {
+                    lockIn = async () => {
                         //need address[] , which[], count[]
-                        let addresses;
-                        let which;
-                        let counts;
+                        let addresses = [];
+                        let which = [];
+                        let counts = [];
 
                         addresses.push(get('wallet1').innerHTML);
                         which.push(parseFloat(get('which1').value));
