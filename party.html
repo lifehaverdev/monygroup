@@ -373,14 +373,17 @@
                                             <div id="winner1">
                                                 <h3 id="wallet1">0x00000....</h3>
                                                 <p>Status:</p>
+                                                <input type="number" id="which1"/>
                                             </div>
                                             <div id="winner2">
                                                 <h3 id="wallet2">0x00000....</h3>
                                                 <p>Status:</p>
+                                                <input type="number" id="which2"/>
                                             </div>
                                             <div id="winner3">
                                                 <h3 id="wallet3">0x00000....</h3>
                                                 <p>Status:</p>
+                                                <input type="number" id="which3"/>
                                             </div>
                                         </div>
                             `
@@ -494,9 +497,13 @@
                             return false;
                         }
                     }
+                    isLastWin = (addy) => {
+                        //if(addy == await )
+                    }
                     doubleCheck = (which) => {
                         let wallet;
                         let div;
+                        let notOk;
                         switch(which){
                             
                             case 1:
@@ -507,6 +514,7 @@
                                 wallet.style.color = 'red';
                                 status.innerHTML += "NFTX";
                                 div.innerHTML += `<button onclick="countId(1)">Add Count</button>`;
+                                ++notOk;
                             } else {
                                 let status = get('winner1').querySelector('p');
                                 status.innerHTML = "";
@@ -521,6 +529,7 @@
                                 wallet.style.color = 'red';
                                 status.innerHTML += "NFTX";
                                 div.innerHTML += `<button onclick="countId(2)">Add Count</button>`;
+                                ++notOk;
                             } else {
                                 let status = get('winner2').querySelector('p');
                                 status.innerHTML = "";
@@ -535,6 +544,7 @@
                                 wallet.style.color = 'red';
                                 status.innerHTML += "NFTX";
                                 div.innerHTML += `<button onclick="countId(3)">Add Count</button>`;
+                                ++notOk;
                             } else {
                                 let status = get('winner3').querySelector('p');
                                 status.innerHTML = "";
@@ -543,9 +553,38 @@
                             break;
                         }
 
+                        if (notOk == 0){
+                            document.getElementById('dashboard').innerHTML += 
+                            `<button onclick="lockIn()">Let's do it</button>`
+                        }
+
                     }
                     lockIn = () => {
+                        //need address[] , which[], count[]
+                        let addresses;
+                        let which;
+                        let counts;
 
+                        addresses.push(get('wallet1').innerHTML);
+                        which.push(parseFloat(get('which1').value));
+                        counts.push(count1);
+                        if(randcount > 2) {
+                            addresses.push(get('wallet2').innerHTML);
+                            which.push(parseFloat(get('which2').value));
+                            counts.push(count2);
+                        }
+                        if(randcount > 4) {
+                            addresses.push(get('wallet3').innerHTML);
+                            which.push(parseFloat(get('which3').value));
+                            counts.push(count3);
+                        }
+                        try {
+                            raffle.methods.sendIt(addresses,which,counts).send({
+                                from: accounts[0]
+                            })
+                        } catch (err) {
+                            console.log('lockin sendit err',err);
+                        }
                     }
                     //User logic
                     //gets accounts and checks chain id then sends to checkWallet()
