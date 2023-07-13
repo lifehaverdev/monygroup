@@ -207,7 +207,10 @@
                 <h1>Milady Maker Party HQ</h1>
                 <button id="connect" onclick="partyFlow()">Let's Party</button>
                 <div id="dashboard">
-                    <div id="locked"></div>
+                    <div id="locked">
+                        <label>test</label>
+                        <input id="testnames"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -359,6 +362,8 @@
                         if(!loaded){
                             dashboard.innerHTML += `
                             <div id="loaded">
+                                <lablel>winner amt</label>
+                                <input type="number" id="names">
                                 <button onclick="drawFlow()">Draw</button>
                             </div>
                             `
@@ -719,7 +724,14 @@
 
                     }
                     drawFlow = async() => {
-
+                        let names = parseFloat(get('names').value);
+                        try {
+                            await raffle.methods.drawPrize(nWin).send({
+                                from: accounts[0]
+                            })
+                        } catch (err) {
+                            console.log('draw prize er',err);
+                        }
                     }
         </script>
 
