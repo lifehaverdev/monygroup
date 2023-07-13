@@ -241,7 +241,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 38')
+            console.log('version 39')
                 
                     
                 var web33 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
@@ -432,21 +432,21 @@
                         switch(which){
                             case 1:
                             id=randomness[0] + randomness[1];
-                            if(id>partyHat.length){
+                            while(id>partyHat.length){
                                 id = id - partyHat.length;
                             }
                             return id;
                             break;
                             case 2:
                             id = randomness[2] + randomness[3];
-                            if(id>partyHat.length){
+                            while(id>partyHat.length){
                                 id = id - partyHat.length;
                             }
                             return id;
                             break;
                             case 3:
                             id = randomness[4] + randomness[5];
-                            if(id>partyHat.length){
+                            while(id>partyHat.length){
                                 id = id - partyHat.length;
                             }
                             return id;
