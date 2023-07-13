@@ -282,6 +282,7 @@ a {
     display: block;
     height: 400px;
     overflow-y: scroll;
+    width: 500px;
 }
 
 .listing-item{

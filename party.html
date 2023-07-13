@@ -373,16 +373,19 @@
                                             <div id="winner1">
                                                 <h3 id="wallet1">0x00000....</h3>
                                                 <p>Status:</p>
+                                                <p>Winner Type:</p>
                                                 <input type="number" id="which1"/>
                                             </div>
                                             <div id="winner2">
                                                 <h3 id="wallet2">0x00000....</h3>
                                                 <p>Status:</p>
+                                                <p>Winner Type:</p>
                                                 <input type="number" id="which2"/>
                                             </div>
                                             <div id="winner3">
                                                 <h3 id="wallet3">0x00000....</h3>
                                                 <p>Status:</p>
+                                                <p>Winner Type:</p>
                                                 <input type="number" id="which3"/>
                                             </div>
                                         </div>
@@ -552,7 +555,7 @@
                             }
                             break;
                         }
-
+                        console.log('notOk',notOk);
                         if (notOk == 0){
                             document.getElementById('dashboard').innerHTML += 
                             `<button onclick="lockIn()">Let's do it</button>`
