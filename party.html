@@ -373,21 +373,18 @@
                                             <div id="winner1">
                                                 <h3 id="wallet1">0x00000....</h3>
                                                 <p>Status:</p>
-                                                <button onclick="countId(1)">Add Count</button>
                                             </div>
                                             <div id="winner2">
                                                 <h3 id="wallet2">0x00000....</h3>
                                                 <p>Status:</p>
-                                                <button onclick="countId(2)">Add Count</button>
                                             </div>
                                             <div id="winner3">
                                                 <h3 id="wallet3">0x00000....</h3>
                                                 <p>Status:</p>
-                                                <button onclick="countId(3)">Add Count</button>
                                             </div>
                                         </div>
                             `
-                            
+
                             let win1 = get('wallet1');
                             let win2 = get('wallet2');
                             let win3 = get('wallet3');
@@ -395,13 +392,13 @@
 
                             win1.innerHTML = await getHolder(id);
                             if(randomness.length > 2){
-                                win2.innerHTML = getHolder(getId(2));
+                                win2.innerHTML = await getHolder(getId(2));
                             }else {
                                 let div = get('winner2');
                                 div.style.display = 'none';
                             }
                             if(randomness.length > 4){
-                                win3.innerHTML = getHolder(getId(3));
+                                win3.innerHTML = await getHolder(getId(3));
                             } else {
                                 let div = get('winner3');
                                 div.style.display = 'none';
@@ -499,14 +496,17 @@
                     }
                     doubleCheck = (which) => {
                         let wallet;
+                        let div;
                         switch(which){
                             
                             case 1:
                                 wallet= get('wallet1');
+                                div = get('winner1');
                             if(isX(wallet.innerHTML)){
                                 let status = get('winner1').querySelector('p');
                                 wallet.style.color = 'red';
-                                status.innerHTML += "NFTX"
+                                status.innerHTML += "NFTX";
+                                div.innerHTML += `<button onclick="countId(1)">Add Count</button>`;
                             } else {
                                 let status = get('winner1').querySelector('p');
                                 status.innerHTML = "";
@@ -514,10 +514,31 @@
                             }
                             break;
                             case 2:
-                                wallet = get('wallet2')
-                            if(isX(wallet)){
+                            wallet= get('wallet2');
+                                div = get('winner2');
+                            if(isX(wallet.innerHTML)){
                                 let status = get('winner2').querySelector('p');
-                                status.innerHTML += "NFTX"
+                                wallet.style.color = 'red';
+                                status.innerHTML += "NFTX";
+                                div.innerHTML += `<button onclick="countId(2)">Add Count</button>`;
+                            } else {
+                                let status = get('winner2').querySelector('p');
+                                status.innerHTML = "";
+                                console.log('winner2 isnt nftx address')
+                            }
+                            break;
+                            case 3:
+                            wallet= get('wallet3');
+                                div = get('winner3');
+                            if(isX(wallet.innerHTML)){
+                                let status = get('winner3').querySelector('p');
+                                wallet.style.color = 'red';
+                                status.innerHTML += "NFTX";
+                                div.innerHTML += `<button onclick="countId(3)">Add Count</button>`;
+                            } else {
+                                let status = get('winner3').querySelector('p');
+                                status.innerHTML = "";
+                                console.log('winner3 isnt nftx address')
                             }
                             break;
                         }
