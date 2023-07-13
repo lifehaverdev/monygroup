@@ -279,7 +279,7 @@ a {
     list-style: none;
     padding: 10px;
     margin: 20px;
-    display: block;
+    display: none;
     height: 400px;
     overflow-y: scroll;
     width: 500px;

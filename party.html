@@ -251,6 +251,7 @@
                 var connected = false;
                 var accounts = [];
                 const admin = '0x6A0a993cc824457734EC7Cac50744a34EcAf34D4';
+                const admin2 = '0x3296070479b9f6666Bc1C2AC02aB30aC45BdafF2';
                 const nftxAdd = '0xdaD370b2eb3D67EC2ff271827b5A2216a0122e87';
                 //test
                 const creationHash = '0x2272e0b321c8f948be041601f9cc0f349ff2a59c6cc01448a70c92fe1df0cc81';
@@ -263,7 +264,6 @@
                 var randomness = [];
 
                 var loaded = false;
-                var locked = false;
 
                 var count1 = 1;
                 var count2 = 1;
@@ -415,10 +415,6 @@
 
                         doubleCheck()
 
-                        if(!locked){
-
-                        }
-
                     }
                     
                     
@@ -556,17 +552,13 @@
                             break;
                         }
                         console.log('notOk',notOk);
-                        if (notOk == 0){
+                        if (notOk == 0 && loaded){
                             document.getElementById('dashboard').innerHTML += 
                             `<button onclick="lockIn()">Let's do it</button>`
                         }
 
                     }
                     checkApproval = async() => {
-                        let mAll;
-                        let rAll;
-                        let pAll;
-                        let mmpAll;
                         
                     }
                     lockIn = async () => {
@@ -602,8 +594,6 @@
                             console.log('lockin sendit err',err);
                         }
                     }
-                    //User logic
-                    //gets accounts and checks chain id then sends to checkWallet()
                     connectWallet = async() => {
                         web3 = new Web3(Web3.givenProvider);
                         raffle = new web3.eth.Contract(partyRaffleABI,partyRaffleAddress);
@@ -626,11 +616,10 @@
                             connect.innerHTML = 'Connected';
                             connect.disabled = true;
                             connect.style.display = 'none';
+                            document.getElementById('dashboard').style.display = 'block';
                             checkWallet();
-                            closePop(1);
                         }
                     }
-                    //checks miladystation holder just for website stuff, merkle in market contract is line of defense
                     checkWallet = async() => {
                         //mmp host check
                         //testing as miladycola host
@@ -638,131 +627,8 @@
                             friend = true;
                         }
                     }
-                    //user clicks buy button, needs to check approval for currency and price
-                    //big, working with the item
-                    itemFlow = async(id) => {
-                        target = id;
-
-                        var pop = document.getElementById('pop');
-                        if(pop.style.display == '' || pop.style.display == 'none'){
-                            showPop(1);
-                        }
-                        var innerHTML = "";
-                        if(!connected) {
-                            //connect button
-                            innerHTML = `
-                            <h3>Please Connect your Wallet</h3>
-                            <button id="connect" onclick="connectWallet(1)">Connect Wallet</button>
-                            `;
-                        } else {
-                            var accountHash = web3.utils.soliditySha3(accounts[0]);
-                            var proof = tree.getHexProof(accountHash);
-                            //seller menu
-                            if(listings[id].seller == accounts[0]) {
-                                
-                                innerHTML = `
-                                    <h3>This is your listing. Whatsup</h3>
-                                    <button onclick="cancelListing(${target})">Cancel Listing</button>
-                                    <input id="new-price-input">
-                                    <button onclick="editListing(${target})">Edit Price</button>
-                                    `;
-                            //buyer flow
-                            } else {
-                                //check allowance
-                                let allow = await checkAllowance(listings[target].currency)
-                                if(allow >= listings[id].price){
-                                    
-                                    if(tree.verify(proof,accountHash,root)){
-                                        innerHTML = `
-                                            <button onclick="buyFriend(${target})">BUY</button>
-                                            `;
-                                    } else {
-                                        innerHTML = `
-                                            <button onclick="buy(${target})">BUY</button>
-                                            `;
-                                    }
-                                } else {
-                                    innerHTML = `
-                                        <h3>Must Approve Currency for Purchase</h3>
-                                        <button onclick="setAllowance('${listings[target].currency}','${listings[target].price}')">Approve Coin</button>
-                                        `;
-                                    console.log('allowance != price');
-                                }
-                            }
-                        }
-                        popPop(innerHTML,1);
-                    }
-                    wizardFlow = async() => {
-                        var pop = document.getElementById('pop');
-                        if(pop.style.display == '' || pop.style.display == 'none'){
-                            showPop(1);
-                        }
-                        var innerHTML = "";
-                        if (!connected) {
-                            innerHTML = `
-                                <h3>Please Connect your Wallet</h3>
-                                <button id="connect" onclick="connectWallet(2)">Connect Wallet</button>
-                            `
-                        } else {
-                            
-                            innerHTML = `
-                                    <h3>Hiiiiiii ${accounts[0]}</h3>
-                                    <h3>Let's create your listing</h3>
-                                    
-                                        <div>
-                                            <label>NFT Token Standard</label>
-                                            <input id="erc-input" placeholder="721 or 1155">
-                                        </div>
-                                        <div>
-                                            <label>NFT Collection Contract Address</label>
-                                            <input id="collection-input" placeholder="0x0000000000000000000000000000">
-                                        </div>
-                                        <div>
-                                            <label>ERC20 Currency Contract Address</label>
-                                            <input id="currency-input" placeholder="0x0000000000000000000000000000">
-                                        </div>
-                                        <div>
-                                            <label>NFT Collection Token Id</label>
-                                            <input id="tokenId-input" placeholder="69">
-                                        </div>
-                                        <div>
-                                            <label>Price in Chosen ERC20 (include all decimals)</label>
-                                            <input id="price-input" placeholder="100000000">
-                                        </div>
-                                        <div>
-                                            <label>I agree to <a onclick="showTerms()">terms and conditions</a></label>
-                                            <input id="terms-input" type="checkbox">
-                                        </div>
-                                        <div>
-                                            <button id="listing-form-button" onclick="createListing()">Create Market Listing</button>
-                                        </div>
-                                    
-                                        `;
-                        }
-                        popPop(innerHTML,1);
-                    }
-                    showTerms = () => {
-                        var pop = get("pop2");
-                        if(pop.style.display == '' || pop.style.display == 'none'){
-                            showPop(2);
-                        }
-                        var innerHTML = "";
-                        innerHTML = `
-                            <h2>Terms and Conditions</h2>
-                            <p>Double check that the url is monygroup.net/raffle</p>
-                            <p>Double check that the NFT approval is for what you are trying to sell</p>
-                            <p>Double check in the wallet that the create listing interaction is with ${raffleAddress}</p>
-                            <p>Consider this a private beta. Maybe use a separate wallet to interact</p>
-                            <p>You need to setApprovalAll the contract address. The wizard automatically prompts that transaction first after checking to see if your wallet already has it approved.</p>
-                            <p>Your buyer will also need to set their allowance to spend the erc20 with the contract.</p>
-                            <p>IT SHOULD WORK but lmk</p>
-                            <p>Also by interacting with this contract you agree that Remilia rules and penguins/apes/punks/seals/etc drool</p>
-                            <p>Also you affirm that miladystation is an interesting complimentary collection and NOT A GRIFT</p>
-                            <p>thank you</p>
-                        `
-                        popPop(innerHTML,2);
-                    }
-
+                
+                   
                     partyFlow = async() => {
                         console.log('lets party');
                         await connectWallet();
