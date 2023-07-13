@@ -340,9 +340,7 @@
                         let rWin = get('rWin');
                         let pWin = get('pWin');
                         let dash = get('dashboard');
-                        let win1 = get('wallet1');
-                        let win2 = get('wallet2');
-                        let win3 = get('wallet3');
+  
 
                         
                         let currentTimestamp = Math.floor(Date.now() / 1000);
@@ -388,9 +386,11 @@
                                                 <button onclick="countId(3)">Add Count</button>
                                             </div>
                                         </div>
-
                             `
-                    
+                            
+                            let win1 = get('wallet1');
+                            let win2 = get('wallet2');
+                            let win3 = get('wallet3');
                             let id = await getId(1);
 
                             win1.innerHTML = await getHolder(id);
