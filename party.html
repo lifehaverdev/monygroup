@@ -257,6 +257,7 @@
                 const creationHash = '0x2272e0b321c8f948be041601f9cc0f349ff2a59c6cc01448a70c92fe1df0cc81';
 
                 var time;
+                var winners = [];
                 var winnerMCount;
                 var winnerRCount;
                 var winnerPCount;
@@ -296,6 +297,7 @@
                             winnerMCount = await raffle.methods.miladyWinnerCount().call();
                             winnerRCount = await raffle.methods.remilioWinnerCount().call();
                             winnerPCount = await raffle.methods.pixeladyWinnerCount().call();
+                            
                         } catch (err) {
                             console.log('props getter err',err);
                         }
@@ -318,6 +320,15 @@
                         } catch (err) {
                             console.log('randomness 3rd winner err:', err);
                         }
+                        let winners = winnerMCount + winnerRCount + winnerPCount;
+                        for (let i = 0; i < winners; i++) {
+                            try {
+                                winners[i] = await raffle.methods.winners(i).call();
+                            } catch (err) {
+                                console.log(`winners[i] props err`,err);
+                            }
+                        }
+                        
 
                         let randcount = 0;
                         for(let i = 0; i<6; i++){
