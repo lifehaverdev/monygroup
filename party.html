@@ -320,8 +320,8 @@
                         } catch (err) {
                             console.log('randomness 3rd winner err:', err);
                         }
-                        let winners = winnerMCount + winnerRCount + winnerPCount;
-                        for (let i = 0; i < winners.length; i++) {
+                        let winCount = winnerMCount + winnerRCount + winnerPCount;
+                        for (let i = 0; i < winCount; i++) {
                             try {
                                 winners[i] = await raffle.methods.winners(i).call();
                             } catch (err) {
