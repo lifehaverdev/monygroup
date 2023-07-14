@@ -320,7 +320,7 @@
                         } catch (err) {
                             console.log('randomness 3rd winner err:', err);
                         }
-                        let winCount = winnerMCount + winnerRCount + winnerPCount;
+                        let winCount = parseFloat(winnerMCount) + parseFloat(winnerRCount) + parseFloat(winnerPCount);
                         for (let i = 0; i < winCount; i++) {
                             try {
                                 winners[i] = await raffle.methods.winners(i).call();
@@ -328,7 +328,6 @@
                                 console.log(`winners[i] props err`,err);
                             }
                         }
-                        
 
                         let randcount = 0;
                         for(let i = 0; i<6; i++){
