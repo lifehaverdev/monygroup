@@ -537,8 +537,21 @@
                                 ++notOk;
                             } else {
                                 let status = get('winner1').querySelector('p');
+                                wallet.style.color = 'blue';
                                 status.innerHTML = "";
                                 console.log('winner1 isnt nftx address')
+                                if(isW(wallet.innerHTML)){
+                                    let status = get(`winner1`).querySelector('p');
+                                    wallet.style.color = 'red';
+                                    status.innerHTML += "Previous Winner";
+                                    div.innerHTML += `<button onclick="countId(1)">Add Count</button>`;
+                                    ++notOk;
+                                } else {
+                                    let status = get(`winner1`).querySelector('p');
+                                    wallet.style.color = 'blue';
+                                    status.innerHTML = "";
+                                    console.log('winner',`1`,' isnt previous winner')
+                                }
                             }
                             break;
                             case 2:
@@ -552,8 +565,21 @@
                                 ++notOk;
                             } else {
                                 let status = get('winner2').querySelector('p');
+                                wallet.style.color = 'blue';
                                 status.innerHTML = "";
                                 console.log('winner2 isnt nftx address')
+                                if(isW(wallet.innerHTML)){
+                                    let status = get(`winner2`).querySelector('p');
+                                    wallet.style.color = 'red';
+                                    status.innerHTML += "Previous Winner";
+                                    div.innerHTML += `<button onclick="countId(2)">Add Count</button>`;
+                                    ++notOk;
+                                } else {
+                                    let status = get(`winner2`).querySelector('p');
+                                    wallet.style.color = 'blue';
+                                    status.innerHTML = "";
+                                    console.log('winner',`2`,' isnt previous winner')
+                                }
                             }
                             break;
                             case 3:
@@ -567,8 +593,21 @@
                                 ++notOk;
                             } else {
                                 let status = get('winner3').querySelector('p');
+                                wallet.style.color = 'blue';
                                 status.innerHTML = "";
                                 console.log('winner3 isnt nftx address')
+                                if(isW(wallet.innerHTML)){
+                                    let status = get(`winner3`).querySelector('p');
+                                    wallet.style.color = 'red';
+                                    status.innerHTML += "Previous Winner";
+                                    div.innerHTML += `<button onclick="countId(3)">Add Count</button>`;
+                                    ++notOk;
+                                } else {
+                                    let status = get(`winner3`).querySelector('p');
+                                    wallet.style.color = 'blue';
+                                    status.innerHTML = "";
+                                    console.log('winner',`3`,' isnt previous winner')
+                                }
                             }
                             break;
                             default:
@@ -593,6 +632,7 @@
                                             ++notOk;
                                         } else {
                                             let status = get(`winner${i}`).querySelector('p');
+                                            wallet.style.color = 'blue';
                                             status.innerHTML = "";
                                             console.log('winner',`${i}`,' isnt previous winner')
                                         }
