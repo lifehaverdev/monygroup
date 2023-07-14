@@ -506,8 +506,14 @@
                             return false;
                         }
                     }
-                    isLastWin = (addy) => {
-                        //if(addy == await )
+                    isW = (addy) => {
+                        let is = false;
+                        for(let i = 0; i < 4; i++) {
+                            if(addy == winners[winners.length - i]){
+                                is = true;
+                            }
+                        }
+                        return is;
                     }
                     doubleCheck = (which) => {
                         let wallet;
@@ -532,7 +538,7 @@
                             break;
                             case 2:
                             wallet= get('wallet2');
-                                div = get('winner2');
+                            div = get('winner2');
                             if(isX(wallet.innerHTML)){
                                 let status = get('winner2').querySelector('p');
                                 wallet.style.color = 'red';
@@ -547,7 +553,7 @@
                             break;
                             case 3:
                             wallet= get('wallet3');
-                                div = get('winner3');
+                            div = get('winner3');
                             if(isX(wallet.innerHTML)){
                                 let status = get('winner3').querySelector('p');
                                 wallet.style.color = 'red';
@@ -560,8 +566,37 @@
                                 console.log('winner3 isnt nftx address')
                             }
                             break;
+                            default:
+                                for(let i=1; i<4; i++){
+                                    wallet = get(`wallet${i}`);
+                                    div = get(`winner${3}`);
+                                    if(isX(wallet.innerHTML)){
+                                        let status = get(`winner${i}`).querySelector('p');
+                                        wallet.style.color = 'red';
+                                        status.innerHTML += "NFTX";
+                                        div.innerHTML += `<button onclick="countId(${i})">Add Count</button>`;
+                                        ++notOk;
+                                    } else {
+                                        let status = get(`winner${i}`).querySelector('p');
+                                        status.innerHTML = "";
+                                        console.log('winner',`${i}`,' isnt nftx address')
+                                        if(isW(wallet.innerHTML)){
+                                            let status = get(`winner${i}`).querySelector('p');
+                                            wallet.style.color = 'red';
+                                            status.innerHTML += "Previous Winner";
+                                            div.innerHTML += `<button onclick="countId(${i})">Add Count</button>`;
+                                            ++notOk;
+                                        } else {
+                                            let status = get(`winner${i}`).querySelector('p');
+                                            status.innerHTML = "";
+                                            console.log('winner',`${i}`,' isnt previous winner')
+                                        }
+                                    }
+
+                                }
+                                break;
                         }
-                        console.log('notOk',notOk);
+                        
                         if (notOk == 0 && loaded){
                             document.getElementById('dashboard').innerHTML += 
                             `<button onclick="lockIn()">Let's do it</button>`
