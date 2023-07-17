@@ -671,8 +671,9 @@
                             tokenId = parseFloat(get('nftId').value);
                         } catch (err) {
                             console.log('not sending nft',err);
+                            tokenId = 0;
                         }
-                        
+                    
                         let addresses = [];
                         let which = [];
                         let counts = [];
