@@ -666,7 +666,7 @@
                     }
                     lockIn = async () => {
                         //need address[] , which[], count[]
-                        let tokenId = get('nftId').value;
+                        let tokenId = parseFloat(get('nftId').value);
                         let addresses = [];
                         let which = [];
                         let counts = [];
