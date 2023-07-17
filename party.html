@@ -613,7 +613,7 @@
                             default:
                                 for(let i=1; i<4; i++){
                                     wallet = get(`wallet${i}`);
-                                    div = get(`winner${3}`);
+                                    div = get(`winner${i}`);
                                     if(isX(wallet.innerHTML)){
                                         let status = get(`winner${i}`).querySelector('p');
                                         wallet.style.color = 'red';
