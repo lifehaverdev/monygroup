@@ -385,7 +385,7 @@
                                                 <h3 id="wallet1">0x00000....</h3>
                                                 <p>Status:</p>
                                                 <p>Winner Type:</p>
-                                                <input type="number" id="which1" onchange=""/>
+                                                <input type="number" id="which1" onchange="getTokenId()"/>
                                                 <button onclick="countId(1)">Add Count</button>
                                             </div>
                                             <div id="winner2">
@@ -652,7 +652,8 @@
                     checkApproval = async() => {
                         
                     }
-                    getTokenId = (val,which) => {
+                    getTokenId = () => {
+                        console.log('we gettin da tokenId');
                         let html;
                         if(val == 5){
                             html = `
