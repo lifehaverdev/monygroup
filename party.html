@@ -254,7 +254,7 @@
                 const admin2 = '0x3296070479b9f6666Bc1C2AC02aB30aC45BdafF2';
                 const nftxAdd = '0xdaD370b2eb3D67EC2ff271827b5A2216a0122e87';
                 //test
-                const creationHash = '0x2272e0b321c8f948be041601f9cc0f349ff2a59c6cc01448a70c92fe1df0cc81';
+                const creationHash = '0x5032c01f6db68c7d95d45ce662f8b30901f341bce088e8ecf9946d5fd3670ec2';
 
                 var time;
                 var winners = [];
@@ -376,7 +376,7 @@
                             `
                         } else {
                             //we have randomness
-
+                            //take out the add count shit once we cool
                             dashboard.innerHTML += `
 
                                         <div id="loading">
@@ -385,7 +385,7 @@
                                                 <h3 id="wallet1">0x00000....</h3>
                                                 <p>Status:</p>
                                                 <p>Winner Type:</p>
-                                                <input type="number" id="which1"/>
+                                                <input type="number" id="which1" onchange=""/>
                                                 <button onclick="countId(1)">Add Count</button>
                                             </div>
                                             <div id="winner2">
@@ -652,21 +652,28 @@
                     checkApproval = async() => {
                         
                     }
+                    getTokenId = (val,which) => {
+                        let html;
+                        if(val == 5){
+                            html = `
+                            <input id="nftId"/>
+                            `
+                            get("winner1").innerHTML += html;
+                        }
+                    }
                     lockIn = async () => {
                         //need address[] , which[], count[]
+                        let tokenId = 0;
                         let addresses = [];
                         let which = [];
                         let counts = [];
                         let randcount = 0;
-                        for(let i = 0; i<6; i++){
-                            if(randomness[i]>0){
-                                randcount++;
-                            }
-                        }
+                        
 
                         addresses.push(get('wallet1').innerHTML);
                         which.push(parseFloat(get('which1').value));
                         counts.push(count1);
+                        //mmpnft check
                         if(randcount > 2) {
                             addresses.push(get('wallet2').innerHTML);
                             which.push(parseFloat(get('which2').value));
@@ -677,8 +684,12 @@
                             which.push(parseFloat(get('which3').value));
                             counts.push(count3);
                         }
+                        if(which[0] == 5){
+                            tokenId = get('nftId').value;
+                        }
+        
                         try {
-                            raffle.methods.sendIt(addresses,which,counts).send({
+                            raffle.methods.sendIt(addresses,which,counts,tokenId).send({
                                 from: accounts[0]
                             })
                         } catch (err) {
