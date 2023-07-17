@@ -666,7 +666,7 @@
                     }
                     lockIn = async () => {
                         //need address[] , which[], count[]
-                        let tokenId = 0;
+                        let tokenId = get('nftId').value;
                         let addresses = [];
                         let which = [];
                         let counts = [];
@@ -687,10 +687,10 @@
                             which.push(parseFloat(get('which3').value));
                             counts.push(count3);
                         }
-                        if(which[0] == 5){
-                            tokenId = get('nftId').value;
+                        if(tokenId != 0){
+                            which[0] = 5; 
                         }
-        
+                        console.log(addresses,which,counts,tokenId);
                         try {
                             raffle.methods.sendIt(addresses,which,counts,tokenId).send({
                                 from: accounts[0]
