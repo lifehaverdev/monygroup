@@ -666,7 +666,13 @@
                     }
                     lockIn = async () => {
                         //need address[] , which[], count[]
-                        let tokenId = parseFloat(get('nftId').value);
+                        let tokenId;
+                        try{
+                            tokenId = parseFloat(get('nftId').value);
+                        } catch (err) {
+                            console.log('not sending nft',err);
+                        }
+                        
                         let addresses = [];
                         let which = [];
                         let counts = [];
