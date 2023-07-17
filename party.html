@@ -671,6 +671,12 @@
                         let which = [];
                         let counts = [];
                         let randcount = 0;
+                        for(i=0; i<6; i++){
+                            if(randomness[i] > 0){
+                                randcount++;
+                            }
+                        }
+                        console.log('randcount in lockin',randcount)
                         
 
                         addresses.push(get('wallet1').innerHTML);
