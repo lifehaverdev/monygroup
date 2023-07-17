@@ -261,6 +261,7 @@
                 var winnerMCount;
                 var winnerRCount;
                 var winnerPCount;
+                var winnerMMPCount;
 
                 var randomness = [];
 
@@ -294,11 +295,11 @@
                             let block = await web3.eth.getTransaction(creationHash)
                             time = await web3.eth.getBlock(block.blockNumber);
                             time = time.timestamp;
-                            console.log('time in props',time)
                             winnerMCount = await raffle.methods.miladyWinnerCount().call();
                             winnerRCount = await raffle.methods.remilioWinnerCount().call();
                             winnerPCount = await raffle.methods.pixeladyWinnerCount().call();
-                            
+                            winnerMMPCount = await raffle.methods.mmpWinnerCount().call();
+
                         } catch (err) {
                             console.log('props getter err',err);
                         }
@@ -321,7 +322,12 @@
                         } catch (err) {
                             console.log('randomness 3rd winner err:', err);
                         }
-                        let winCount = parseFloat(winnerMCount) + parseFloat(winnerRCount) + parseFloat(winnerPCount);
+                        let winCount = 
+                            parseFloat(winnerMCount) + 
+                            parseFloat(winnerRCount) + 
+                            parseFloat(winnerPCount) + 
+                            parseFloat(mmpWinnerCount);
+
                         for (let i = 0; i < winCount; i++) {
                             try {
                                 winners[i] = await raffle.methods.winners(i).call();
@@ -336,7 +342,7 @@
                                 randcount++;
                             }
                         }
-                        console.log('randcount',randcount);
+                        
                         if(randcount>0){
                             loaded = true;
                         }
@@ -350,9 +356,8 @@
                         let mWin = get('mWin');
                         let rWin = get('rWin');
                         let pWin = get('pWin');
+                        let mmpWin = get('mmpWin');
                         let dash = get('dashboard');
-  
-
                         
                         let currentTimestamp = Math.floor(Date.now() / 1000);
                         let ageInSeconds = currentTimestamp - time; 
@@ -363,6 +368,7 @@
                         mWin.innerHTML = "This many milady won: "+winnerMCount;
                         rWin.innerHTML = "This many Remilio won: "+winnerRCount;
                         pWin.innerHTML = "This many Pixelady won: "+winnerPCount;
+                        mmpWin.innerHTML = "This many MMP won: "+winnerMMPCount;
                         
 
                         //get wallets on deck from randomness
@@ -770,6 +776,7 @@
                                                 <li id="mWin"></li>
                                                 <li id="rWin"></li>
                                                 <li id="pWin"></li>
+                                                <li id="mmpWin"></li>
                                             </ul>
                                         </div>
                                         
