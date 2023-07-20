@@ -677,7 +677,7 @@
                         if(tokenId != 0){
                             which[0] = 5;
                             try {
-                                await raffle.methods.sendMMPToken(addresses[0],tokenId,counts[0]).send({
+                                await raffle.methods.sendMMPtoken(addresses[0],tokenId,counts[0]).send({
                                     from: accounts[0]
                                 })
                             } catch(err) {
