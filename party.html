@@ -223,7 +223,7 @@
                 const admin2 = '0x3296070479b9f6666Bc1C2AC02aB30aC45BdafF2';
                 const nftxAdd = '0xdaD370b2eb3D67EC2ff271827b5A2216a0122e87';
                 //test
-                const creationHash = '0x5032c01f6db68c7d95d45ce662f8b30901f341bce088e8ecf9946d5fd3670ec2';
+                const creationHash = '0x19417cda8c0cfcd00483f27b93925ea66ccbff40154034a7ce750aa1579fc7f4';
 
                 var time;
                 var winners = [];
@@ -295,7 +295,7 @@
                             parseFloat(winnerMCount) + 
                             parseFloat(winnerRCount) + 
                             parseFloat(winnerPCount) + 
-                            parseFloat(mmpWinnerCount);
+                            parseFloat(winnerMMPCount);
 
                         for (let i = 0; i < winCount; i++) {
                             try {
@@ -399,10 +399,9 @@
                                 div.style.display = 'none';
                             }
                         
-                            
+                            doubleCheck()
                         }
 
-                        doubleCheck()
 
                     }
                     
