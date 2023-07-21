@@ -213,7 +213,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 2')
+            console.log('version 3')
                     
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
                 //test
@@ -276,16 +276,28 @@
                         let dash = get('dashboard');
                         dash.style.display = 'block';
                         dash.innerHTML = `
+                        <div>
                             <label>How many of each type? You own ${length}</label>
+                            <div>
                             <label>low</label>
                             <input type="number" id="low"/>
+                            </div>
+                            <div>
                             <label>med</label>
                             <input type="number" id="med"/>
+                            </div>
+                            <div>
                             <label>high</label>
                             <input type="number" id="high"/>
+                            </div>
+                            <div>
                             <label>insane</label>
                             <input type="number" id="insane"/>
+                            </div>
+                            <div>
                             <button onclick="calculate()">Calculate Odds</button>
+                            </div>
+                        </div>
                             <h2 id="announcement">Your Odds of winning:</h2>
                             `
                     }
