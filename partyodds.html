@@ -213,7 +213,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 1')
+            console.log('version 2')
                     
                 var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
                 //test
@@ -249,9 +249,9 @@
                         let addy = get('user-addy').value;
                         if(addy){
                             try {
-                                length = await mmp.methods.ownerBalance(addy).call();
+                                length = await mmp.methods.balanceOf(addy).call();
                             } catch (err) {
-                                console.log('ownerBalance error: ',err);
+                                console.log('balanceOf error: ',err);
                             }
                             return length;
                         } else {
@@ -264,11 +264,15 @@
                         let med = parseFloat(get('med').value);
                         let high = parseFloat(get('high').value);
                         let insane = parseFloat(get('insane').value);
+                        if(!low){low=0}
+                        if(!med){med=0}
+                        if(!high){high=0}
+                        if(!insane){insane=0}
                         let odds = low + med*2 + high*4 + insane*10;
                         get('announcement').innerHTML = `Your Odds of winning: ${odds} / 4834`;
                     }
-                    getOdds = () => {
-                        let length = getItemNumber();
+                    getOdds = async () => {
+                        let length = await getItemNumber();
                         let dash = get('dashboard');
                         dash.style.display = 'block';
                         dash.innerHTML = `
