@@ -276,10 +276,10 @@
                         let length = await getItemNumber();
                         let dash = get('dashboard');
                         dash.style.display = 'block';
-                        let low = length * Math.floor(1842/3000);
-                        let mid = length * Math.floor(928/3000);
-                        let hi = length * Math.floor(194/3000);
-                        let insane = length * Math.floor(36/3000);
+                        let low =  Math.floor(length * 1842/3000);
+                        let mid = Math.floor(length * 928/3000);
+                        let hi = Math.floor(length * 194/3000);
+                        let insane = Math.floor(length * 36/3000);
                         dash.innerHTML = `
                         <div>
                             <label>How many of each type? You own ${length}</label>
