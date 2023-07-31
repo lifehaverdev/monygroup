@@ -276,24 +276,28 @@
                         let length = await getItemNumber();
                         let dash = get('dashboard');
                         dash.style.display = 'block';
+                        let low = length * Math.floor(1842/3000);
+                        let mid = length * Math.floor(928/3000);
+                        let hi = length * Math.floor(194/3000);
+                        let insane = length * Math.floor(36/3000);
                         dash.innerHTML = `
                         <div>
                             <label>How many of each type? You own ${length}</label>
                             <div>
                             <label>low</label>
-                            <input type="number" id="low"/>
+                            <input type="number" id="low" value="${low}"/>
                             </div>
                             <div>
                             <label>med</label>
-                            <input type="number" id="med"/>
+                            <input type="number" id="med" value="${mid}/>
                             </div>
                             <div>
                             <label>high</label>
-                            <input type="number" id="high"/>
+                            <input type="number" id="high" value="${hi}/>
                             </div>
                             <div>
                             <label>insane</label>
-                            <input type="number" id="insane"/>
+                            <input type="number" id="insane" value="${insane}/>
                             </div>
                             <div>
                             <button onclick="calculate()">Calculate Odds</button>

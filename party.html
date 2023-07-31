@@ -221,6 +221,7 @@
                 const admin2 = '0x6A0a993cc824457734EC7Cac50744a34EcAf34D4';
                 const admin = '0x3296070479b9f6666Bc1C2AC02aB30aC45BdafF2';
                 const nftxAdd = '0xdaD370b2eb3D67EC2ff271827b5A2216a0122e87';
+                const vaultAdd = '0xcf73183F87e52F7aE77a43024d70D9224BCF9773';
                 //main
                 const creationHash = '0x6c3419d8ee81ee4e7ff1def09906bab43eb08b0c41e2165782297bc6ca6c66c8';
 
@@ -478,7 +479,7 @@
                         
                     }
                     isX = (addy) => {
-                        if(addy == nftxAdd){
+                        if(addy == nftxAdd || addy == vaultAdd){
                             return true;
                         } else {
                             return false;
