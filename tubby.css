@@ -1,19 +1,13 @@
 
-#boot {
-    /* background-image: linear-gradient(to bottom, pink, yellow); */
-    /* background-color: white; */
-    /* height: 101%;
-    width: 101%;
-    left: -0.5%;
-    top: -0.5%; */
-}
-
-#logo {
-    width: 100px;
-    opacity: 0;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+#receipt {
+    z-index: 3;
+    background-color: red;;
+    display: none;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 50%;
 }
 
 #pop {
