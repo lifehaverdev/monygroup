@@ -335,18 +335,7 @@
                     }
                     return owned;
                 }
-                checkFriend = async() => {
-                    var accountHash = web3.utils.soliditySha3(accounts[0]);
-                    var proof = tree.getHexProof(accountHash);
-                    friend = tree.verify(proof,accountHash,root)
-                    console.log('is we on da list',friend);
-                }
-                checkHolder = async() => {
-                    let hold = 0;
-                    hold += parseInt(await check721Balance(tubbyStationAddress));
-                    console.log("checkHolder",hold);
-                    return hold;
-                }
+                
                 displayHoldings = async() => {
 
                 }
@@ -394,9 +383,20 @@
                 if(await checkHolder() > 0){
                     displayHoldings();
                 }
-                console.log('is we friend? : ', friend)
             }
-            
+            checkFriend = async() => {
+                    var accountHash = web3.utils.soliditySha3(accounts[0]);
+                    var proof = tree.getHexProof(accountHash);
+                    friend = tree.verify(proof,accountHash,root)
+                    console.log('is we on da list',friend);
+                    return friend;
+                }
+            checkHolder = async() => {
+                let hold = 0;
+                hold += parseInt(await check721Balance(tubbyStationAddress));
+                console.log("checkHolder",hold);
+                return hold;
+                }
             //contract interaction
             //
             mintFlow = async() => {
