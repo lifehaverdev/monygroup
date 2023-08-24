@@ -406,6 +406,7 @@
                 console.log('minting, is frined?',friend);
                 //check if free minted
                 var freeMinted = await tubby.methods.freeMinted(accounts[0]).call();
+                console.log('free minted in mint flow',freeMinted);
                 if(!freeMinted && friend){
                     var accountHash = web3.utils.soliditySha3(accounts[0]);
                     var proof = tree.getHexProof(accountHash);
@@ -422,7 +423,7 @@
                     try {
                         tubby.methods.mint(amount).send({
                             from: accounts[0],
-                            value: 1000000*amount
+                            value: 10000000000*amount
                         })
                     } catch(err) {
                         console.log('mint error',err);
