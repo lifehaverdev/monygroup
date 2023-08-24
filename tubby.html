@@ -338,7 +338,7 @@
                 checkFriend = async() => {
                     var accountHash = web3.utils.soliditySha3(accounts[0]);
                     var proof = tree.getHexProof(accountHash);
-                    friend = tree.verify(proof,leaf,root)
+                    friend = tree.verify(proof,accountHash,root)
                     console.log('is we on da list',friend);
                 }
                 checkHolder = async() => {
