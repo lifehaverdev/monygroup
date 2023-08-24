@@ -81,7 +81,7 @@
         
                             var innerHTML = 
                                 `
-                                <img id="cashier" src="public/milkbar1.png"/>
+                                <img id="cashier" src="public/tubby/tuntunz.gif"/>
                                 <div id="receipt">
                                     <h3 class="center">Congratulations! You have just ${desc}</h3>
                                     <p class="center">You can see your transaction here:</p>
@@ -262,6 +262,7 @@
                                                     </div>
                                                 </div>
                                                 <div style="color:rgb(255, 186, 221);font-size:20px;display:block;margin-block-end:0px;margin-block-start:0px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:0px;text-align: center;">20000 NFTS ON THE ETHERIUM BLOCKCHAIN.</div>
+                                                <div id="count" style="color:rgb(255, 186, 221);font-size:20px;display:block;margin-block-end:0px;margin-block-start:0px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:0px;text-align: center;"></div>
                                                 <div style="text-align:center;color:rgb(174, 172, 173);font-size:24px;display:block;line-height:18px;margin-block-end:0px;margin-block-start:20px;margin-bottom:22px;margin-inline-end:52.2344px;margin-inline-start:52.2188px;margin-left:auto;margin-right:auto;margin-top:20px;width:85%;">Created by <a href="https://archive.li/o/bkyud/https://twitter.com/tubbyCollective" rel="noreferrer" target="_blank" style="color:rgb(174, 172, 173);cursor:pointer;text-decoration-color:rgb(174, 172, 173);text-decoration-line:underline;text-decoration-style:solid;text-decoration-thickness:auto;">@tubbyCollective</a> + <a href="https://archive.li/o/bkyud/https://twitter.com/trolldart" rel="noreferrer" target="_blank" style="color:rgb(174, 172, 173);cursor:pointer;text-decoration-color:rgb(174, 172, 173);text-decoration-line:underline;text-decoration-style:solid;text-decoration-thickness:auto;">@miladystation </a></div>
                                                 <div style="text-align:center;color:rgb(174, 172, 173);font-size:24px;display:block;line-height:18px;margin-block-end:0px;margin-block-start:20px;margin-bottom:22px;margin-inline-end:52.2344px;margin-inline-start:52.2188px;margin-left:auto;margin-right:auto;margin-top:20px;width:85%;">2 Free for Milady, Tubby and MiladyStation Holders</div>
                                                 <div style="text-align:center;color:rgb(174, 172, 173);font-size:24px;display:block;line-height:18px;margin-block-end:0px;margin-block-start:20px;margin-bottom:22px;margin-inline-end:52.2344px;margin-inline-start:52.2188px;margin-left:auto;margin-right:auto;margin-top:20px;width:85%;">0.01ETH each</div>
@@ -282,8 +283,9 @@
         <script>
 
             const web3 = new Web3(Web3.givenProvider); 
-            
+            const max = 400
             var maxMint = 5;
+            
 
             var accounts = [];
             var friend;
@@ -311,6 +313,7 @@
 
                 console.log(totalSup,"tokens");
                 console.log("saleOn",saleOn);
+                get('count').innerHTML = `Only ${max - totalSup} left!`
                 
             }
             getProp();
@@ -343,6 +346,29 @@
             function errorTell(message) {
                 alert(`Something went wrong, here is what the chain said when we checked: ${message}`);
             }
+            function buyBuyBuy(tx) {
+                    //clear cart and hide
+                    //clearPop('pop3');
+                    //
+                    //hide("selection")
+                    
+                    var txPop = get('pop1');
+                    txPop.innerHTML += 
+                        `
+                        <div class="x" onclick="clearPop('pop1'); getProps();">x</div>
+                        `;
+                    txPop.innerHTML += 
+                        `
+                        <img src="public/tuntunz.gif"/>
+                        <div id="receipt">
+                            <h3 class="center">Congratulations! You have just minted TubbyStation Player Character(s)</h3>
+                            <p class="center">You can see your transaction here:</p>
+                            <a class="center white-link" target="_blank" href="${chainScanPre}/${tx}">${tx}</a>
+                            <p>It will be in your wallet shortly</p>
+                        </div>
+                        `;
+                        show('pop1');
+                }
             function hide(id) {
                 let el = document.getElementById(id);
                 el.style.display = "none";
@@ -416,6 +442,9 @@
                             from: accounts[0],
                             value: 0
                         })
+                        .on('transactionHash', function(hash){
+                                    buyBuyBuy(hash)
+                        });
                     } catch(err) {
                         console.log('freemint error',err);
                     }
@@ -426,6 +455,9 @@
                             from: accounts[0],
                             value: 10000000000*amount
                         })
+                        .on('transactionHash', function(hash){
+                            buyBuyBuy(hash)
+                        });
                     } catch(err) {
                         console.log('mint error',err);
                     }
