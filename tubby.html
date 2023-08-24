@@ -412,7 +412,7 @@
                     var accountHash = web3.utils.soliditySha3(accounts[0]);
                     var proof = tree.getHexProof(accountHash);
                     try {
-                        tubby.methods.mintFree(proof).send({
+                        tubby.methods.freeMint(proof).send({
                             from: accounts[0],
                             value: 0
                         })
