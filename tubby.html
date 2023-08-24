@@ -3,6 +3,9 @@
     <head>
         
         <title>TubbyStation</title>
+        <link rel="shortcut icon" type="image/png" width="32px" href="public/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png"/>
+        <link rel="style" href="tubby.css"/>
         <style type="text/css">
             /* updated */
             @font-face {
@@ -14,33 +17,7 @@
         </style>
         <script src="https://unpkg.com/web3@1.10.0/dist/web3.min.js"></script>  
                 <!-- frontend stuff -->
-                <script>
-                    //Dropdown
-                        // Select all dropdown parent elements
-                        var dropdownParents = document.querySelectorAll('.dropdown');
-                    
-                        // Add click event listener to each dropdown parent
-                        dropdownParents.forEach(function (parent) {
-                        parent.addEventListener('click', function () {
-                            // Toggle the "active" class on the clicked dropdown parent
-                            this.classList.toggle('active');
-                    
-                            // Toggle the visibility of the dropdown content
-                            var dropdownContent = this.querySelector('.dropitems');
-                            dropdownContent.classList.toggle('show');
-                        });
-                        });
-                    
-                        // Close the dropdown when clicking outside of it
-                        window.addEventListener('click', function (event) {
-                        dropdownParents.forEach(function (parent) {
-                            if (!parent.contains(event.target)) {
-                            parent.classList.remove('active');
-                            var dropdownContent = parent.querySelector('.dropitems');
-                            dropdownContent.classList.remove('show');
-                            }
-                        });
-                        });
+                <script>              
                     //Popup
                         function closePop(which) {
                             var pop;
@@ -269,6 +246,8 @@
                                                 </button>
                                             </div>
                                         </div>
+                                        <div id="pop" style="display:none;"></div>
+                                        <div id="pop1" style="display:none;"></div>
                                         <div style="display:block;">
                                             <div style="display:block;margin-bottom:0px;margin-left:auto;margin-right:auto;margin-top:100px;max-width:1400px;position:relative;width:85%;">
                                                 <div style="box-sizing:border-box;display:flex;flex-wrap:wrap;width:100%;">
@@ -284,8 +263,9 @@
                                                 </div>
                                                 <div style="color:rgb(255, 186, 221);font-size:20px;display:block;margin-block-end:0px;margin-block-start:0px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:0px;text-align: center;">20000 NFTS ON THE ETHERIUM BLOCKCHAIN.</div>
                                                 <div style="text-align:center;color:rgb(174, 172, 173);font-size:24px;display:block;line-height:18px;margin-block-end:0px;margin-block-start:20px;margin-bottom:22px;margin-inline-end:52.2344px;margin-inline-start:52.2188px;margin-left:auto;margin-right:auto;margin-top:20px;width:85%;">Created by <a href="https://archive.li/o/bkyud/https://twitter.com/tubbyCollective" rel="noreferrer" target="_blank" style="color:rgb(174, 172, 173);cursor:pointer;text-decoration-color:rgb(174, 172, 173);text-decoration-line:underline;text-decoration-style:solid;text-decoration-thickness:auto;">@tubbyCollective</a> + <a href="https://archive.li/o/bkyud/https://twitter.com/trolldart" rel="noreferrer" target="_blank" style="color:rgb(174, 172, 173);cursor:pointer;text-decoration-color:rgb(174, 172, 173);text-decoration-line:underline;text-decoration-style:solid;text-decoration-thickness:auto;">@miladystation </a></div>
-                                                <div style="text-align:center;color:rgb(174, 172, 173);font-size:24px;display:block;line-height:18px;margin-block-end:0px;margin-block-start:20px;margin-bottom:22px;margin-inline-end:52.2344px;margin-inline-start:52.2188px;margin-left:auto;margin-right:auto;margin-top:20px;width:85%;">Free for Milady, Tubby and MiladyStation Holders </div>
-                                                <button onclick="mintFlow()" style="color:rgb(0, 0, 0);font-family:Arial;font-size:13.3333px;font-stretch:100%;font-style:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:400;text-rendering:auto;align-items:flex-start;background-color:rgb(255, 127, 191);border-bottom-color:rgb(0, 0, 0);border-bottom-left-radius:50px;border-bottom-right-radius:50px;border-bottom-style:none;border-bottom-width:0px;border-image-outset:0;border-image-repeat:stretch;border-image-slice:100%;border-image-source:none;border-image-width:1;border-left-color:rgb(0, 0, 0);border-left-style:none;border-left-width:0px;border-right-color:rgb(0, 0, 0);border-right-style:none;border-right-width:0px;border-top-color:rgb(0, 0, 0);border-top-left-radius:50px;border-top-right-radius:50px;border-top-style:none;border-top-width:0px;box-sizing:border-box;cursor:pointer;display:inline-block;height:45px;letter-spacing:normal;line-height:normal;margin-bottom:0px;margin-left:auto;margin-right:auto;margin-top:0px;outline-color:rgb(0, 0, 0);outline-style:none;outline-width:0px;padding-bottom:1px;padding-left:6px;padding-right:6px;padding-top:1px;text-align:center;text-indent:0px;text-shadow:none;text-transform:none;width:100%;word-spacing:0px;appearance:auto;"><div style="color:rgb(255, 255, 255);font-family:TuttiFrutti;font-size:22px;font-weight:300;display:block;margin-block-end:0px;margin-block-start:0px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:0px;padding-top:5px;">mint</button>
+                                                <div style="text-align:center;color:rgb(174, 172, 173);font-size:24px;display:block;line-height:18px;margin-block-end:0px;margin-block-start:20px;margin-bottom:22px;margin-inline-end:52.2344px;margin-inline-start:52.2188px;margin-left:auto;margin-right:auto;margin-top:20px;width:85%;">2 Free for Milady, Tubby and MiladyStation Holders</div>
+                                                <div style="text-align:center;color:rgb(174, 172, 173);font-size:24px;display:block;line-height:18px;margin-block-end:0px;margin-block-start:20px;margin-bottom:22px;margin-inline-end:52.2344px;margin-inline-start:52.2188px;margin-left:auto;margin-right:auto;margin-top:20px;width:85%;">0.01ETH each</div>
+                                                <button id="mint-button" onclick="mintFlow()" style="color:rgb(0, 0, 0);font-family:Arial;font-size:13.3333px;font-stretch:100%;font-style:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:400;text-rendering:auto;align-items:flex-start;background-color:rgb(255, 127, 191);border-bottom-color:rgb(0, 0, 0);border-bottom-left-radius:50px;border-bottom-right-radius:50px;border-bottom-style:none;border-bottom-width:0px;border-image-outset:0;border-image-repeat:stretch;border-image-slice:100%;border-image-source:none;border-image-width:1;border-left-color:rgb(0, 0, 0);border-left-style:none;border-left-width:0px;border-right-color:rgb(0, 0, 0);border-right-style:none;border-right-width:0px;border-top-color:rgb(0, 0, 0);border-top-left-radius:50px;border-top-right-radius:50px;border-top-style:none;border-top-width:0px;box-sizing:border-box;cursor:pointer;display:inline-block;height:45px;letter-spacing:normal;line-height:normal;margin-bottom:0px;margin-left:auto;margin-right:auto;margin-top:0px;outline-color:rgb(0, 0, 0);outline-style:none;outline-width:0px;padding-bottom:1px;padding-left:6px;padding-right:6px;padding-top:1px;text-align:center;text-indent:0px;text-shadow:none;text-transform:none;width:100%;word-spacing:0px;appearance:auto;"><div style="color:rgb(255, 255, 255);font-family:TuttiFrutti;font-size:22px;font-weight:300;display:block;margin-block-end:0px;margin-block-start:0px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:0px;padding-top:5px;">mint</button>
                                                 
                                             </div>
                                             <div style="display:block;height:140px;"></div>
@@ -294,10 +274,7 @@
                                 </div>
                             </div>
                         
-                    <div id="pop" style="display: none;"></div>
-                    <div id="pop1" style="display: none;"></div>
            
-                    <!--<![endif]-->
                 </div>       
         
         <!-- web3 -->
@@ -328,7 +305,7 @@
 
             async function getProp() {
                 
-                saleOn=await tubby.methods.saleOn().call();
+                saleOn= await tubby.methods.saleOn().call();
                 totalSup = await tubby.methods.totalSupply().call();
                 
 
@@ -342,7 +319,8 @@
                 makeNFT721 = async(collection) => {
                     var nftAddress = collection;
                     //this is miladycola tbh
-                    var nft721ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"ApprovalCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"ApprovalQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"BalanceQueryForZeroAddress","type":"error"},{"inputs":[],"name":"InvalidQueryRange","type":"error"},{"inputs":[],"name":"MintERC2309QuantityExceedsLimit","type":"error"},{"inputs":[],"name":"MintToZeroAddress","type":"error"},{"inputs":[],"name":"MintZeroQuantity","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"OwnerQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"OwnershipNotInitializedForExtraData","type":"error"},{"inputs":[],"name":"TransferCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"TransferFromIncorrectOwner","type":"error"},{"inputs":[],"name":"TransferToNonERC721ReceiverImplementer","type":"error"},{"inputs":[],"name":"TransferToZeroAddress","type":"error"},{"inputs":[],"name":"URIQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"fromTokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"toTokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"ConsecutiveTransfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"IPFSURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tubbyPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"bulkPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bottle","type":"uint256"},{"internalType":"uint256","name":"friend","type":"uint256"},{"internalType":"uint256","name":"bulk","type":"uint256"}],"name":"changePrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"explicitOwnershipOf","outputs":[{"components":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint64","name":"startTimestamp","type":"uint64"},{"internalType":"bool","name":"burned","type":"bool"},{"internalType":"uint24","name":"extraData","type":"uint24"}],"internalType":"struct IERC721A.TokenOwnership","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"tokenIds","type":"uint256[]"}],"name":"explicitOwnershipsOf","outputs":[{"components":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint64","name":"startTimestamp","type":"uint64"},{"internalType":"bool","name":"burned","type":"bool"},{"internalType":"uint24","name":"extraData","type":"uint24"}],"internalType":"struct IERC721A.TokenOwnership[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"flipSaleState","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"holder","type":"address"}],"name":"friendCheck","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"friendPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"numberOfTokens","type":"uint256"}],"name":"mintFriend","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"numberOfTokens","type":"uint256"}],"name":"mintNew","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownershipHandoverValidFor","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"s_MAXMILADYCOLA","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"s_saleIsActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"baseURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"tokensOfOwner","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"stop","type":"uint256"}],"name":"tokensOfOwnerIn","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]; //
+                    var nft721ABI = 
+                    [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"ApprovalCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"ApprovalQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"BalanceQueryForZeroAddress","type":"error"},{"inputs":[],"name":"InvalidQueryRange","type":"error"},{"inputs":[],"name":"MintERC2309QuantityExceedsLimit","type":"error"},{"inputs":[],"name":"MintToZeroAddress","type":"error"},{"inputs":[],"name":"MintZeroQuantity","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"OwnerQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"OwnershipNotInitializedForExtraData","type":"error"},{"inputs":[],"name":"TransferCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"TransferFromIncorrectOwner","type":"error"},{"inputs":[],"name":"TransferToNonERC721ReceiverImplementer","type":"error"},{"inputs":[],"name":"TransferToZeroAddress","type":"error"},{"inputs":[],"name":"URIQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"fromTokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"toTokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"ConsecutiveTransfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"IPFSURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tubbyPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"bulkPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bottle","type":"uint256"},{"internalType":"uint256","name":"friend","type":"uint256"},{"internalType":"uint256","name":"bulk","type":"uint256"}],"name":"changePrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"explicitOwnershipOf","outputs":[{"components":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint64","name":"startTimestamp","type":"uint64"},{"internalType":"bool","name":"burned","type":"bool"},{"internalType":"uint24","name":"extraData","type":"uint24"}],"internalType":"struct IERC721A.TokenOwnership","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"tokenIds","type":"uint256[]"}],"name":"explicitOwnershipsOf","outputs":[{"components":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint64","name":"startTimestamp","type":"uint64"},{"internalType":"bool","name":"burned","type":"bool"},{"internalType":"uint24","name":"extraData","type":"uint24"}],"internalType":"struct IERC721A.TokenOwnership[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"flipSaleState","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"holder","type":"address"}],"name":"friendCheck","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"friendPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"numberOfTokens","type":"uint256"}],"name":"mintFriend","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"numberOfTokens","type":"uint256"}],"name":"mintNew","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownershipHandoverValidFor","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"s_MAXMILADYCOLA","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"s_saleIsActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"baseURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"tokensOfOwner","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"stop","type":"uint256"}],"name":"tokensOfOwnerIn","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]; //
                     var nft = await new web3.eth.Contract(nft721ABI,nftAddress);
                     return nft;
                 }
@@ -358,11 +336,10 @@
                     return owned;
                 }
                 checkFriend = async() => {
-                    let friendScale = 0;
-                    friendScale += parseInt(await check721Balance(miladyAddress));
-                    friendScale += parseInt(await check721Balance(miladystationAddress));
-                    friendScale += parseInt(await check721Balance(tubbyCatAddress));
-                    return friendScale;
+                    var accountHash = web3.utils.soliditySha3(accounts[0]);
+                    var proof = tree.getHexProof(accountHash);
+                    friend = tree.verify(proof,leaf,root)
+                    console.log('is we on da list',friend);
                 }
                 checkHolder = async() => {
                     let hold = 0;
@@ -384,29 +361,6 @@
                 let el = document.getElementById(id);
                 el.style.display = "block";
             }
-            function popUp(f,tokens,tx){
-                document.getElementById('txinfo').style.display = 'grid';
-                let title = document.getElementById('txtitle')
-                let txt = document.getElementById('txtext')
-                if(f=='mint'){
-                    title.innerHTML = 'Bottles minting'
-                    txt.innerHTML = `oh my gosh you just minted ${tokens} MiladyCola Bottles! Here's your <a href='${etherscanPre}/${tx}' target='_blank'> Etherscan Transaction </a>`
-                } else if(f=='pop'){
-                    title.innerHTML = 'Bottles popping'
-                    txt.innerHTML = `whoa you just popped off bottle ${tokens} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract. here's the <a href='${etherscanPre}/${tx}' target='_blank'> Etherscan Transaction </a>`
-                }
-            }
-            function updatePop(f) {
-                let title = document.getElementById('txtitle')
-                if(f=='mint'){
-                    title.innerHTML = 'Bottles minted'
-                } else if(f=='pop'){
-                    title.innerHTML = 'Bottles popped'
-                }
-            }
-            function closePop() {
-                document.getElementById('txinfo').style.display = 'none';
-            }
             
             // Connect to the MetaMask wallet
             connectWallet = async() => {
@@ -421,12 +375,10 @@
                 if(connected){
                     var connectbutt = document.getElementById('connect-button');
                     connectbutt.innerText = 'Connected';
-                    connectbutt.disabled = true;
-                    connectbutt.style.fontSize = "20px";
 
                     var networkId = await web3.eth.net.getId();
-                    // console.log(networkId);
-                    if (networkId !== 1) {
+                    console.log(networkId);
+                    if (networkId !== 11155111) {
                     // Show an error message or take other appropriate action
                     alert('change your network to main ethereum')
                     }
@@ -444,18 +396,6 @@
                 console.log('is we friend? : ', friend)
             }
             
-            //primer
-            function phaseTwoMint() {
-                if (saleOn || test){
-                    hide("mint-button");
-                    show("mnt-btn");
-                    show("mint-input");
-                } else {
-                    alert('sale is not active, come back soon')
-                }
-
-            }
-            
             //contract interaction
             //
             mintFlow = async() => {
@@ -463,10 +403,35 @@
                     alert("please connect your wallet using the  button");
                     exit
                 }
+                console.log('minting, is frined?',friend);
+                //check if free minted
+                var freeMinted = await tubby.methods.freeMinted(accounts[0]).call();
+                if(!freeMinted && friend){
+                    var accountHash = web3.utils.soliditySha3(accounts[0]);
+                    var proof = tree.getHexProof(accountHash);
+                    try {
+                        tubby.methods.mintFree(proof).send({
+                            from: accounts[0],
+                            value: 0
+                        })
+                    } catch(err) {
+                        console.log('freemint error',err);
+                    }
+                } else if (freeMinted || !friend){
+                    var amount = Number(window.prompt('How many TubbyStations do you want?'));
+                    try {
+                        tubby.methods.mint(amount).send({
+                            from: accounts[0],
+                            value: 1000000*amount
+                        })
+                    } catch(err) {
+                        console.log('mint error',err);
+                    }
+                }
+                //disable button until amount is chosen or free box is checked
+                get('mint-button').disabled = true;
+                //present amount choosing.
 
-                //bring up the popup
-                show('pop')
-                welcome();
                 //if theyre on the whitelist tell them something
                 //ask them how many they want to mint or do the free mint
 
@@ -546,45 +511,13 @@
                     }
                 }
             }
-            //pop bottles
-            pop = async() => {
-                show("redeem-button");
-                hide("pop");
-                hide("bottleList");
-                document.getElementById("redeem-button").disabled = true;
-                //var list = `${targets}`;
-                console.log(targets);
-                console.dir(targets);
-                if(targets.length == 0){
-                    alert('wait no you have to pick the bottles you want to pop, dont accept this tx')
-                }
-                try {
-                    await icola.methods
-                    .bottlePop(targets)
-                    .send({
-                        from: accounts[0],
-                        value: 0
-                    })
-                    .on('transactionHash', function(hash){
-                        popUp('pop',targets,hash);
-                    });
-                    
-                } catch(err) {
-                    console.log(err)
-                    errorTell(err.message);
-                }
-                document.getElementById("redeem-button").disabled = false;
-                document.getElementById("bottleList").innerHTML = "";
-                targets = [];
-                
-            }
-        
+            
         </script>
         <!-- //animation -->
         <script>
             //animation
             function welcome() {
-                show("boot");
+                //show("boot");
                 var image = get("logo");
                 var opacity = 0;
                 var intervalID = setInterval(function() {
@@ -600,9 +533,7 @@
                             image.style.opacity = opacity;
                         } else {
                             clearInterval(intervalID2);
-                            hide("boot");
-                            show("landing");
-                            show("flame");
+                            
                         }
                         }, 4);
                     }, 1000);
