@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="background-color:#EEEEEE">
+<html>
     <head>
         
         <title>TubbyStation</title>
@@ -205,10 +205,12 @@
                 </script>  
     </head>
     <body>
-                            <div class="body" id="master" style="color:rgb(255, 255, 255);margin-bottom:0px;margin-left:0px;margin-right:0px;margin-top:0px;min-height:800px /*cni=20*/;overflow-x:visible;overflow-y:visible;background-position:/*x=*/center /*y=*/top;font-family:TuttiFrutti;font-style:normal;font-weight:300;-webkit-font-smoothing:antialiased;background-color:rgb(255, 255, 255);display:block;padding-right:0px;">
+        <div id="pop" style="display:none;"></div>
+        <div id="pop1" style="display:none;position:absolute;top:30%;margin-left:auto;margin-right:auto;background-color:aliceblue;color:blue;z-index:2;"></div>
+                            <div class="body" id="master">
                                 <div id="root" style="display:block;">
                                     <div style="display:block;">
-                                        <div h-case="4" old-position="fixed" v-case="6 parentBounds=List((2,1,Rectangle(0.0,0.0,1024.0,768.0)))" style="left:0.0px;position:absolute;top:calc(0.0px - 0.0px);width:100%;z-index:999999;background-color:rgb(255, 236, 245);display:block;height:100px;">
+                                        <div id="bar" h-case="4" old-position="fixed" v-case="6 parentBounds=List((2,1,Rectangle(0.0,0.0,1024.0,768.0)))" style="left:0.0px;position:absolute;top:calc(0.0px - 0.0px);width:100%;z-index:999999;background-color:rgb(255, 236, 245);display:block;height:100px;">
                                             <div style="min-height:100px;display:flex;flex-direction:row;height:100%;margin-bottom:0px;margin-left:auto;margin-right:auto;margin-top:0px;max-height:100%;width:90%;">
                                                 <div style="min-height:100px;align-items:center;display:flex;flex-basis:0%;flex-wrap:wrap;height:100%;justify-content:center;position:relative;"></div>
                                                 <div style="min-height:100px;align-items:center;display:flex;flex-basis:16.33%;flex-wrap:wrap;height:100%;justify-content:center;position:relative;">
@@ -246,10 +248,9 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div id="pop" style="display:none;"></div>
-                                        <div id="pop1" style="display:none;"></div>
+                                        
                                         <div style="display:block;">
-                                            <div style="display:block;margin-bottom:0px;margin-left:auto;margin-right:auto;margin-top:100px;max-width:1400px;position:relative;width:85%;">
+                                            <div id="main" style="margin-top:20vh;">
                                                 <div style="box-sizing:border-box;display:flex;flex-wrap:wrap;width:100%;">
                                                     <div style="box-sizing:border-box;display:block;flex-basis:16.6667%;flex-grow:0;margin-bottom:0px;margin-left:0px;margin-right:0px;margin-top:0px;max-width:16.6667%;position:relative;">
                                                         <img alt="Stars" loading="lazy" src="public/tubby/starsI.png" style="min-height:154.188px;min-width:145.062px;display:block;margin-bottom:0px;margin-left:auto;margin-right:auto;margin-top:60px;max-width:160px;width:100%;"/>
@@ -276,7 +277,7 @@
                             </div>
                         
            
-                </div>       
+                       
         
         <!-- web3 -->
         <!-- tubbystation nft contract -->

@@ -1,14 +1,20 @@
 
-#receipt {
-    z-index: 3;
-    background-color: red;;
-    display: none;
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    width: 80%;
-    height: 50%;
+
+body {
+    color:rgb(255, 255, 255);
+    margin-bottom:0px;
+    margin-left:0px;margin-right:0px;margin-top:0px;min-height:100%;overflow-x:visible;overflow-y:visible;background-position:/*x=*/center /*y=*/top;font-family:TuttiFrutti;font-style:normal;font-weight:300;-webkit-font-smoothing:antialiased;background-color:rgb(255, 255, 255);display:block;padding-right:0px;
 }
+
+#bar {
+    left:0.0px;position:absolute;top:calc(0.0px - 0.0px);width:100%;z-index:999999;background-color:rgb(255, 236, 245);display:block;height:100px;
+}
+
+#main {
+    display:block;margin-bottom:0px;margin-left:auto;margin-right:auto;margin-top:20%;max-width:1400px;position:relative;width:85%;
+}
+
+
 
 #pop {
     z-index: 3;
@@ -22,16 +28,13 @@
 }
 
 #pop1 {
+    z-index: 3;
+    background-color:black;
     display: none;
     position: absolute;
-    top: 2%;
-    height: 80%;
-    width: 80%;
-    background-color: black;
-    color: white;
-    z-index: 1;
-    margin: 40px;
-    overflow-y: scroll;
+    top: 30%;
+    left: 40%;
+    width: 30%;
 }
 #pop1 img {
     width: 80%;
