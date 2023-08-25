@@ -32,7 +32,7 @@
                                     pop = document.getElementById('pop3');
                                     break;
                                 default:
-                                    pop = document.getElementById('pop');
+                                    pop = document.getElementById('pop1');
                                     break;
                             }
                             pop.innerHTML = '';
@@ -206,7 +206,7 @@
     </head>
     <body>
         <div id="pop" style="display:none;"></div>
-        <div id="pop1" style="display:none;position:absolute;top:30%;margin-left:auto;margin-right:auto;background-color:aliceblue;color:blue;z-index:2;"></div>
+        <div id="pop1" style="display:none;position:absolute;top:30%;left:30%;width:40%;background-color:aliceblue;color:blue;z-index:2;"></div>
                             <div class="body" id="master">
                                 <div id="root" style="display:block;">
                                     <div style="display:block;">
@@ -356,7 +356,7 @@
                     var txPop = get('pop1');
                     txPop.innerHTML += 
                         `
-                        <div class="x" onclick="clearPop('pop1'); getProps();">x</div>
+                        <div class="x" onclick="closePop(); getProps();">x</div>
                         `;
                     txPop.innerHTML += 
                         `
