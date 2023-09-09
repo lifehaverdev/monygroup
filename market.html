@@ -266,7 +266,12 @@
                         for(i=0;i<listingTotal;i++){
                             meta = await getListing(i);
                             if(meta != -1){
-                                showListing(meta.metadata, listings[i], i);
+                                try{
+                                    showListing(meta.metadata, listings[i], i);
+                                } catch(err) {
+                                    console.log('show listing error',i,err);
+                                }
+                                
                             } else {
                                 break;
                             }
