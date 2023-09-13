@@ -473,6 +473,10 @@
                     }
                 } else if (freeMinted || !friend){
                     var amount = Number(window.prompt('How many TubbyStations do you want?'));
+                    if(amount > maxMint){
+                        alert('You may only mint ',`${maxMint} at a time`)
+                        return;
+                    }
                     try {
                         tubby.methods.mint(amount).send({
                             from: accounts[0],
@@ -485,13 +489,7 @@
                         console.log('mint error',err);
                     }
                 }
-                //disable button until amount is chosen or free box is checked
-                get('mint-button').disabled = true;
-                //present amount choosing.
-
-                //if theyre on the whitelist tell them something
-                //ask them how many they want to mint or do the free mint
-
+                
             }
             //mint tubbystation pcs
             mint = async(amt) => {
