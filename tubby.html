@@ -360,7 +360,7 @@
                     var txPop = get('pop1');
                     txPop.innerHTML += 
                         `
-                        <div class="x" onclick="closePop(); getProps();">x</div>
+                        <div class="x" onclick="closePop();">x</div>
                         `;
                     txPop.innerHTML += 
                         `
@@ -440,7 +440,9 @@
                 return hold;
                 }
             relo = async() => {
+                console.log('reloading');
                 setTimeout(function() {
+                    console.log('reloaded');
                     checkWallet();
                 }, 10000)
             }
