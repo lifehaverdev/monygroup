@@ -427,7 +427,9 @@
                     console.log('is we on da list',friend);
                     var freeMinted = await tubby.methods.freeMinted(accounts[0]).call();
                     if(friend && !freeMinted){
-                        get('mint-button').innerHTML = "Mint Free";
+                        get('mintbutt-text').innerHTML = "Mint Free";
+                    } else if (friend && freeMinted){
+                        get('mintbutt-text').innerHTML = "Mint";
                     }
                     return friend;
                 }
