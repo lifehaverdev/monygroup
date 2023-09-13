@@ -99,6 +99,7 @@ body {
     padding-bottom: 5px;
     font-size: 30px;
     text-align: center;
+    cursor: pointer;
 }
 .x:hover {
     cursor:pointer;

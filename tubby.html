@@ -442,10 +442,12 @@
             relo = async() => {
                 console.log('reloading');
                 get('mint-button').disabled = true;
+                get('mintbutt-text').innerHTML = "Please wait 1 moment";
                 setTimeout(function() {
                     console.log('reloaded');
                     checkWallet();
                     get('mint-button').disabled = false;
+                    get('mintbutt-text').innerHTML = "Mint";
                 },60000)
             }
                 //contract interaction
