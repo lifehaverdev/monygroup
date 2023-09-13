@@ -153,7 +153,7 @@
                                                 <div style="box-sizing:border-box;display:flex;flex-wrap:wrap;margin-bottom:0px;margin-left:auto;margin-right:auto;margin-top:0px;width:80%;">
                                                     <div style="box-sizing:border-box;display:block;flex-basis:58.3333%;flex-grow:0;margin-bottom:0px;margin-left:0px;margin-right:0px;margin-top:0px;max-width:58.3333%;padding-bottom:16px;padding-left:16px;padding-right:16px;padding-top:16px;">
                                                         <h2 style="color:rgb(255, 127, 191);font-size:42px;font-weight:700;display:block;margin-block-end:34.86px;margin-block-start:34.86px;margin-inline-end:0px;margin-inline-start:0px;">The Collection</h2>
-                                                        <div style="color:rgb(255, 186, 221);font-size:22px;display:block;margin-block-end:0px;margin-block-start:20px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:20px;">tubbystation is a collection of 20000 miladystation trained stable diffusion textual inversion generated and hand-picked nfts on etherium.</div>
+                                                        <div style="color:rgb(255, 186, 221);font-size:22px;display:block;margin-block-end:0px;margin-block-start:20px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:20px;">tubbystation is a collection of 365 miladystation trained stable diffusion textual inversion generated and hand-picked nfts on etherium.</div>
                                                         <div style="color:rgb(255, 186, 221);font-size:22px;display:block;margin-block-end:0px;margin-block-start:12px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:12px;">
                                                             art: <a href="https://archive.ph/o/Soo00/https://twitter.com/tubbyCollective" rel="noreferrer" target="_blank" style="color:rgb(255, 186, 221);cursor:pointer;text-decoration-color:rgb(255, 186, 221);text-decoration-line:underline;text-decoration-style:solid;text-decoration-thickness:auto;">@miladystation</a>
                                                         </div>
@@ -173,7 +173,7 @@
                                                         <h2 style="color:rgb(255, 127, 191);font-size:42px;font-weight:700;display:block;margin-block-end:34.86px;margin-block-start:34.86px;margin-inline-end:0px;margin-inline-start:0px;">creating tubbystation</h2>
                                                         <div style="color:rgb(255, 186, 221);font-size:22px;display:block;margin-block-end:0px;margin-block-start:0px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:0px;">rather than creating from one of 120 various themed palettes, each tubbystation cat player character is generated completely randomly from the collection.</div>
                                                         <div style="color:rgb(255, 186, 221);font-size:22px;display:block;margin-block-end:0px;margin-block-start:20px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:20px;">tubbystation player character cats are not generated with individual trait rarity in mind. rarity is based on the themed gen palettes and which traits the AI was able to render properly.</div>
-                                                        <div style="color:rgb(255, 186, 221);font-size:22px;display:block;margin-block-end:0px;margin-block-start:20px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:20px;">the collection also contains XX one-of-ones, which are created by different artists on tubbycat team (Except Fatwell). each one-of-one has an attribute that displays the artist of each.</div>
+                                                        <div style="color:rgb(255, 186, 221);font-size:22px;display:block;margin-block-end:0px;margin-block-start:20px;margin-bottom:0px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:20px;">the collection also contains 56 one-of-ones, which are created by different artists on tubbycat team (Except Fatwell). each one-of-one has an attribute that displays the artist of each.</div>
                                                     </div>
                                                 </div>
                                                 <h1 style="color:rgb(255, 127, 191);font-size:80px;font-weight:400;display:block;margin-block-end:40px;margin-block-start:0px;margin-bottom:40px;margin-inline-end:0px;margin-inline-start:0px;margin-left:auto;margin-right:auto;margin-top:0px;padding-top:100px;text-align:center;">The Team</h1>
@@ -416,6 +416,9 @@
                 }
             }
             checkFriend = async() => {
+                    const leaves = tubbyHat.map(x => web3.utils.soliditySha3(x));
+                    const tree = new MerkleTree(leaves, web3.utils.soliditySha3, { sort: true });
+                    const root = tree.getHexRoot();
                     var accountHash = web3.utils.soliditySha3(accounts[0]);
                     var proof = tree.getHexProof(accountHash);
                     friend = tree.verify(proof,accountHash,root)
@@ -582,18 +585,17 @@
         </script>
         <!-- merkle -->
         <script src="https://cdn.jsdelivr.net/npm/merkletreejs@latest/merkletree.js"></script>
-        
         <script>
             // miladystation holders (+ first 4 for testing )
             //first 3 wallets, forge test, forge anvil cast account 0, miladycola test wallet
             //const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4','0x8703a1aC3a2474eE68A1154B7538172f9865192c','0xE51B692Ee9671E7EA69022D1C70bdCF16fff07c5','0xE220F9370Af26471Eba309975E827B66BaDbD4F5'].map( x => web3.utils.soliditySha3(x));
             // 0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496
-            console.log('tubbyhat 5',tubbyHat[5])
+            
+            
             const leaves = tubbyHat.map(x => web3.utils.soliditySha3(x));
-            console.log('leaves',leaves);
 
             const tree = new MerkleTree(leaves, web3.utils.soliditySha3, { sort: true });
-            console.log('root pre root',root);
+            
             const root = tree.getHexRoot();
 
             console.log('root: ',root);
