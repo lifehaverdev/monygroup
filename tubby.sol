@@ -54,6 +54,11 @@ contract TubbyStation is ERC721A, ERC721AQueryable, ERC721ABurnable, Ownable {
     //root:
     //0x8846dd93fd368514683ee858b5e8216240896a3c0ebf50f3225e7a8552578c37
 
+    //new root with cig
+    //0xcb2a546e011166feb2ac77f98a545183bf9137fcd0dda1c9aad522a23ed442d5
+    //cid
+    //ipfs://bafybeibin567fwd3rfgp23t5mci7nftlhnkqoowr7oxwomua2jrtfb2rpm/
+
     function mint(uint256 amount) public payable{
         if(!saleOn){revert NoDice("Sale Not On");}
         if(msg.value < 10000000000000000*amount){revert NotEnough("Need Fee");}
