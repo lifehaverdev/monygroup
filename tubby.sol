@@ -51,6 +51,9 @@ contract TubbyStation is ERC721A, ERC721AQueryable, ERC721ABurnable, Ownable {
         return MerkleProofLib.verifyCalldata(proof, root, keccak256(abi.encodePacked(bytes20(msg.sender))));
     }
 
+    //root:
+    //0x8846dd93fd368514683ee858b5e8216240896a3c0ebf50f3225e7a8552578c37
+
     function mint(uint256 amount) public payable{
         if(!saleOn){revert NoDice("Sale Not On");}
         if(msg.value < 10000000000000000*amount){revert NotEnough("Need Fee");}
