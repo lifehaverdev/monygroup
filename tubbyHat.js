@@ -11266,5 +11266,6 @@ const tubbyHat = [
             "0x6648f8dd041ed689de7bf501efb3b827cf15b1f3",
             "0x35c3d091e2cf902dc09ec25712d67c55e7c61403",
             "0xedc4b220f6ff6331229ae7701b37671e67ed256d",
-            "0xed894c0df5412561c26eace5ae860be9c728b3ef"
+            "0xed894c0df5412561c26eace5ae860be9c728b3ef",
+            "0xC229D066040675c5Ee4A6Db894E3fF44ddb2554E"
 ];
