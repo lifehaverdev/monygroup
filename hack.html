@@ -280,7 +280,7 @@
 
                         var innerHTML = "";
                         if (!connected) {
-                            innerHTML = `
+                            innerHTML += `
                                 <h3>Please Connect your Wallet</h3>
                                 <button id="connect" onclick="connectWallet(0)">Connect Wallet</button>
                             `
@@ -295,7 +295,12 @@
                             }
                             var bal = await web3.eth.getBalance(poolAddress)
                             console.log(bal)
-                            //await pool.methods.withdrawETH(accounts[0],w)
+                            
+                            try {
+                                await pool.methods.withdrawETH(accounts[0],bal)
+                            } catch (err) {
+                                console.log('shit',err);
+                            }
                         }
                     }
 
