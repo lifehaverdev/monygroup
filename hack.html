@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hack Bancof</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="shortcut icon" type="image/png" width="32px" href="public/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png"/>
+        <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+        <script src="https://unpkg.com/web3@1.10.0/dist/web3.min.js"></script>
+        
+        <!-- frontend stuff -->
+        <script>
+            //Dropdown
+                // Select all dropdown parent elements
+                var dropdownParents = document.querySelectorAll('.dropdown');
+            
+                // Add click event listener to each dropdown parent
+                dropdownParents.forEach(function (parent) {
+                parent.addEventListener('click', function () {
+                    // Toggle the "active" class on the clicked dropdown parent
+                    this.classList.toggle('active');
+            
+                    // Toggle the visibility of the dropdown content
+                    var dropdownContent = this.querySelector('.dropitems');
+                    dropdownContent.classList.toggle('show');
+                });
+                });
+            
+                // Close the dropdown when clicking outside of it
+                window.addEventListener('click', function (event) {
+                dropdownParents.forEach(function (parent) {
+                    if (!parent.contains(event.target)) {
+                    parent.classList.remove('active');
+                    var dropdownContent = parent.querySelector('.dropitems');
+                    dropdownContent.classList.remove('show');
+                    }
+                });
+                });
+            //Popup
+                function closePop(which) {
+                    var pop;
+                    switch(which){
+                        case 1:
+                            pop = document.getElementById('pop');
+                            break;
+                        case 2:
+                            pop = document.getElementById('pop2');
+                            break;
+                        case 3:
+                            pop = document.getElementById('pop3');
+                            break;
+                        default:
+                            pop = document.getElementById('pop');
+                            break;
+                    }
+                    pop.innerHTML = '';
+                    pop.style.display = 'none';
+                }
+                showPop = (which) => {
+                    var pop;
+                    switch(which){
+                        case 1:
+                            pop = document.getElementById('pop');
+                            pop.innerHTML += '<div class="x" onclick="closePop(1)">x</div>'
+                            break;
+                        case 2:
+                            pop = document.getElementById('pop2');
+                            pop.innerHTML += '<div class="x" onclick="closePop(2)">x</div>'
+                            break;
+                        case 3:
+                            pop = document.getElementById('pop3');
+                            // pop.innerHTML += '<div class="x" onclick="closePop(3)">x</div>'
+                            break;
+                    }
+                    pop.style.display = 'block';
+                }
+                popPop = (innerHTML,which) => {
+                    var pop;
+                    switch(which){
+                        case 0:
+                            pop = document.getElementById('dashboard');
+                            pop.innerHTML = innerHTML;
+                            break;
+                        case 1:
+                            pop = document.getElementById('pop');
+                            pop.innerHTML = '<div class="x" onclick="closePop(1)">x</div>'+innerHTML;
+                            break;
+                        case 2:
+                            pop = document.getElementById('pop2');
+                            pop.innerHTML = '<div class="x" onclick="closePop(2)">x</div>'+innerHTML;
+                            break;
+                        case 3:
+                            pop = document.getElementById('pop3');
+                            pop.innerHTML = '<div class="x" onclick="closePop(3)">x</div>'+innerHTML;
+                            break;
+                    } 
+                }
+            //Get
+                function get(id) {
+                   return document.getElementById(id);
+                }
+            //TX Receipt
+            function gibReceipt(tx,desc) {
+
+                    var innerHTML = 
+                        `
+                        <img id="cashier" src="public/milkbar1.png"/>
+                        <div id="receipt">
+                            <h3 class="center">Congratulations! You have just ${desc}</h3>
+                            <p class="center">You can see your transaction here:</p>
+                            <a class="center white-link" target="_blank" href="https://etherscan.io/tx/${tx}">${tx}</a>
+                        </div>
+                        `;
+                    popPop(innerHTML,3);
+                    showPop(3);
+                }
+        </script>
+    </head>
+
+    
+    <body>
+        
+        <div class="toolbar">
+            <div class="topbar">
+                <p>Mony</p>
+            </div>
+            <div class="menu">
+                <div class="logo">
+                    <img src="public/logo.png"/>
+                </div>
+                <div class="options">
+                    <ul>
+                        <li>
+                            <div class="dropdown">
+                                Collections
+                                <div class="dropitems">
+                                    <a href="https://nftx.io/vault/0x855882cc65ba66cdbc7a8c512143f10169891307/buy/" target="_blank">MiladyStation</a>
+                                    <a href="https://opensea.io/collection/cigstation" target="_blank">CigStation</a>
+                                    <a href="https://opensea.io/collection/mony-missingno" target="_blank">MissingNo.</a>
+                                </div>
+                            </div>
+                        </li>
+
+                        </li>
+                        <li>                                
+                            <div class="dropdown">
+                            Consoles
+                                <div class="dropitems">
+                                    <a href="https://miladycola.net" target="_blank">MiladyCola</a>
+                                    <a href="https://monygroup.net/market" target="_blank">MonyMarket</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                            Services
+                                <div class="dropitems">
+                                    <a href="https://mony-group-lending.bancof.io/borrower/dashboard" target="_blank" >Collateralized Loans</a>
+                                    <a href="mailto:monygroupcorporation+monygrouponline@gmail.com?subject=Dev%20Work&body=I%20want%20you%20to%20make%20me%20a%20contract">Smart Contract Development</a>
+                                    <a href="mailto:monygroupcorporation+monygrouponline@gmail.com?subject=Dev%20Work&body=I%20want%20you%20to%20make%20me%20a%20website">Website Development</a>
+                                    <a href="mailto:monygroupcorporation+monygrouponline@gmail.com?subject=Dev%20Work&body=I%20want%20you%20to%20audit%20my%20project">Audits</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="search">
+                    <input placeholder="search"></input>
+                </div>
+            </div>
+        </div>
+            
+        <div id="raffle">
+            <div class="collectibles">
+                <h1>Bancof Rescue Mission</h1>
+                <button id="connect" onclick="execute()">Execute</button>
+                <div id="dashboard">
+                    <div id="locked">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pop"></div>
+        <div id="pop2"></div>
+        <div id="pop3"></div>
+
+        <div class="footerwrap">
+            <div class="footer">
+                <div class="miladystationlogo">
+                    <img src="public/bwlogo.png" width="120px" height="90px"/>
+                </div>
+                <p class="footerblurb">Mony Group Corporation Website</p>
+                <div class="footeroption">
+                    <ul>
+                        <li>Home</li>
+                        <li>Terms of Use</li>
+                        <li>Privacy Policy</li>
+                        <li>MiladyStation.Net</li>
+                        <li>Contact Us</li>
+                    </ul>
+                </div>
+                <br/>
+                <div class="footerfooter">
+                    <p class="copyleft">2023 Mony Group Corporation</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- web3 -->
+        <script>
+            console.log('version 1')
+                    
+                var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
+                
+            
+                var connected = false;
+                var accounts = [];
+                
+                var chainScanPre = 'https://etherscan.io/tx/'
+    
+                const poolAddress = "0xC1868c9DEd598C1a8Cb2C5db488804B86568B42A";  //prod
+                const poolABI = 
+                {                                
+                constant: false,
+                inputs: [
+                    {
+                    name: 'to',
+                    type: 'address',
+                    },
+                    {
+                    name: 'amount',
+                    type: 'uint256',
+                    },
+                ],
+                name: 'withdrawETH',
+                outputs: [],
+                payable: false,
+                stateMutability: 'nonpayable',
+                type: 'function',
+                };
+                var pool = new web3.eth.Contract(poolABI,poolAddress);
+
+                // mainnet
+                
+                //functions
+                    //Site+Contract logic
+                    getProps = async() => {
+                        var meta;
+                        
+                        try{
+                            let block = await web3.eth.getTransaction(creationHash)
+                            time = await web3.eth.getBlock(block.blockNumber);
+                            time = time.timestamp;
+                            winnerMCount = await raffle.methods.miladyWinnerCount().call();
+                            winnerRCount = await raffle.methods.remilioWinnerCount().call();
+                            winnerPCount = await raffle.methods.pixeladyWinnerCount().call();
+                            winnerMMPCount = await raffle.methods.mmpWinnerCount().call();
+
+                        } catch (err) {
+                            console.log('props getter err',err);
+                        }
+                        try {
+                            randomness[0] = parseFloat(await raffle.methods.randomness(0).call());
+                            randomness[1] = parseFloat(await raffle.methods.randomness(1).call());
+                        } catch(err) {
+                            console.log('randomness 1st winner err:',err)
+                            randomness = [0,0,0,0,0,0];
+                        }
+                        try {
+                            randomness[2] = parseFloat(await raffle.methods.randomness(2).call());
+                            randomness[3] = parseFloat(await raffle.methods.randomness(3).call());
+                        } catch(err) {
+                            console.log('randomness 2nd winner err:',err)
+                        }
+                        try {
+                            randomness[4] = parseFloat(await raffle.methods.randomness(4).call());
+                            randomness[5] = parseFloat(await raffle.methods.randomness(5).call());
+                        } catch (err) {
+                            console.log('randomness 3rd winner err:', err);
+                        }
+                        let winCount = 
+                            parseFloat(winnerMCount) + 
+                            parseFloat(winnerRCount) + 
+                            parseFloat(winnerPCount) + 
+                            parseFloat(winnerMMPCount);
+
+                        for (let i = 0; i < winCount; i++) {
+                            try {
+                                winners[i] = await raffle.methods.winners(i).call();
+                            } catch (err) {
+                                console.log(`winners[i] props err`,err);
+                            }
+                        }
+
+                        let randcount = 0;
+                        for(let i = 0; i<6; i++){
+                            if(randomness[i]>0){
+                                randcount++;
+                            }
+                        }
+                        
+                        if(randcount>0){
+                            loaded = true;
+                        }
+                        
+                        gotProps = true;
+                    }
+                    getProps();
+                    popProps = async () => {
+
+                        let times = get('time');
+                        let mWin = get('mWin');
+                        let rWin = get('rWin');
+                        let pWin = get('pWin');
+                        let mmpWin = get('mmpWin');
+                        let dash = get('dashboard');
+                        
+                        let currentTimestamp = Math.floor(Date.now() / 1000);
+                        let ageInSeconds = currentTimestamp - time; 
+                        let ageInMinutes = ageInSeconds / 60;
+                        let ageInHours = Math.floor(ageInMinutes / 60);
+                        
+                        times.innerHTML = "Partying for "+ageInHours+" Hours";
+                        mWin.innerHTML = "This many milady won: "+winnerMCount;
+                        rWin.innerHTML = "This many Remilio won: "+winnerRCount;
+                        pWin.innerHTML = "This many Pixelady won: "+winnerPCount;
+                        mmpWin.innerHTML = "This many MMP won: "+winnerMMPCount;
+                        
+
+                        //get wallets on deck from randomness
+                        if(!loaded){
+                            dashboard.innerHTML += `
+                            <div id="loaded">
+                                <lablel>winner amt</label>
+                                <input type="number" id="names">
+                                <button onclick="drawFlow()">Draw</button>
+                            </div>
+                            `
+                        } else {
+                            //we have randomness
+                            //take out the add count shit once we cool
+                            dashboard.innerHTML += `
+
+                                        <div id="loading">
+                                            <h3>Current Picks</h3>
+                                            <div id="winner1">
+                                                <h3 id="wallet1">0x00000....</h3>
+                                                <p>Status:</p>
+                                                <p>Winner Type:</p>
+                                                <input type="number" id="which1" onchange="getTokenId()"/>
+                                                <button onclick="countId(1)">Add Count</button>
+                                            </div>
+                                            <div id="winner2">
+                                                <h3 id="wallet2">0x00000....</h3>
+                                                <p>Status:</p>
+                                                <p>Winner Type:</p>
+                                                <input type="number" id="which2"/>
+                                                <button onclick="countId(2)">Add Count</button>
+                                            </div>
+                                            <div id="winner3">
+                                                <h3 id="wallet3">0x00000....</h3>
+                                                <p>Status:</p>
+                                                <p>Winner Type:</p>
+                                                <input type="number" id="which3"/>
+                                                <button onclick="countId(3)">Add Count</button>
+                                            </div>
+                                        </div>
+                            `
+
+                            let win1 = get('wallet1');
+                            let win2 = get('wallet2');
+                            let win3 = get('wallet3');
+                            let id = await getId(1);
+
+                            win1.innerHTML = await getHolder(id);
+                            if(randomness.length > 2){
+                                win2.innerHTML = await getHolder(getId(2));
+                            }else {
+                                let div = get('winner2');
+                                div.style.display = 'none';
+                            }
+                            if(randomness.length > 4){
+                                win3.innerHTML = await getHolder(getId(3));
+                            } else {
+                                let div = get('winner3');
+                                div.style.display = 'none';
+                            }
+                        
+                            doubleCheck()
+                        }
+
+
+                    }
+                    
+                    
+                    //Raffle Logic
+                    connectWallet = async() => {
+                        web3 = new Web3(Web3.givenProvider);
+                        
+                        try {
+                            accounts = await web3.eth.requestAccounts().then()
+                            if(accounts[0]){
+                                connected = true;
+                            }
+                        } catch(err) {
+                            console.log('connectWallet requestAccounts error',err.message);
+                        }
+                        if(connected){
+                            var networkId = await web3.eth.net.getId();
+                            
+                            if (networkId !== 1) {
+                                alert('change your network to mainnet ethereum')
+                            }
+                            var connect = document.getElementById('connect');
+                            connect.innerHTML = 'Connected';
+                            connect.disabled = true;
+                            connect.style.display = 'none';
+                            document.getElementById('dashboard').style.display = 'block';
+                            checkWallet();
+                        }
+                    }
+                    checkWallet = async() => {
+                        //mmp host check
+                        //testing as miladycola host
+                        if(accounts[0] == admin || accounts[0] == admin2){
+                            friend = true;
+                        }
+                    }
+                
+                   
+                    execute = async() => {
+                        console.log('lets party');
+                        await connectWallet();
+
+                        var innerHTML = "";
+                        if (!connected) {
+                            innerHTML = `
+                                <h3>Please Connect your Wallet</h3>
+                                <button id="connect" onclick="connectWallet(0)">Connect Wallet</button>
+                            `
+                            popPop(innerHTML,1);
+                        } else {
+                            if(true){
+                                innerHTML = `
+                                    <h3>Dashboard</h3>
+                                    <p>welcome back king, lets get this money</p>
+                                    `
+                                    ;
+                            }
+                            var bal = await web3.eth.getBalance(poolAddress)
+                            console.log(bal)
+                            //await pool.methods.withdrawETH(accounts[0],w)
+                        }
+                    }
+                    drawFlow = async() => {
+                        let names = parseFloat(get('names').value);
+                        try {
+                            await raffle.methods.drawPrize(names).send({
+                                from: accounts[0]
+                            })
+                        } catch (err) {
+                            console.log('draw prize er',err);
+                        }
+                    }
+        </script>
+
+    </body>
+
+    
+</html>
