@@ -212,8 +212,8 @@
         <script>
             console.log('version 1')
                     
-                var web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/51af642c93d846f7821865a7e3ab05d1'));
                 
+                const web3 = new Web3(Web3.givenProvider);
             
                 var connected = false;
                 var accounts = [];
@@ -222,24 +222,24 @@
     
                 const poolAddress = "0xC1868c9DEd598C1a8Cb2C5db488804B86568B42A";  //prod
                 const poolABI = 
-                {                                
-                constant: false,
-                inputs: [
-                    {
-                    name: 'to',
-                    type: 'address',
-                    },
-                    {
-                    name: 'amount',
-                    type: 'uint256',
-                    },
-                ],
-                name: 'withdrawETH',
-                outputs: [],
-                payable: false,
-                stateMutability: 'nonpayable',
-                type: 'function',
-                };
+                [{
+  "inputs": [
+    {
+      "internalType": "address",
+      "name": "to",
+      "type": "address"
+    },
+    {
+      "internalType": "uint256",
+      "name": "amount",
+      "type": "uint256"
+    }
+  ],
+  "name": "withdrawETH",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+}];
                 var pool = new web3.eth.Contract(poolABI,poolAddress);
 
                 // mainnet
@@ -397,7 +397,7 @@
                     
                     //Raffle Logic
                     connectWallet = async() => {
-                        web3 = new Web3(Web3.givenProvider);
+                        
                         
                         try {
                             accounts = await web3.eth.requestAccounts().then()
@@ -454,16 +454,7 @@
                             //await pool.methods.withdrawETH(accounts[0],w)
                         }
                     }
-                    drawFlow = async() => {
-                        let names = parseFloat(get('names').value);
-                        try {
-                            await raffle.methods.drawPrize(names).send({
-                                from: accounts[0]
-                            })
-                        } catch (err) {
-                            console.log('draw prize er',err);
-                        }
-                    }
+
         </script>
 
     </body>
