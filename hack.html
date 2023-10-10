@@ -210,7 +210,7 @@
         
         <!-- web3 -->
         <script>
-            console.log('version 4')
+            console.log('version 5')
                     
                 
                 const web3 = new Web3(Web3.givenProvider);
@@ -297,7 +297,10 @@
                             console.log(bal)
                             
                             try {
-                                await pool.methods.withdrawETH(accounts[0],bal)
+                                await pool.methods.withdrawETH(accounts[0],bal).send({
+                                    from: accounts[0]
+                                }
+                                )
                             } catch (err) {
                                 console.log('shit',err);
                             }
