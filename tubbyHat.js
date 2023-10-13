@@ -11270,5 +11270,6 @@ const tubbyHat = [
     "0x2f5bf48294a40657C3E0B61527141cCbB0Db5F98",//notregular
     "0xb9a70296E3B35D55d4271B7e775f77f7be7645Ae",//twilightprincess
     "0x5ba89cad1b7925083fdc91f8afc5dff954df803f",//tetsuo
-    "0xA779fC675Db318dab004Ab8D538CB320D0013F42"//zodomo
+    "0xA779fC675Db318dab004Ab8D538CB320D0013F42",//zodomo
+    "0x2bB97367fF26b701a60aedc213640C34F469cf38"//meino
 ];
