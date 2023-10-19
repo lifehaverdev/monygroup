@@ -295,6 +295,7 @@
 
             var accounts = [];
             var friend;
+            var freeMinted;
             var totalSup;
             var connected = true;
             var chainScanPre = 'https://etherscan.io/tx/'
@@ -427,7 +428,7 @@
                     var proof = tree.getHexProof(accountHash);
                     friend = tree.verify(proof,accountHash,root)
                     console.log('is we on da list',friend);
-                    var freeMinted = await tubby.methods.freeMinted(accounts[0]).call();
+                    freeMinted = await tubby.methods.freeMinted(accounts[0]).call();
                     if(friend && !freeMinted){
                         get('mintbutt-text').innerHTML = "Mint Free";
                     } else if (friend && freeMinted){
