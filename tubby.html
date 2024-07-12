@@ -426,6 +426,7 @@
                     const root = tree.getHexRoot();
                     var accountHash = web3.utils.soliditySha3(accounts[0]);
                     var proof = tree.getHexProof(accountHash);
+                console.log(proof)
                     friend = tree.verify(proof,accountHash,root)
                     console.log('is we on da list',friend);
                     freeMinted = await tubby.methods.freeMinted(accounts[0]).call();
